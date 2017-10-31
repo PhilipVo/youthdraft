@@ -1,34 +1,97 @@
-<h1>Maker Registration</h1>
-<button (click)="back()">Back</button>
-<form (ngSubmit)="register()" #registerForm="ngForm">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="text" class="form-control" id="email" required [(ngModel)]="league.email" name="email" #email="ngModel">
-    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-      Email is required
+<h1 style="text-align: center;">Create a league</h1>
+<p style="text-align: center;">
+  By creating a League, you will be the sole administator.<br>
+  As the admin you can add coaches, players, change tryout<br>
+  dates and times, and define the player assessment criteria.<br>
+  Up for the task? Let's get started below:
+</p>
+<form 
+  (ngSubmit)="register()"
+  #registerForm="ngForm"
+  style="align-items: flex-start; display: flex; justify-content: space-around;">
+
+  <!-- Left Column -->
+  <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+    <!-- First Name -->
+    <input
+      [(ngModel)]="league.firstName" name="firstName" #firstName="ngModel"
+      id="firstName"
+      placeholder="First Name"
+      required
+      style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 50%;"
+      type="text">
+    <div [hidden]="firstName.valid || firstName.pristine">
+      First name is required
+    </div>
+
+    <!-- Last Name -->
+    <input
+      [(ngModel)]="league.LastName" name="LastName" #LastName="ngModel"
+      id="LastName"
+      placeholder="Last Name"
+      required
+      style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 50%;"
+      type="text">
+    <div [hidden]="LastName.valid || LastName.pristine">
+      Last name is required
+    </div>
+
+    <!-- League Name -->
+    <input
+      [(ngModel)]="league.leagueName" name="leagueName" #leagueName="ngModel"
+      id="leagueName"
+      placeholder="League Name"
+      required
+      style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 50%;"
+      type="text">
+    <div [hidden]="leagueName.valid || leagueName.pristine">
+      League name is required
     </div>
   </div>
-  <div class="form-group">
-    <label for="company">Company</label>
-    <input type="text" class="form-control" id="company" required [(ngModel)]="league.company" name="company" #company="ngModel">
-    <div [hidden]="company.valid || company.pristine" class="alert alert-danger">
-      Company is required
+
+
+  <!-- Right Column -->
+  <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+    <!-- Email -->
+    <input
+      [(ngModel)]="league.email" name="email" #email="ngModel"
+      id="email"
+      placeholder="Email Address"
+      required
+      style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 50%;"
+      type="text">
+    <div [hidden]="email.valid || email.pristine">
+      Email address is required
     </div>
-  </div>
-  <div class="form-group">
-    <label for="contact">Contact</label>
-    <input type="text" class="form-control" id="contact" required [(ngModel)]="league.contact" name="contact" #contact="ngModel">
-    <div [hidden]="contact.valid || contact.pristine" class="alert alert-danger">
-      Contact is required
+
+    <!-- Phone Number -->
+    <input
+      [(ngModel)]="league.phoneNumber" name="phoneNumber" #phoneNumber="ngModel"
+      id="phoneNumber"
+      placeholder="Phone Number"
+      required
+      style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 50%;"
+      type="text">
+    <div [hidden]="phoneNumber.valid || phoneNumber.pristine">
+      Phone Number is required
     </div>
+
+    <!-- City -->
+    <input
+      [(ngModel)]="league.city" name="city" #city="ngModel"
+      id="city"
+      placeholder="City"
+      required
+      style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 50%;"
+      type="text">
+    <div [hidden]="city.valid || city.pristine">
+      City is required
+    </div>
+
+    <!-- Next -->
+      <button [disabled]="!registerForm.form.valid">Next</button>
+      <!-- <button type="submit" [disabled]="!registerForm.form.valid">Register</button> -->
+    
   </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" required [(ngModel)]="league.password" name="password">
-  </div>
-  <div class="form-group">
-    <label for="confirm_password">Confirm Password</label>
-    <input type="confirm_password" class="form-control" id="confirm_password" required [(ngModel)]="league.confirm_password" name="confirm_password">
-  </div>
-  <button type="submit" class="btn btn-default" [disabled]="!registerForm.form.valid">Register</button>
+  
 </form>
