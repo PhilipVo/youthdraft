@@ -1,0 +1,22 @@
+<h1>Coach Login</h1>
+<a (click)="back()">Back</a>
+<nav>
+  <a routerLink="/supplier/dashboard" routerLinkActive="active-link">Dashboard</a>
+  <a routerLink="/supplier/register" routerLinkActive="active-link">Register</a>
+  <a routerLink="/supplier/login" routerLinkActive="active-link">Login</a>
+  <a routerLink="">Welcome</a>
+</nav>
+<form (ngSubmit)="login()" #loginForm="ngForm">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="email" required [(ngModel)]="coach.email" name="email" #email="ngModel">
+    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+      Email is required
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="text" class="form-control" id="password" required [(ngModel)]="coach.password" name="password">
+  </div>
+  <button type="submit" class="btn btn-default" [disabled]="!loginForm.form.valid">Login</button>
+</form>

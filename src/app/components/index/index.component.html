@@ -1,0 +1,107 @@
+<!-- YouthDraft -->
+<div>
+  <div style="align-items: center; display: flex; justify-content: flex-end">
+    <a routerLink="/league/login" routerLinkActive="active-link">League Login</a>
+    <p>&nbsp;|&nbsp;</p>
+    <a routerLink="/coach/login" routerLinkActive="active-link">Coach Login</a>
+  </div>
+  
+  <div style="align-items: center; display: flex; flex-direction: column">
+    <div style=" text-align: right;">
+      <h1>YouthDraft<sup style="font-size: 10px;">TM</sup></h1>
+      <p style="">RANK &#8226; DRAFT &#8226; WIN</p>
+    </div>
+  </div>
+  
+  <p style="text-align: center">
+    The modern way to manage<br>
+    youth sports assessments
+  </p>
+  
+  <div style="display: flex; justify-content: space-evenly;">
+    <button 
+    (click)="router.navigate(['/league/register'])"
+    style="background-color: #2052a3; border: none; border-radius: 5px; padding: 20px; color: white;">
+      Create League Account
+    </button>
+    <button 
+      (click)="router.navigate(['/coach/register'])"
+      style="background-color: #85c642; border: none; border-radius: 5px; padding: 20px; color: white;">
+        Create Coach Account
+    </button>
+  </div>
+</div>
+
+<!-- What is YouthDraft -->
+<h1 style="text-align: center;">What is YouthDraft?</h1>
+
+<div style="display: flex; justify-content: space-between;">
+  <div style="padding: 50px;">
+    <p>
+      YouthDraft is a modern tool for an age-old problem.
+      We are bringing the assessment and draft process for youth sports from the clipboard
+      to the digital age.
+    </p>
+  </div>
+  <div style="padding: 50px;">
+    <p>
+      Still using Excel to manage player assessments?
+      Recover lost time in transferring them to excel using our web and mobile app solution.
+    </p>
+  </div>
+  <div style="padding: 50px;">
+    <p>
+      YouthDraft is a tool that will save leagues, managers, and coaches countless hours
+      while offering the ability to automate the assessment process.
+    </p>
+  </div>
+</div>
+
+<!-- How can I get YouthDraft? -->
+<div>
+  <h1 style="text-align: center;">How can I get YouthDraft?</h1>
+  
+  <div style="display: flex; padding: 50px;">
+    <div style="flex: 4;">
+      <p style="text-align: center">
+        YouthDraft is available on web and mobile for little league baseball to
+        provide you the easiest way to evaluate talent.
+        Start a league or join an existing one as a coach.<br><br>
+  
+        Want it for your sport? Hit the contact button in the bottom right and
+        let us know what sport you want to use YouthDraft in next.
+      </p>
+    </div>
+    <div style="flex: 3"></div>
+  </div>
+
+  <div style="display: flex; justify-content: space-evenly;">
+    <button 
+    (click)="router.navigate(['/league/register'])"
+    style="background-color: #2052a3; border: none; border-radius: 5px; padding: 20px; color: white;">
+      Create League Account
+    </button>
+    <button 
+      (click)="router.navigate(['/coach/register'])"
+      style="background-color: #85c642; border: none; border-radius: 5px; padding: 20px; color: white;">
+        Create Coach Account
+    </button>
+  </div>
+</div>
+
+<!-- Footer -->
+<div style="display: flex; justify-content: space-between;">
+  <div style="display: flex; padding: 20px;">
+    <p>facebook</p>
+    <p>instagram</p>
+    <p>twitter</p>
+  </div>
+  
+  <div style="display: flex; padding: 20px;">
+    <p>About</p>
+    <p>&nbsp;|&nbsp;</p>
+    <p>FAQ</p>
+    <p>&nbsp;|&nbsp;</p>
+    <p>Contact</p>
+  </div>
+</div>
