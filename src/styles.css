@@ -3,3 +3,27 @@
   margin: 0;
   padding: 0;
 }
+
+.blue-bg {
+  background-color: #0055a5;
+}
+
+.gray-bg {
+  background-color: #787878;
+}
+
+.green-bg {
+  background-color: #8cc63e;
+}
+
+.league-register {
+  background-image: url('./assets/background-league.png');
+  background-size: cover;
+  bottom: 0;
+  color: white;
+  left: 0;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

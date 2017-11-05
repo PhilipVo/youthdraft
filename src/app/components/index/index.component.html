@@ -1,69 +1,84 @@
 <!-- YouthDraft -->
-<div>
+<div style="background-image: url('../../../assets/index-0.png'); background-size: cover; padding: 20px;">
   <div style="align-items: center; display: flex; justify-content: flex-end">
-    <a routerLink="/league/login" routerLinkActive="active-link">League Login</a>
-    <p>&nbsp;|&nbsp;</p>
-    <a routerLink="/coach/login" routerLinkActive="active-link">Coach Login</a>
+    <a routerLink="/league/login" routerLinkActive="active-link" style="color: white; font-size: 25px;">
+      League Login
+    </a>
+    <p style="color: white; font-size: 25px;">&nbsp;|&nbsp;</p>
+    <a routerLink="/coach/login" routerLinkActive="active-link" style="color: white; font-size: 25px;">
+      Coach Login
+    </a>
   </div>
   
-  <div style="align-items: center; display: flex; flex-direction: column">
-    <div style=" text-align: right;">
-      <h1>YouthDraft<sup style="font-size: 10px;">TM</sup></h1>
-      <p style="">RANK &#8226; DRAFT &#8226; WIN</p>
-    </div>
+  <div style="display: flex; justify-content: center;">
+    <img src="../../../assets/logo.png" style=" object-fit: contain; width: 400px;">
   </div>
-  
-  <p style="text-align: center">
+
+  <p style="color: white; font-size: 40px; padding: 1%; text-align: center">
     The modern way to manage<br>
     youth sports assessments
   </p>
   
-  <div style="display: flex; justify-content: space-evenly;">
+  <!-- Buttons -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly; margin: 5% 0%;">
     <button 
-    (click)="router.navigate(['/league/register'])"
-    style="background-color: #2052a3; border: none; border-radius: 5px; padding: 20px; color: white;">
+      class="blue-bg"
+      (click)="router.navigate(['/league/register'])"
+      style="border: none; border-radius: 5px; color: white; font-size: 20px; padding: 20px;">
       Create League Account
     </button>
     <button 
+      class="green-bg"  
       (click)="router.navigate(['/coach/register'])"
-      style="background-color: #85c642; border: none; border-radius: 5px; padding: 20px; color: white;">
-        Create Coach Account
+      style="border: none; border-radius: 5px; color: white; font-size: 20px; padding: 20px;">
+      Create Coach Account
     </button>
   </div>
 </div>
 
-<!-- What is YouthDraft -->
-<h1 style="text-align: center;">What is YouthDraft?</h1>
-
-<div style="display: flex; justify-content: space-between;">
-  <div style="padding: 50px;">
-    <p>
-      YouthDraft is a modern tool for an age-old problem.
-      We are bringing the assessment and draft process for youth sports from the clipboard
-      to the digital age.
-    </p>
-  </div>
-  <div style="padding: 50px;">
-    <p>
-      Still using Excel to manage player assessments?
-      Recover lost time in transferring them to excel using our web and mobile app solution.
-    </p>
-  </div>
-  <div style="padding: 50px;">
-    <p>
-      YouthDraft is a tool that will save leagues, managers, and coaches countless hours
-      while offering the ability to automate the assessment process.
-    </p>
+<!-- What is YouthDraft? -->
+<div style="color: #787878; padding: 5%;">
+  <h1 style="font-size: 40px; padding: 5%; text-align: center;">What is YouthDraft?</h1>
+  
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <div style="align-items: center; display: flex; flex:1; flex-direction: column;">
+      <img 
+        src="../../../assets/index-clipboard.png" 
+        style="margin-bottom: 5%; object-fit: contain; height: 30%">
+      <p style="font-size: 25px; padding: 10%;">
+        YouthDraft is a modern tool for an age-old problem.
+        We are bringing the assessment and draft process for youth sports from the clipboard
+        to the digital age.
+      </p>
+    </div>
+    <div style="align-items: center; display: flex; flex:1; flex-direction: column;">
+      <img 
+        src="../../../assets/index-clock.png" 
+        style="margin-bottom: 5%; object-fit: contain; height: 30%">
+      <p style="font-size: 25px; padding: 10%;">
+        Still using Excel to manage player assessments?
+        Recover lost time in transferring them to excel using our web and mobile app solution.
+      </p>
+    </div>
+    <div style="align-items: center; display: flex; flex:1; flex-direction: column;">
+      <img 
+        src="../../../assets/index-baseball.png" 
+        style="margin-bottom: 5%; object-fit: contain; height: 30%">
+      <p style="font-size: 25px; padding: 10%;">
+        YouthDraft is a tool that will save leagues, managers, and coaches countless hours
+        while offering the ability to automate the assessment process.
+      </p>
+    </div>
   </div>
 </div>
 
 <!-- How can I get YouthDraft? -->
-<div>
-  <h1 style="text-align: center;">How can I get YouthDraft?</h1>
+<div id="how">
+  <h1 style="font-size: 40px; padding: 5%; text-align: center;">How can I get YouthDraft?</h1>
   
-  <div style="display: flex; padding: 50px;">
+  <div style="display: flex; padding: 5%;">
     <div style="flex: 4;">
-      <p style="text-align: center">
+      <p style="font-size: 25px;">
         YouthDraft is available on web and mobile for little league baseball to
         provide you the easiest way to evaluate talent.
         Start a league or join an existing one as a coach.<br><br>
@@ -74,34 +89,57 @@
     </div>
     <div style="flex: 3"></div>
   </div>
+  
+  <!-- App store/Google play -->
+  <div style="display: flex;">
+    <div style="display: flex; flex: 4; justify-content: space-around;">
+      <a href="">
+        <img src="../../../assets/index-store.png" style="object-fit: contain; height: 50px;">
+      </a>
+      <a href="">
+        <img src="../../../assets/index-play.png" style="object-fit: contain; height: 50px;">
+      </a>
+    </div>
+    <div style="display: flex; flex: 3;"></div>
+  </div>
 
-  <div style="display: flex; justify-content: space-evenly;">
+
+  <!-- Buttons -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly; margin: 5% 0%;">
     <button 
-    (click)="router.navigate(['/league/register'])"
-    style="background-color: #2052a3; border: none; border-radius: 5px; padding: 20px; color: white;">
+      class="blue-bg"
+      (click)="router.navigate(['/league/register'])"
+      style="border: none; border-radius: 5px; color: white; font-size: 20px; padding: 20px;">
       Create League Account
     </button>
     <button 
+      class="green-bg"  
       (click)="router.navigate(['/coach/register'])"
-      style="background-color: #85c642; border: none; border-radius: 5px; padding: 20px; color: white;">
-        Create Coach Account
+      style="border: none; border-radius: 5px; color: white; font-size: 20px; padding: 20px;">
+      Create Coach Account
     </button>
   </div>
 </div>
 
 <!-- Footer -->
-<div style="display: flex; justify-content: space-between;">
+<div style="align-items: center; display: flex; justify-content: space-between;">
   <div style="display: flex; padding: 20px;">
-    <p>facebook</p>
-    <p>instagram</p>
-    <p>twitter</p>
+    <a href="" style="margin-right: 20px;">
+      <i class="icon ion-social-facebook-outline" style="color: #787878; font-size: 200%;"></i>
+    </a>
+    <a href="" style="margin-right: 20px;">
+      <i class="icon ion-social-instagram-outline" style="color: #787878; font-size: 200%;"></i>
+    </a>
+    <a href="">
+      <i class="icon ion-social-twitter-outline" style="color: #787878; font-size: 200%;"></i>
+    </a>
   </div>
   
   <div style="display: flex; padding: 20px;">
-    <p>About</p>
+    <a href="" style="color: #787878;">About</a>
     <p>&nbsp;|&nbsp;</p>
-    <p>FAQ</p>
+    <a href="" style="color: #787878;">FAQ</a>
     <p>&nbsp;|&nbsp;</p>
-    <p>Contact</p>
+    <a href="" style="color: #787878;">Contact</a>
   </div>
 </div>

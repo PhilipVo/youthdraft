@@ -1,0 +1,14 @@
+table, th, td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-top: 5%;
+  padding: 10px;
+  width: 150px;
+}

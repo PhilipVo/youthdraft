@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { UploadCoachComponent } from './upload-coach/upload-coach.component';
 
 import { LeagueRoutingModule } from './league-routing.module';
 
@@ -22,7 +23,8 @@ import { LeagueRoutingModule } from './league-routing.module';
     HeaderComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    UploadCoachComponent
   ]
 })
 export class LeagueModule {

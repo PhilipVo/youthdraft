@@ -37,7 +37,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const youthdraftToken = Cookie.get('youthdraftToken');
     const url = state.url;
-
+    console.log(state)
     if ((url.includes('login') || url.includes('register'))) {
       if (this.session.user) {
         this.router.navigate([`/${this.session.user}/dashboard`]);

@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { SessionService } from '../../../services/session.service';
 
 @Component({
-  selector: 'app-register',
-  styleUrls: ['./register.component.css'],
-  templateUrl: './register.component.html'
+  selector: 'app-upload-coach',
+  templateUrl: './upload-coach.component.html',
+  styleUrls: ['./upload-coach.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class UploadCoachComponent implements OnInit {
   league = {};
   screen = 0;
 
@@ -33,5 +33,4 @@ export class RegisterComponent implements OnInit {
     //     console.log(error)
     //   })
   }
-
 }

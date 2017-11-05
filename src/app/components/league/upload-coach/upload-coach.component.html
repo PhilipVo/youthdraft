@@ -1,0 +1,98 @@
+<div class="league-register">
+  <div style="align-items: flex-end; display: flex; margin: 1%;">
+    <div style="display: flex; flex: 1; justify-content: center;">
+      <a routerLink="/">
+        <img src="../../../../assets/logo-no-text.png">
+      </a>
+    </div>
+    <div style="flex: 2;">
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Upload Coach Roster</h1>
+    </div>
+    <div style="flex:1"></div>
+  </div>
+
+  <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
+    Please upload an excel/csv of your coaches for this season in the following format.<br><br>
+    We promise we don't share any of this information to a third party.
+  </p>
+  
+  <div style="align-items: flex-start; display: flex; justify-content: space-around;">
+
+    <!-- Left Column -->
+    <div style="flex: 2; padding: 2%;">
+      <table style="background-color: white; color: black;">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>League (Majors, AAA, etc.)</th>
+          <th>Email Address</th>
+          <th>Phone Number</th>
+        </tr>
+        <tr>
+          <td>Tony</td>
+          <td>LaRussa</td>
+          <td>Majors</td>
+          <td>tony@larussa.com</td>
+          <td>123-456-7890</td>
+        </tr>
+        <tr>
+          <td>Joe</td>
+          <td>Torre</td>
+          <td>AAA</td>
+          <td>joe@torre.com</td>
+          <td>234-567-8901</td>
+        </tr>
+        <tr>
+          <td>Earl  </td>
+          <td>Weaver</td>
+          <td>Teeball</td>
+          <td>earl@weaver.com</td>
+          <td>345-678-9012</td>
+        </tr>
+      </table>
+
+      <p style="color: white; font-size: 20px; margin-top: 5%;">
+        Formatting Notes:<br>
+        <span style="margin-left: 20px;">- available divisions are<br></span>
+        <span style="margin-left: 40px;">- Majors, AAA, AA, A, Farm, Rookie, Teeball</span>
+      </p>
+    </div>
+
+    <!-- Right Column -->
+    <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+      <p style="color: white; font-size: 20px;">
+        Download roster template:<br>
+        Use our template to populate your coach's information
+      </p>
+
+      <button 
+        class="gray-bg btn"
+        (click)="next()"
+        style="margin-top: 5%;">
+        Download
+      </button>
+
+      <p style="color: white; font-size: 20px; margin-top: 5%;">
+        Upload roster template:<br>
+        Once you populate the template from above, upload it here.
+      </p>
+
+      <button 
+        class="gray-bg btn"
+        (click)="next()"
+        style="margin-top: 5%;">
+        Upload
+      </button>
+
+      <!-- Next -->
+      <button 
+        class="blue-bg btn"
+        (click)="next()"
+        style="margin-top: 10%;">
+        Next
+      </button>
+
+    </div>
+    
+  </div>
+</div>
