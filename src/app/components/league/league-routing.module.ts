@@ -3,39 +3,34 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
+import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { RegisterComponent } from './register/register.component';
-import { UploadCoachComponent } from './upload-coach/upload-coach.component';
 
 import { AuthGuardService } from '../../services/auth-guard.service';
 
-const leagueRoutes: Routes = [
+const routes: Routes = [
   {
     path: '',
+    canActivateChild: [AuthGuardService],
     children: [
       {
         path: '',
-        canActivateChild: [AuthGuardService],
         children: [
           { path: 'login', component: LoginComponent },
           {
             path: 'register',
-            children: [
-              { path: 'upload-coach', component: UploadCoachComponent },
-              { path: '', component: RegisterComponent },
-            ]
+            loadChildren: './register/register.module#RegisterModule'
           },
-          { path: '', redirectTo: 'login' }
         ]
       },
       {
         path: '',
         component: HeaderComponent,
-        canActivateChild: [AuthGuardService],
         children: [
           { path: 'dashboard', component: DashboardComponent },
           { path: 'profile', component: ProfileComponent },
+          { path: '', component: IndexComponent }
         ]
       }
     ]
@@ -43,7 +38,7 @@ const leagueRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(leagueRoutes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class LeagueRoutingModule { }

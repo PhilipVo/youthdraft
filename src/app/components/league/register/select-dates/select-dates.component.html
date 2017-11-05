@@ -1,0 +1,44 @@
+<div class="league-register">
+  <div style="align-items: flex-end; display: flex; margin: 1%;">
+    <div style="display: flex; flex: 1; justify-content: center;">
+      <a routerLink="/">
+        <img src="../../../../../assets/logo-no-text.png">
+      </a>
+    </div>
+    <div style="flex: 2;">
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Upload Tryout Dates</h1>
+    </div>
+    <div style="flex:1"></div>
+  </div>
+
+  <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
+    Please mark your tyrout dates.<br>
+    You can mark up to 8 tryout dates over 4 weekends.<br>
+  </p>
+  
+  <form 
+    (ngSubmit)="register()"
+    #registerForm="ngForm"
+    style="align-items: flex-start; display: flex; justify-content: space-around;">
+
+    <!-- Left Column -->
+    <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+
+    </div>
+
+    <!-- Right Column -->
+    <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+      <!-- Next -->
+      <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
+        <button 
+          class="bg-blue btn"
+          style="border: none; border-radius: 5px; color: white; padding: 10px 20px;"
+          type="submit">
+          Next
+        </button>
+        <!-- <button type="submit" [disabled]="!registerForm.form.valid">Register</button> -->
+      </div>
+    </div>
+    
+  </form>
+</div>

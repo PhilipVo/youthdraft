@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { SessionService } from '../../../services/session.service';
+import { SessionService } from '../../../../services/session.service';
 
 @Component({
-  selector: 'app-register',
-  styleUrls: ['./register.component.css'],
-  templateUrl: './register.component.html'
+  selector: 'app-index',
+  styleUrls: ['./index.component.css'],
+  templateUrl: './index.component.html'
 })
-export class RegisterComponent implements OnInit {
+export class IndexComponent implements OnInit {
   league = {};
   screen = 0;
 

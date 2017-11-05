@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { SessionService } from '../../../services/session.service';
+import { SessionService } from '../../../../services/session.service';
 
 @Component({
-  selector: 'app-upload-coach',
-  templateUrl: './upload-coach.component.html',
-  styleUrls: ['./upload-coach.component.css']
+  selector: 'app-select-dates',
+  templateUrl: './select-dates.component.html',
+  styleUrls: ['./select-dates.component.css']
 })
-export class UploadCoachComponent implements OnInit {
+export class SelectDatesComponent implements OnInit {
   league = {};
   screen = 0;
 
