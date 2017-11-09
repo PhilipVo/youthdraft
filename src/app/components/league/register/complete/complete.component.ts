@@ -5,12 +5,12 @@ import { Router } from '@angular/router';
 import { SessionService } from '../../../../services/session.service';
 
 @Component({
-  selector: 'app-select-dates',
-  templateUrl: './select-dates.component.html',
-  styleUrls: ['./select-dates.component.css']
+  selector: 'app-complete',
+  templateUrl: './complete.component.html',
+  styleUrls: ['./complete.component.css']
 })
-export class SelectDatesComponent implements OnInit {
-  dates = [{}, {}, {}, {}, {}, {}, {}, {}];
+export class CompleteComponent implements OnInit {
+  league = {};
   screen = 0;
 
   constructor(
@@ -26,7 +26,7 @@ export class SelectDatesComponent implements OnInit {
   }
 
   register(): void {
-    this.router.navigate(['/league/register/finalize']);
+    this.router.navigate(['/league/register/upload-coach']);
     // this.session.register('leagues', this.league)
     //   .then(() => this.router.navigate(['league/dashboard']))
     //   .catch(error => {

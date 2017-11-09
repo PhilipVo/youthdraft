@@ -6,16 +6,15 @@
       </a>
     </div>
     <div style="flex: 2;">
-      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Create a League</h1>
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Coaching History</h1>
     </div>
     <div style="flex:1"></div>
   </div>
 
   <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
-    By creating a League, you will be the sole administator.<br>
-    As the admin you can add coaches, players, change tryout<br>
-    dates and times, and define the player assessment criteria.<br>
-    Up for the task? Let's get started below:
+    Tell us about your history as a coach.<br><br>
+    This will help us understand what team and division we can assign<br>
+    you to give our players a great experience:
   </p>
   
   <form 
@@ -32,7 +31,7 @@
           name="firstName"
           #firstName="ngModel"
           id="firstName"
-          placeholder="First Name"
+          placeholder="Past League"
           required
           type="text">
         <div [hidden]="firstName.valid || firstName.pristine" style="color: red; margin-bottom: 2%;">
@@ -47,26 +46,11 @@
           name="LastName"
           #LastName="ngModel"
           id="LastName"
-          placeholder="Last Name"
+          placeholder="Desired Coaching Div."
           required
           type="text">
         <div [hidden]="LastName.valid || LastName.pristine" style="color: red; margin-bottom: 2%;">
           Last name is required
-        </div>
-      </div>
-
-      <!-- League Name -->
-      <div style="width: 50%">
-        <input
-          [(ngModel)]="league.leagueName"
-          name="leagueName"
-          #leagueName="ngModel"
-          id="leagueName"
-          placeholder="League Name"
-          required
-          type="text">
-        <div [hidden]="leagueName.valid || leagueName.pristine" style="color: red; margin-bottom: 2%;">
-          League name is required
         </div>
       </div>
     </div>
@@ -80,7 +64,7 @@
           name="email"
           #email="ngModel"
           id="email"
-          placeholder="Email Address"
+          placeholder="Past Divisions Coached"
           required
           type="text">
         <div [hidden]="email.valid || email.pristine" style="color: red; margin-bottom: 2%;">
@@ -95,7 +79,7 @@
           name="phoneNumber"
           #phoneNumber="ngModel"
           id="phoneNumber"
-          placeholder="Phone Number"
+          placeholder="Years of Experience"
           required
           type="text">
         <div [hidden]="phoneNumber.valid || phoneNumber.pristine" style="color: red; margin-bottom: 2%;">
@@ -103,45 +87,13 @@
         </div>
       </div>
 
-      <div style="display: flex; justify-content: space-between; width: 50%;">
-        <!-- City -->
-        <div style="flex: 2; margin-right: 5px;">
-          <input
-            [(ngModel)]="league.city"
-            name="city"
-            #city="ngModel"
-            id="city"
-            placeholder="City"
-            required
-            type="text">
-          <div [hidden]="city.valid || city.pristine" style="color: red; margin-bottom: 2%;">
-            City is required
-          </div>
-        </div>
-
-        <!-- State -->
-        <div style="flex: 1">
-          <input
-            [(ngModel)]="league.state"
-            name="state"
-            #state="ngModel"
-            id="state"
-            placeholder="State"
-            required
-            type="text">
-          <div [hidden]="state.valid || state.pristine" style="color: red; margin-bottom: 2%;">
-            State is required
-          </div>          
-        </div>
-      </div>
-
       <!-- Next -->
       <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
         <button 
-          class="bg-blue btn"
+          class="bg-green btn"
           style="border: none; border-radius: 5px; color: white; padding: 10px 20px;"
           type="submit">
-          Next
+          Finish
         </button>
         <!-- <button type="submit" [disabled]="!registerForm.form.valid">Register</button> -->
       </div>

@@ -22,7 +22,7 @@ import { LeagueRoutingModule } from './league-routing.module';
     HeaderComponent,
     IndexComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
   ]
 })
 export class LeagueModule {

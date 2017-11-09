@@ -20,7 +20,7 @@ const routes: Routes = [
           { path: 'login', component: LoginComponent },
           {
             path: 'register',
-            loadChildren: './register/register.module#RegisterModule'
+            loadChildren: './register/league-register.module#LeagueRegisterModule'
           },
         ]
       },

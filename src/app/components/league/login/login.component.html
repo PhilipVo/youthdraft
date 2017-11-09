@@ -1,16 +1,55 @@
-<h1>League Login</h1>
-<a (click)="back()">Back</a>
-<form (ngSubmit)="login()" #loginForm="ngForm">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="text" class="form-control" id="email" required [(ngModel)]="league.email" name="email" #email="ngModel">
-    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-      Email is required
+<div class="league-register">
+  <div style="align-items: flex-end; display: flex; margin: 1%;">
+    <div style="display: flex; flex: 1; justify-content: center;">
+      <a routerLink="/">
+        <img src="../../../../../assets/logo-no-text.png">
+      </a>
     </div>
+    <div style="flex: 2;">
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">League Login</h1>
+    </div>
+    <div style="flex:1"></div>
   </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="text" class="form-control" id="password" required [(ngModel)]="league.password" name="password">
-  </div>
-  <button type="submit" class="btn btn-default" [disabled]="!loginForm.form.valid">Login</button>
-</form>
+
+  <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
+    Login here to manage your players, coaches, and tryout schedules.<br><br>
+    "Baseball is 90 percent mental and the other half is physical."<br>
+    - Yogi Berra
+  </p>
+  
+  <form 
+    (ngSubmit)="login()"
+    #loginForm="ngForm"
+    style="align-items: center; display: flex; flex-direction: column;">
+    {{diagnostic}}
+    <div>
+      <input
+        class="form-control"
+        id="email"
+        name="email"
+        [(ngModel)]="user.email"
+        placeholder="Email Address"
+        required
+        type="text">
+      <input
+        class="form-control"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        placeholder="Password"
+        required
+        type="password">
+      <select id="league" name="league" [(ngModel)]="user.league" required>
+        <option *ngFor="let league of leagues" [value]="league">
+          {{league.leagueName}} - {{league.city}}, {{league.state}}
+        </option>
+      </select>
+      <button 
+        class="bg-blue btn"
+        style="width: 100%;"
+        type="submit">
+        Login
+      </button>
+    </div>
+  </form>
+</div>

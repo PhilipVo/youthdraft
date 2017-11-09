@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HttpService {
-  private _ip = 'http://172.16.9.13:8000';
+  private _ip = 'http://52.53.223.138';
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   private handleError(error: any): Promise<any> {

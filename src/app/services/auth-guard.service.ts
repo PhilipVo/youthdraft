@@ -24,7 +24,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
   canActivate(): boolean {
     const youthdraftToken = Cookie.get('youthdraftToken');
-    console.log('canActivate called')
+
     if (youthdraftToken && this.jwtHelper.isTokenExpired(youthdraftToken)) {
       this.session.logout();
       return true;

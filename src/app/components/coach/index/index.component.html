@@ -2,7 +2,7 @@
   <div style="align-items: flex-end; display: flex; margin: 1%;">
     <div style="display: flex; flex: 1; justify-content: center;">
       <a routerLink="/">
-        <img src="../../../../../assets/logo-no-text.png">
+        <img src="../../../../assets/logo-no-text.png">
       </a>
     </div>
     <div style="flex: 2;">
@@ -28,12 +28,11 @@
       <!-- First Name -->
       <div style="width: 50%">
         <input
-          [(ngModel)]="league.firstName"
-          name="firstName"
-          #firstName="ngModel"
+          [(ngModel)]="league.firstName" name="firstName" #firstName="ngModel"
           id="firstName"
           placeholder="First Name"
           required
+          style="border-radius: 5px; border-width: 0px; box-sizing: border-box; margin-bottom: 2%; padding: 10px; width: 100%;"
           type="text">
         <div [hidden]="firstName.valid || firstName.pristine" style="color: red; margin-bottom: 2%;">
           First name is required
@@ -43,12 +42,11 @@
       <!-- Last Name -->
       <div style="width: 50%">
         <input
-          [(ngModel)]="league.LastName"
-          name="LastName"
-          #LastName="ngModel"
+          [(ngModel)]="league.LastName" name="LastName" #LastName="ngModel"
           id="LastName"
           placeholder="Last Name"
           required
+          style="border-radius: 5px; border-width: 0px; box-sizing: border-box; margin-bottom: 2%; padding: 10px; width: 100%;"
           type="text">
         <div [hidden]="LastName.valid || LastName.pristine" style="color: red; margin-bottom: 2%;">
           Last name is required
@@ -58,12 +56,11 @@
       <!-- League Name -->
       <div style="width: 50%">
         <input
-          [(ngModel)]="league.leagueName"
-          name="leagueName"
-          #leagueName="ngModel"
+          [(ngModel)]="league.leagueName" name="leagueName" #leagueName="ngModel"
           id="leagueName"
           placeholder="League Name"
           required
+          style="border-radius: 5px; border-width: 0px; box-sizing: border-box; margin-bottom: 2%; padding: 10px; width: 100%;"
           type="text">
         <div [hidden]="leagueName.valid || leagueName.pristine" style="color: red; margin-bottom: 2%;">
           League name is required
@@ -76,12 +73,11 @@
       <!-- Email -->
       <div style="width: 50%">
         <input
-          [(ngModel)]="league.email"
-          name="email"
-          #email="ngModel"
+          [(ngModel)]="league.email" name="email" #email="ngModel"
           id="email"
           placeholder="Email Address"
           required
+          style="border-radius: 5px; border-width: 0px; box-sizing: border-box; margin-bottom: 2%; padding: 10px; width: 100%;"
           type="text">
         <div [hidden]="email.valid || email.pristine" style="color: red; margin-bottom: 2%;">
           Email address is required
@@ -91,12 +87,11 @@
       <!-- Phone Number -->
       <div style="width: 50%">
         <input
-          [(ngModel)]="league.phoneNumber"
-          name="phoneNumber"
-          #phoneNumber="ngModel"
+          [(ngModel)]="league.phoneNumber" name="phoneNumber" #phoneNumber="ngModel"
           id="phoneNumber"
           placeholder="Phone Number"
           required
+          style="border-radius: 5px; border-width: 0px; box-sizing: border-box; margin-bottom: 2%; padding: 10px; width: 100%;"
           type="text">
         <div [hidden]="phoneNumber.valid || phoneNumber.pristine" style="color: red; margin-bottom: 2%;">
           Phone Number is required
@@ -107,12 +102,11 @@
         <!-- City -->
         <div style="flex: 2; margin-right: 5px;">
           <input
-            [(ngModel)]="league.city"
-            name="city"
-            #city="ngModel"
+            [(ngModel)]="league.city" name="city" #city="ngModel"
             id="city"
             placeholder="City"
             required
+            style="border-radius: 5px; border-width: 0px; box-sizing: border-box; margin-bottom: 2%; padding: 10px; width: 100%;"
             type="text">
           <div [hidden]="city.valid || city.pristine" style="color: red; margin-bottom: 2%;">
             City is required
@@ -122,12 +116,11 @@
         <!-- State -->
         <div style="flex: 1">
           <input
-            [(ngModel)]="league.state"
-            name="state"
-            #state="ngModel"
+            [(ngModel)]="league.state" name="state" #state="ngModel"
             id="state"
             placeholder="State"
             required
+            style="border-radius: 5px; border-width: 0px; box-sizing: border-box; margin-bottom: 2%; padding: 10px; width: 100%;"
             type="text">
           <div [hidden]="state.valid || state.pristine" style="color: red; margin-bottom: 2%;">
             State is required

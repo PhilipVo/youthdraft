@@ -1,0 +1,52 @@
+<div class="league-register">
+  <div style="align-items: flex-end; display: flex; margin: 1%;">
+    <div style="display: flex; flex: 1; justify-content: center;">
+      <a routerLink="/">
+        <img src="../../../../../assets/logo-no-text.png">
+      </a>
+    </div>
+    <div style="flex: 2;">
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Finalize League Details</h1>
+    </div>
+    <div style="flex:1"></div>
+  </div>
+
+  <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
+    Almost there, Chris!<br><br>
+    Take a look below for your league details and hit finish when complete.
+  </p>
+  
+  <form 
+    (ngSubmit)="register()"
+    #registerForm="ngForm"
+    style="display: flex; font-size: 20px; justify-content: space-around;">
+
+    <!-- Left Column -->
+    <div>
+      League Admin:<br>
+      {{data.firstName}} {{data.lastName}}<br>
+      {{data.email}}<br>
+      {{data.leagueName}}<br><br>
+      Coach Roster Uploaded<br>
+      <i class="icon ion-android-checkbox" style="color: #30c219; font-size: 200%;"></i><br><br>
+      Player Roster Uploaded<br>
+      <i class="icon ion-android-checkbox" style="color: #30c219; font-size: 200%;"></i>
+    </div>
+
+    <!-- Right Column -->
+    <div style="align-items: center; display: flex; flex-direction: column;">
+      Selected Tryout Dates:
+      <p *ngFor="let date of data.dates">{{date.date}}</p>
+      <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
+        <button 
+          class="bg-blue btn"
+          style="border: none; border-radius: 5px; color: white; padding: 10px 20px;"
+          type="submit">
+          Create League
+        </button>
+        <!-- <button type="submit" [disabled]="!registerForm.form.valid">Register</button> -->
+      </div>
+    </div>
+    
+  </form>
+</div>
