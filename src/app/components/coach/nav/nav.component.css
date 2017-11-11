@@ -1,0 +1,17 @@
+a {
+  box-sizing: border-box;
+  color: white;
+  font-size: 30px;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+
+div > a:not(:first-child):not(:last-child) {
+    border-bottom: 1px solid white;
+}
+
+.active-link {
+  background-color: #bcdc85;
+}

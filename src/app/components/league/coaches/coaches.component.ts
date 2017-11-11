@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { SessionService } from '../../../services/session.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html'
+  selector: 'app-coaches',
+  templateUrl: './coaches.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class CoachesComponent implements OnInit {
 
   constructor(
     private router: Router,

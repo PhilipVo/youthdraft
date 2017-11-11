@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { SessionService } from '../../../../services/session.service';
@@ -10,20 +9,15 @@ import { SessionService } from '../../../../services/session.service';
   templateUrl: './index.component.html'
 })
 export class IndexComponent implements OnInit {
-  league = {};
-  screen = 0;
-
   constructor(
-    private location: Location,
     private router: Router,
     private session: SessionService
   ) { }
 
-  ngOnInit() { }
+  league = {};
+  screen = 0;
 
-  back(): void {
-    this.location.back();
-  }
+  ngOnInit() { }
 
   register(): void {
     this.router.navigate(['/league/register/upload-coach']);

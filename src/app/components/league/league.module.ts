@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeaderComponent } from './header/header.component';
+import { CoachesComponent } from './coaches/coaches.component';
+import { NavComponent } from './nav/nav.component';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
+import { PlayersComponent } from './players/players.component';
+import { SettingsComponent } from './settings/settings.component';
+import { TryoutsComponent } from './tryouts/tryouts.component';
 
 import { LeagueRoutingModule } from './league-routing.module';
 
@@ -18,11 +20,13 @@ import { LeagueRoutingModule } from './league-routing.module';
     LeagueRoutingModule
   ],
   declarations: [
-    DashboardComponent,
-    HeaderComponent,
+    CoachesComponent,
+    NavComponent,
     IndexComponent,
     LoginComponent,
-    ProfileComponent,
+    PlayersComponent,
+    SettingsComponent,
+    TryoutsComponent,
   ]
 })
 export class LeagueModule {

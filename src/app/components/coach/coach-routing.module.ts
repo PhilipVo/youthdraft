@@ -1,39 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeaderComponent } from './header/header.component';
+import { AssessmentsComponent } from './assessments/assessments.component';
+import { FormulasComponent } from './formulas/formulas.component';
+import { NavComponent } from './nav/nav.component';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
+import { PlayersComponent } from './players/players.component';
+import { SettingsComponent } from './settings/settings.component';
 
 import { AuthGuardService } from '../../services/auth-guard.service';
 
 const coachRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'register',
+    loadChildren: './register/coach-register.module#CoachRegisterModule'
+  },
   {
     path: '',
+    component: NavComponent,
+    canActivateChild: [AuthGuardService],
     children: [
-      {
-        path: '',
-        canActivateChild: [AuthGuardService],
-        children: [
-          { path: 'login', component: LoginComponent },
-          {
-            path: 'register',
-            loadChildren: './register/coach-register.module#CoachRegisterModule'
-          },
-        ]
-      },
-      {
-        path: '',
-        component: HeaderComponent,
-        canActivateChild: [AuthGuardService],
-        children: [
-          { path: 'dashboard', component: DashboardComponent },
-          { path: 'profile', component: ProfileComponent },
-          { path: '', component: IndexComponent }
-        ]
-      }
+      { path: 'assessments', component: AssessmentsComponent },
+      { path: 'formulas', component: FormulasComponent },
+      { path: 'players', component: PlayersComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: '', component: PlayersComponent }
     ]
   }
 ];

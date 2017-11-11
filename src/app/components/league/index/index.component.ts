@@ -19,7 +19,7 @@ export class IndexComponent implements OnInit {
     private session: SessionService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { console.log('index') }
 
   back(): void {
     this.location.back();

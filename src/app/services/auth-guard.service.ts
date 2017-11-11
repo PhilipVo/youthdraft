@@ -20,16 +20,19 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   constructor(
     private router: Router,
     private session: SessionService
-  ) { }
+  ) {
+    console.log('loaded authguard')
+  }
 
   canActivate(): boolean {
     const youthdraftToken = Cookie.get('youthdraftToken');
 
+    console.log(this.session.user)
     if (youthdraftToken && this.jwtHelper.isTokenExpired(youthdraftToken)) {
       this.session.logout();
       return true;
     } else if (this.session.user) {
-      this.router.navigate([`/${this.session.user}/dashboard`]);
+      this.router.navigate([`/${this.session.user}`]);
       return false;
     } else return true;
   }
@@ -37,14 +40,15 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const youthdraftToken = Cookie.get('youthdraftToken');
     const url = state.url;
-    console.log(state)
+    console.log(state, this.session.user)
     if ((url.includes('login') || url.includes('register'))) {
       if (this.session.user) {
-        this.router.navigate([`/${this.session.user}/dashboard`]);
+        this.router.navigate([`/${this.session.user}`]);
         return false;
       } else
         return true;
     } else if (youthdraftToken && !this.jwtHelper.isTokenExpired(youthdraftToken)) {
+      console.log('includes', url.includes(`${this.session.user}`))
       if (url.includes(`${this.session.user}`))
         return true;
       else {

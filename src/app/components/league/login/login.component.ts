@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { HttpService } from '../../../services/http.service';
@@ -13,13 +12,24 @@ import { SessionService } from '../../../services/session.service';
 export class LoginComponent implements OnInit {
   constructor(
     private http: HttpService,
-    private location: Location,
     private router: Router,
     private session: SessionService,
   ) { }
 
-  private user = {};
-  private leagues = []
+  error = null;
+  league = {
+    city: '',
+    leagueName: '',
+    state: ''
+  };
+  leagues = [];
+  user = {
+    city: '',
+    email: '',
+    leagueName: '',
+    password: '',
+    state: ''
+  };
 
   ngOnInit() {
     this.http.get('/leagues')
@@ -27,18 +37,14 @@ export class LoginComponent implements OnInit {
       .catch(error => console.log(error))
   }
 
-  back(): void {
-    this.location.back();
-  }
+  submit(): void {
+    this.error = null;
+    this.user = { ...this.user, ...this.league };
+    console.log(this.user)
 
-  get diagnostic() { return JSON.stringify(this.user); }
-
-  login(): void {
-    // this.session.login('leagues', this.user)
-    //   .then(() => this.router.navigate(['league/dashboard']))
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
+    this.session.login('league', this.user)
+      .then(() => this.router.navigate(['league']))
+      .catch(error => this.error = typeof error === 'string' ? error : 'Oops, something went wrong.');
   }
 
 }

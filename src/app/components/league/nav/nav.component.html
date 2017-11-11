@@ -1,0 +1,15 @@
+<div style="display: flex; position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y:auto;">
+  <div class="bg-blue" style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+    <a>
+      <img src="../../../../assets/logo-white.png" style="object-fit: contain;">
+    </a>
+    <a routerLink="/league/dashboard" routerLinkActive="active-link">Coaches</a>
+    <a routerLink="/league/players" routerLinkActive="active-link">Players</a>
+    <a routerLink="/league/tryouts" routerLinkActive="active-link">Tryouts</a>
+    <a routerLink="/league/settings" routerLinkActive="active-link">Settings</a>
+  </div>
+
+  <div style="display: flex; flex: 3;">
+    <router-outlet></router-outlet>
+  </div>
+</div>

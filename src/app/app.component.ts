@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     const youthdraftToken: string = Cookie.get('youthdraftToken');
+    console.log(youthdraftToken)
     if (youthdraftToken)
       this.session.setSession(youthdraftToken);
   }

@@ -3,16 +3,17 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SessionService } from '../../../services/session.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html'
+  selector: 'app-nav',
+  styleUrls: ['./nav.component.css'],
+  templateUrl: './nav.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class NavComponent implements OnInit {
 
   constructor(
     private session: SessionService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { console.log('init') }
 
   ngOnDestroy() { }
 

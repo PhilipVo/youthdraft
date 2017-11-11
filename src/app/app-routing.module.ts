@@ -11,10 +11,12 @@ const routes: Routes = [
 		children: [
 			{
 				path: 'coach',
+				canActivateChild: [AuthGuardService],
 				loadChildren: './components/coach/coach.module#CoachModule'
 			},
 			{
 				path: 'league',
+				canActivateChild: [AuthGuardService],
 				loadChildren: './components/league/league.module#LeagueModule'
 			},
 			{
