@@ -65,32 +65,19 @@
         Use our template to populate your coach's information
       </p>
 
-      <button 
-        class="bg-gray btn"
-        (click)="next()"
-        style="margin-top: 5%;">
-        Download
-      </button>
+      <button  class="bg-gray btn" (click)="next()" style="margin-top: 5%;">Download</button>
 
       <p style="color: white; font-size: 20px; margin-top: 5%;">
         Upload roster template:<br>
         Once you populate the template from above, upload it here.
       </p>
 
-      <button 
-        class="bg-gray btn"
-        (click)="next()"
-        style="margin-top: 5%;">
-        Upload
-      </button>
+      <label for="upload" class="bg-gray btn" style="text-align: center;">Upload</label>
+      <input accept=".csv, .png, .xlsx" (change)="upload($event)" id="upload" required style="display: none;" type="file">
+      <p *ngIf="file">{{file}}</p>
 
       <!-- Next -->
-      <button 
-        class="bg-blue btn"
-        (click)="next()"
-        style="margin-top: 10%;">
-        Next
-      </button>
+      <button  class="bg-blue btn" (click)="next()" [disabled]="!file" style="margin-top: 10%;">Next</button>
 
     </div>
     

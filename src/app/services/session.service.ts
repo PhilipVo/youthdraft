@@ -8,6 +8,7 @@ import { HttpService } from './http.service';
 
 @Injectable()
 export class SessionService {
+  private _newUser: object = {};
   private _user: string;
 
   private jwtHelper: JwtHelper = new JwtHelper();
@@ -15,9 +16,12 @@ export class SessionService {
   constructor(
     private http: HttpService,
     private router: Router,
-  ) { console.log('loaded session') }
+  ) { }
 
   get user(): string { return this._user; }
+  get newUser(): any { return this._newUser; }
+
+  set newUser(data) { this._newUser = { ...this._newUser, ...data }; }
 
   login(user, data): Promise<any> {
     return this.http.post(`/${user}/login`, data)

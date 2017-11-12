@@ -25,7 +25,7 @@ export class IndexComponent implements OnInit {
     this.location.back();
   }
 
-  register(): void {
+  next(): void {
     this.router.navigate(['/league/register/upload-coach']);
     // this.session.register('leagues', this.league)
     //   .then(() => this.router.navigate(['league/dashboard']))

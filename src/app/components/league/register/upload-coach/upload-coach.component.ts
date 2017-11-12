@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { SessionService } from '../../../../services/session.service';
@@ -10,27 +9,33 @@ import { SessionService } from '../../../../services/session.service';
   styleUrls: ['./upload-coach.component.css']
 })
 export class UploadCoachComponent implements OnInit {
-  league = {};
-  screen = 0;
-
   constructor(
-    private location: Location,
     private router: Router,
     private session: SessionService
   ) { }
 
-  ngOnInit() { }
+  file = this.session.newUser.coachRoster && this.session.newUser.coachRoster.name ?
+    this.session.newUser.coachRoster.name : null;
 
-  back(): void {
-    this.location.back();
+  ngOnInit() {
+    if (!(this.session.newUser.firstName &&
+      this.session.newUser.lastName &&
+      this.session.newUser.leagueName &&
+      this.session.newUser.email &&
+      this.session.newUser.phoneNumber &&
+      this.session.newUser.city &&
+      this.session.newUser.state))
+      this.router.navigate(['/league/register']);
   }
 
   next(): void {
     this.router.navigate(['/league/register/upload-player']);
-    // this.session.register('leagues', this.league)
-    //   .then(() => this.router.navigate(['league/dashboard']))
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
+  }
+
+  upload(event) {
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0].name;
+      this.session.newUser = { coachRoster: event.target.files[0] };
+    }
   }
 }
