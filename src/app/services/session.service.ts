@@ -8,18 +8,17 @@ import { HttpService } from './http.service';
 
 @Injectable()
 export class SessionService {
-  private _newUser: object = {};
-  private _user: string;
-
-  private jwtHelper: JwtHelper = new JwtHelper();
-
   constructor(
     private http: HttpService,
     private router: Router,
   ) { }
 
-  get user(): string { return this._user; }
+  private jwtHelper: JwtHelper = new JwtHelper();
+  private _newUser: object = {};
+  private _user: string;
+
   get newUser(): any { return this._newUser; }
+  get user(): string { return this._user; }
 
   set newUser(data) { this._newUser = { ...this._newUser, ...data }; }
 
@@ -31,7 +30,6 @@ export class SessionService {
       }).catch(error => Promise.reject(error));
   }
 
-  // logout(relocate = true): void {
   logout(): void {
     // Clear user information:
     this._user = null;
@@ -46,12 +44,9 @@ export class SessionService {
     this.router.navigate(['']);
   }
 
-  register(user, data): Promise<any> {
-    return this.http.post(`/${user}/login`, data)
-      .then(youthdraftToken => {
-        Cookie.set('youthdraftToken', youthdraftToken, undefined, '/');
-        this.setSession(Cookie.get('youthdraftToken'));
-      }).catch(error => Promise.reject(error));
+  register(user): Promise<any> {
+    return this.http.post(`/${user}/register`, this.newUser)
+      .catch(error => Promise.reject(error));
   }
 
   setSession(youthdraftToken: string): void {

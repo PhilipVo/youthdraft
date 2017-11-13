@@ -89,7 +89,14 @@
       </p>
 
       <label for="upload" class="bg-gray btn" style="text-align: center;">Upload</label>
-      <input accept=".csv, .png, .xlsx" (change)="upload($event)" id="upload" required style="display: none;" type="file">
+      <input
+        accept=".csv,
+        .png,
+        .xlsx"
+        (change)="upload($event)"
+        id="upload"
+        required style="display: none;"
+        type="file">
       <p *ngIf="file">{{file}}</p>
 
       <!-- Next -->

@@ -10,27 +10,23 @@ import { SessionService } from '../../../../services/session.service';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  dates = [{}, {}, {}, {}, {}, {}, {}, {}];
-  screen = 0;
-
   constructor(
-    private location: Location,
     private router: Router,
     private session: SessionService
   ) { }
 
-  ngOnInit() { }
-
-  back(): void {
-    this.location.back();
+  ngOnInit() {
+    if (!(this.session.newUser.firstName &&
+      this.session.newUser.lastName &&
+      this.session.newUser.leagueName &&
+      this.session.newUser.email &&
+      this.session.newUser.phoneNumber &&
+      this.session.newUser.city &&
+      this.session.newUser.state))
+      this.router.navigate(['/coach/register']);
   }
 
   register(): void {
     this.router.navigate(['/coach/register/complete']);
-    // this.session.register('leagues', this.league)
-    //   .then(() => this.router.navigate(['league/dashboard']))
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
   }
 }

@@ -17,231 +17,40 @@
   </p>
   
   <form 
-    (ngSubmit)="register()"
-    #registerForm="ngForm"
+    (ngSubmit)="next()"
+    #form="ngForm"
     style="align-items: center; display: flex; flex-direction: column;">
 
-      <!-- #0 -->
       <div style="display: flex; justify-content: space-between; width: 50%;">
         <div style="width: 48%">
-          <label for="date0">Date &amp; Time</label>
-          <input
-            [(ngModel)]="dates[0].date"
-            name="date0"
-            #date0="ngModel"
-            id="date0"
-            required
-            type="datetime-local">
-          <div [hidden]="date0.valid || date0.pristine" style="color: red; margin-bottom: 2%;">
-            At least one tryout date is required.
-          </div>
+          <label>Date &amp; Time</label>
         </div>
         <div style="width: 48%">
-          <label for="address0">Location</label>
-          <input
-            [(ngModel)]="dates[0].address"
-            name="address0"
-            #address0="ngModel"
-            id="address0"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
-          <div [hidden]="address0.valid || address0.pristine" style="color: red; margin-bottom: 2%;">
-            At least one tryout location is required.
-          </div>
+          <label>Location</label>
         </div>
       </div>
       
-      <!-- #1 -->
-      <div style="display: flex; justify-content: space-between; width: 50%;">
+      <div 
+        *ngFor="let date of dates"
+        style="display: flex; justify-content: space-between; width: 50%;">
         <div style="width: 48%">
           <input
-            [(ngModel)]="dates[1].date"
-            name="date1"
-            #date1="ngModel"
-            id="date1"
+            [(ngModel)]="date.date"
+            name="date"
             required
             type="datetime-local">
         </div>
         <div style="width: 48%">
           <input
-            [(ngModel)]="dates[1].address"
-            name="address1"
-            #address1="ngModel"
-            id="address1"
+            [(ngModel)]="date.address"
+            name="address"
             placeholder="123 Fake Street, San Jose, CA, 95127"
             required
             type="text">
         </div>
       </div>
       
-      <!-- #2 -->
-      <div style="display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[2].date"
-            name="date2"
-            #date2="ngModel"
-            id="date2"
-            required
-            type="datetime-local">
-        </div>
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[2].address"
-            name="address2"
-            #address2="ngModel"
-            id="address2"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
-        </div>
-      </div>
-      
-      <!-- #3 -->
-      <div style="align-items: center; display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[3].date"
-            name="date3"
-            #date3="ngModel"
-            id="date3"
-            required
-            type="datetime-local">
-        </div>
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[3].address"
-            name="address3"
-            #address3="ngModel"
-            id="address3"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
-        </div>
-      </div>
-
-      <!-- #4 -->
-      <div style="align-items: center; display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[4].date"
-            name="date4"
-            #date4="ngModel"
-            id="date4"
-            required
-            type="datetime-local">
-        </div>
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[4].address"
-            name="address4"
-            #address4="ngModel"
-            id="address4"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
-        </div>
-      </div>
-
-      <!-- #4 -->
-      <div style="align-items: center; display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[4].date"
-            name="date4"
-            #date4="ngModel"
-            id="date4"
-            required
-            type="datetime-local">
-        </div>
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[4].address"
-            name="address4"
-            #address4="ngModel"
-            id="address4"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
-        </div>
-      </div>
-
-      <!-- #5 -->
-      <div style="align-items: center; display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[5].date"
-            name="date5"
-            #date5="ngModel"
-            id="date5"
-            required
-            type="datetime-local">
-        </div>
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[5].address"
-            name="address5"
-            #address5="ngModel"
-            id="address5"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
-        </div>
-      </div>
-
-      <!-- #6 -->
-      <div style="align-items: center; display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[6].date"
-            name="date6"
-            #date6="ngModel"
-            id="date6"
-            required
-            type="datetime-local">
-        </div>
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[6].address"
-            name="address6"
-            #address6="ngModel"
-            id="address6"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
-        </div>
-      </div>
-
-      <!-- #7 -->
-      <div style="align-items: center; display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[7].date"
-            name="date7"
-            #date7="ngModel"
-            id="date7"
-            required
-            type="datetime-local">
-        </div>
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="dates[7].address"
-            name="address7"
-            #address7="ngModel"
-            id="address7"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
-        </div>
-      </div>
-      
-      <button 
-        class="bg-blue btn"
-        style="border: none; border-radius: 5px; color: white; padding: 10px 20px;"
-        type="submit">
-        Next
-      </button>
+      <button class="bg-blue btn" [disabled]="!form.form.valid" type="submit">Next</button>
     
   </form>
 </div>

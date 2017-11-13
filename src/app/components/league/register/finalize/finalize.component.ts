@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import * as moment from 'moment';
@@ -12,38 +11,28 @@ import { SessionService } from '../../../../services/session.service';
   styleUrls: ['./finalize.component.css']
 })
 export class FinalizeComponent implements OnInit {
-  data = {
-    firstName: 'Chris',
-    lastName: 'Thompson',
-    email: 'chris@youthdraft.com',
-    leagueName: 'Diablo Valley Little League',
-    dates: [
-      { date: moment().format('MMMM Do YYYY, h:mm:ss a') },
-      { date: moment().format('MMMM Do YYYY, h:mm:ss a') },
-      { date: moment().format('MMMM Do YYYY, h:mm:ss a') },
-      { date: moment().format('MMMM Do YYYY, h:mm:ss a') }
-    ]
-  };
-  screen = 0;
-
   constructor(
-    private location: Location,
     private router: Router,
     private session: SessionService
   ) { }
 
-  ngOnInit() { }
+  dates = [];
 
-  back(): void {
-    this.location.back();
+  ngOnInit() {
+    if (!this.session.newUser.dates ||
+      this.session.newUser.dates.length < 1 ||
+      !this.session.newUser.dates[0].date ||
+      !this.session.newUser.dates[0].address)
+      this.router.navigate(['/league/register/select-dates']);
+    else this.dates = this.session.newUser.dates.map(date =>
+      moment(date.date).format('MMMM Do YYYY, h:mm:ss a'));
   }
 
   register(): void {
-    this.router.navigate(['/league/register/complete']);
-    // this.session.register('leagues', this.league)
-    //   .then(() => this.router.navigate(['league/dashboard']))
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
+    this.session.register('league')
+      .then(() => this.router.navigate(['league/register/complete']))
+      .catch(error => {
+        console.log(error)
+      })
   }
 }

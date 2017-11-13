@@ -19,83 +19,49 @@
   
   <form 
     (ngSubmit)="register()"
-    #registerForm="ngForm"
+    #form="ngForm"
     style="align-items: flex-start; display: flex; justify-content: space-around;">
 
     <!-- Left Column -->
     <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
-      <!-- First Name -->
-      <div style="width: 50%">
-        <input
-          [(ngModel)]="league.firstName"
-          name="firstName"
-          #firstName="ngModel"
-          id="firstName"
-          placeholder="Past League"
-          required
-          type="text">
-        <div [hidden]="firstName.valid || firstName.pristine" style="color: red; margin-bottom: 2%;">
-          First name is required
-        </div>
-      </div>
+      <!-- Past League -->
+      <input
+        [(ngModel)]="session.newUser.pastLeague"
+        name="pastLeague"
+        placeholder="Past League"
+        required
+        type="text">
 
-      <!-- Last Name -->
-      <div style="width: 50%">
-        <input
-          [(ngModel)]="league.LastName"
-          name="LastName"
-          #LastName="ngModel"
-          id="LastName"
-          placeholder="Desired Coaching Div."
-          required
-          type="text">
-        <div [hidden]="LastName.valid || LastName.pristine" style="color: red; margin-bottom: 2%;">
-          Last name is required
-        </div>
-      </div>
+      <!-- Desired Coaching Div. -->
+      <input
+        [(ngModel)]="session.newUser.desired"
+        name="desired"
+        placeholder="Desired Coaching Div."
+        required
+        type="text">
     </div>
 
     <!-- Right Column -->
     <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
       <!-- Email -->
-      <div style="width: 50%">
-        <input
-          [(ngModel)]="league.email"
-          name="email"
-          #email="ngModel"
-          id="email"
-          placeholder="Past Divisions Coached"
-          required
-          type="text">
-        <div [hidden]="email.valid || email.pristine" style="color: red; margin-bottom: 2%;">
-          Email address is required
-        </div>
-      </div>
+      <input
+        [(ngModel)]="session.newUser.pastDivision"
+        name="pastDivision"
+        placeholder="Past Divisions Coached"
+        required
+        type="text">
 
       <!-- Phone Number -->
-      <div style="width: 50%">
-        <input
-          [(ngModel)]="league.phoneNumber"
-          name="phoneNumber"
-          #phoneNumber="ngModel"
-          id="phoneNumber"
-          placeholder="Years of Experience"
-          required
-          type="text">
-        <div [hidden]="phoneNumber.valid || phoneNumber.pristine" style="color: red; margin-bottom: 2%;">
-          Phone Number is required
-        </div>
-      </div>
+      <input
+        [(ngModel)]="session.newUser.years"
+        name="years"
+        placeholder="Years of Experience"
+        required
+        type="text">
 
       <!-- Next -->
       <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
-        <button 
-          class="bg-green btn"
-          style="border: none; border-radius: 5px; color: white; padding: 10px 20px;"
-          type="submit">
-          Finish
-        </button>
-        <!-- <button type="submit" [disabled]="!registerForm.form.valid">Register</button> -->
+        <button class="bg-green btn" [disabled]="!form.form.valid" type="submit">Finish</button>
       </div>
 
     </div>

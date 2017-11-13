@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { SessionService } from '../../../../services/session.service';
@@ -10,27 +9,20 @@ import { SessionService } from '../../../../services/session.service';
   styleUrls: ['./select-dates.component.css']
 })
 export class SelectDatesComponent implements OnInit {
-  dates = [{}, {}, {}, {}, {}, {}, {}, {}];
-  screen = 0;
-
   constructor(
-    private location: Location,
     private router: Router,
     private session: SessionService
   ) { }
 
-  ngOnInit() { }
+  dates = this.session.newUser.dates ? this.session.newUser.dates : [{}];
 
-  back(): void {
-    this.location.back();
+  ngOnInit() {
+    if (!this.session.newUser.playerRoster)
+      this.router.navigate(['/league/register/upload-player']);
   }
 
-  register(): void {
+  next(): void {
+    this.session.newUser = { dates: this.dates };
     this.router.navigate(['/league/register/finalize']);
-    // this.session.register('leagues', this.league)
-    //   .then(() => this.router.navigate(['league/dashboard']))
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
   }
 }

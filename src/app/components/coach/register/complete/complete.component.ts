@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { SessionService } from '../../../../services/session.service';
@@ -10,27 +9,16 @@ import { SessionService } from '../../../../services/session.service';
   styleUrls: ['./complete.component.css']
 })
 export class CompleteComponent implements OnInit {
-  league = {};
-  screen = 0;
-
   constructor(
-    private location: Location,
     private router: Router,
     private session: SessionService
   ) { }
 
-  ngOnInit() { }
-
-  back(): void {
-    this.location.back();
-  }
-
-  register(): void {
-    this.router.navigate(['/league/register/upload-coach']);
-    // this.session.register('leagues', this.league)
-    //   .then(() => this.router.navigate(['league/dashboard']))
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
+  ngOnInit() {
+    if (!(this.session.newUser.pastLeague &&
+      this.session.newUser.desired &&
+      this.session.newUser.pastDivision &&
+      this.session.newUser.years))
+      this.router.navigate(['/coach/register/history']);
   }
 }

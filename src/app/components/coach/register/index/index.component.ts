@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SessionService } from '../../../../services/session.service';
@@ -9,29 +8,13 @@ import { SessionService } from '../../../../services/session.service';
   styleUrls: ['./index.component.css'],
   templateUrl: './index.component.html'
 })
-export class IndexComponent implements OnInit {
-  league = {};
-  screen = 0;
-
+export class IndexComponent {
   constructor(
-    private location: Location,
     private router: Router,
     private session: SessionService
   ) { }
 
-  ngOnInit() { }
-
-  back(): void {
-    this.location.back();
-  }
-
-  register(): void {
+  next(): void {
     this.router.navigate(['/coach/register/history']);
-    // this.session.register('leagues', this.league)
-    //   .then(() => this.router.navigate(['league/dashboard']))
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
   }
-
 }

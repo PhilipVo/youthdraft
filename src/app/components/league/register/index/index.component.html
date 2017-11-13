@@ -26,39 +26,51 @@
     <!-- Left Column -->
     <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
       <!-- First Name -->
-      <input [(ngModel)]="user.firstName" name="firstName" placeholder="First Name" required type="text">
+      <input [(ngModel)]="session.newUser.firstName" name="firstName" placeholder="First Name" required type="text">
 
       <!-- Last Name -->
-      <input [(ngModel)]="user.lastName" name="LastName" placeholder="Last Name" required type="text">
+      <input [(ngModel)]="session.newUser.lastName" name="LastName" placeholder="Last Name" required type="text">
 
       <!-- League Name -->
-      <input [(ngModel)]="user.leagueName" name="leagueName" placeholder="League Name" required type="text">
+      <input [(ngModel)]="session.newUser.leagueName" name="leagueName" placeholder="League Name" required type="text">
     </div>
 
     <!-- Right Column -->
     <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
       <!-- Email -->
-      <input [(ngModel)]="user.email" name="email" placeholder="Email Address" required type="text">
+      <input [(ngModel)]="session.newUser.email" name="email" placeholder="Email Address" required type="text">
 
       <!-- Phone Number -->
-      <input [(ngModel)]="user.phoneNumber" name="phoneNumber" placeholder="Phone Number" required type="text">
+      <input [(ngModel)]="session.newUser.phoneNumber" name="phoneNumber" placeholder="Phone Number" required type="text">
 
       <div style="display: flex; justify-content: space-between; width: 50%;">
         <!-- City -->
         <div style="flex: 2; margin-right: 5px;">
-          <input [(ngModel)]="user.city" name="city" placeholder="City" required style="width: 100%" type="text">
+          <input
+            [(ngModel)]="session.newUser.city"
+            name="city"
+            placeholder="City"
+            required
+            style="width: 100%"
+            type="text">
         </div>
 
         <!-- State -->
         <div style="flex: 1">
-          <input [(ngModel)]="user.state" maxLength="2" name="state" placeholder="State" required style="width: 100%" type="text">
+          <input
+            [(ngModel)]="session.newUser.state"
+            maxLength="2"
+            name="state"
+            placeholder="State"
+            required
+            style="width: 100%"
+            type="text">
         </div>
       </div>
 
       <!-- Next -->
       <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
         <button  class="bg-blue btn" [disabled]="!form.form.valid" type="submit">Next</button>
-        <!-- <button type="submit" [disabled]="!form.form.valid">Register</button> -->
       </div>
     </div>
     

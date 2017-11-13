@@ -12,21 +12,20 @@
   </div>
 
   <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
-    Almost there, Chris!<br><br>
+    Almost there, {{session.newUser.firstName}}!<br><br>
     Take a look below for your league details and hit finish when complete.
   </p>
   
   <form 
     (ngSubmit)="register()"
-    #registerForm="ngForm"
     style="display: flex; font-size: 20px; justify-content: space-around;">
 
     <!-- Left Column -->
     <div>
       League Admin:<br>
-      {{data.firstName}} {{data.lastName}}<br>
-      {{data.email}}<br>
-      {{data.leagueName}}<br><br>
+      {{session.newUser.firstName}} {{session.newUser.lastName}}<br>
+      {{session.newUser.email}}<br>
+      {{session.newUser.leagueName}}<br><br>
       Coach Roster Uploaded<br>
       <i class="icon ion-android-checkbox" style="color: #30c219; font-size: 200%;"></i><br><br>
       Player Roster Uploaded<br>
@@ -36,15 +35,9 @@
     <!-- Right Column -->
     <div style="align-items: center; display: flex; flex-direction: column;">
       Selected Tryout Dates:
-      <p *ngFor="let date of data.dates">{{date.date}}</p>
-      <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
-        <button 
-          class="bg-blue btn"
-          style="border: none; border-radius: 5px; color: white; padding: 10px 20px;"
-          type="submit">
-          Create League
-        </button>
-        <!-- <button type="submit" [disabled]="!registerForm.form.valid">Register</button> -->
+      <p *ngFor="let date of dates">{{date}}</p>
+      <div style="display: flex; justify-content: flex-end; margin-top: 10%;">
+        <button class="bg-blue btn" type="submit">Create League</button>
       </div>
     </div>
     

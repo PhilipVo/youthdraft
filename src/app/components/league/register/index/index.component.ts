@@ -14,10 +14,7 @@ export class IndexComponent {
     private session: SessionService
   ) { }
 
-  user = {};
-
   next(): void {
-    this.session.newUser = this.user;
     this.router.navigate(['/league/register/upload-coach']);
   }
 
