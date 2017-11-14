@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 
 import { CoachesComponent } from './coaches/coaches.component';
 import { NavComponent } from './nav/nav.component';
-import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
 import { PlayersComponent } from './players/players.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -22,7 +21,6 @@ import { LeagueRoutingModule } from './league-routing.module';
   declarations: [
     CoachesComponent,
     NavComponent,
-    IndexComponent,
     LoginComponent,
     PlayersComponent,
     SettingsComponent,

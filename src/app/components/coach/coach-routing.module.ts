@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { FormulasComponent } from './formulas/formulas.component';
 import { NavComponent } from './nav/nav.component';
-import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
 import { PlayersComponent } from './players/players.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -26,7 +25,7 @@ const coachRoutes: Routes = [
       { path: 'formulas', component: FormulasComponent },
       { path: 'players', component: PlayersComponent },
       { path: 'settings', component: SettingsComponent },
-      { path: '', component: PlayersComponent }
+      { path: '**', redirectTo: 'players' }
     ]
   }
 ];

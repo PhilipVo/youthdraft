@@ -40,10 +40,9 @@ export class LoginComponent implements OnInit {
   submit(): void {
     this.error = null;
     this.user = { ...this.user, ...this.league };
-    console.log(this.user)
 
     this.session.login('league', this.user)
-      .then(() => this.router.navigate(['league']))
+      .then(() => this.router.navigate(['/league/coaches']))
       .catch(error => this.error = typeof error === 'string' ? error : 'Oops, something went wrong.');
   }
 

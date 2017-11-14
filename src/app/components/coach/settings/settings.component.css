@@ -1,0 +1,27 @@
+* {
+  color: #787878;
+}
+
+input {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 20px;
+  padding: 10px;
+  width: 75%;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+    font-size: 12px;
+    padding: 5px;
+    white-space: nowrap;
+}
+
+tr {
+    text-align: left;
+    width: 100%;
+}

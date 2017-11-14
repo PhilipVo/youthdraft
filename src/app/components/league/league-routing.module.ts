@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CoachesComponent } from './coaches/coaches.component';
-import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { PlayersComponent } from './players/players.component';
@@ -25,7 +24,7 @@ const routes: Routes = [
       { path: 'players', component: PlayersComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'tryouts', component: TryoutsComponent },
-      { path: '', component: IndexComponent }
+      { path: '**', redirectTo: 'coaches' }
     ]
   }
 ];

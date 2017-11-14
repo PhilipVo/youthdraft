@@ -35,7 +35,7 @@ export class SessionService {
     this._user = null;
 
     // Clear cookies:
-    Cookie.deleteAll();
+    Cookie.delete('youthdraftToken');
     const youthdraftToken: string = Cookie.get('youthdraftToken');
     console.log(youthdraftToken)
 

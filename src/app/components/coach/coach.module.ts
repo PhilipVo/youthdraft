@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { FormulasComponent } from './formulas/formulas.component';
-import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { PlayersComponent } from './players/players.component';
@@ -22,7 +21,6 @@ import { CoachRoutingModule } from './coach-routing.module';
   declarations: [
     AssessmentsComponent,
     FormulasComponent,
-    IndexComponent,
     LoginComponent,
     NavComponent,
     PlayersComponent,

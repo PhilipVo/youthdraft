@@ -1,3 +1,192 @@
-<p>
-  assessments works!
-</p>
+<div style="height: 100%; display: flex; flex-direction: column;">
+  <div style="flex: 1; padding: 25px;">
+    <h1>Assessments</h1><br>
+    <p>
+      Select one of the formulas you created in the Formulas tab to view player
+      rankings based on the weight of your formula.
+    </p>
+    <select [(ngModel)]="formula" required style="margin-top: 20px;">
+      <option [ngValue]="defaultFormula"></option>
+      <option *ngFor="let formula of formulas" [ngValue]="formula">
+        {{formula.name}}
+      </option>
+    </select>
+  </div>
+
+  <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
+    <!-- Formula Details -->
+    <div style="background-color: white; flex: 1; height: 100%; margin-bottom: 20px; padding: 25px; overflow: auto;">
+      <h4>Formula Details</h4>
+      <table>
+        <colgroup>
+          <col style="width: 25%">
+          <col style="width: 25%">
+          <col style="width: 25%">
+          <col style="width: 25%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Hitting</th>
+            <th>Throwing</th>
+            <th>Fielding</th>
+            <th>Baserunning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>Hitting Mechanics</p>
+              <p>{{formula.hittingMechanics}}%</p>
+            </td>
+            <td>
+              <p>Throwing Mechanics</p>
+              <p>{{formula.throwingMechanics}}%</p>
+            </td>
+            <td>
+              <p>Fielding</p>
+              <p>{{formula.fielding}}%</p>
+            </td>
+            <td>
+              <p>Baserunning</p>
+              <p>{{formula.baserunning}}%</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Bat Speed</p>
+              <p>{{formula.batSpeed}}%</p>
+            </td>
+            <td>
+              <p>Arm Strength</p>
+              <p>{{formula.armStrength}}%</p>
+            </td>
+            <td>
+              <p>Outfield</p>
+              <p>{{formula.outfield}}%</p>
+            </td>
+            <td>
+              <p>Speed</p>
+              <p>{{formula.speed}}%</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Bat Contact</p>
+              <p>{{formula.batContact}}%</p>
+            </td>
+            <td>
+              <p>Arm Accuracy</p>
+              <p>{{formula.armAccuracy}}%</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Players -->
+    <div style="background-color: white; flex: 2; height: 100%; padding: 25px; overflow: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Player Name</th>
+            <th>Hitting</th>
+            <th>Throwing</th>
+            <th>Fielding</th>
+            <th>Baserunning</th>
+            <th>Raw Score</th>
+            <th>Weighted Score</th>
+            <th>Prior Div.</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let player of players">
+            <tr>
+              <td 
+                (click)="player.show ? player.show = false : player.show = true"
+                style="cursor: pointer;">
+                8 | {{player.name}}&nbsp;
+                <i class="icon ion-android-arrow-dropdown" style="font-size: 14px;"></i>
+              </td>
+              <td>{{player.hitting}} | {{player.hitting}}</td>
+              <td>{{player.throwing}} | {{player.throwing}}</td>
+              <td>{{player.fielding}} | {{player.fielding}}</td>
+              <td>{{player.baserunning}} | {{player.baserunning}}</td>
+              <td>{{player.raw}}</td>
+              <td>{{player.weighted}}</td>
+              <td>{{player.div}}</td>
+            </tr>
+
+            <!-- Expanded row -->
+            <tr *ngIf="player.show">
+              <td colspan="8">
+                <div style="padding: 10px; white-space: normal;">
+                  This is where we provide more details on this player's assessment results
+                  formatted as: raw score | weighted score.<br>
+                  Assessment Date: January 15, 2017.
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Hitting</th>
+                        <th>Throwing</th>
+                        <th>Fielding</th>
+                        <th>Baserunning</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          Mechanics 
+                        </td>
+                        <td>
+                          Mechanics 
+                        </td>
+                        <td>
+                          Infield 
+                        </td>
+                        <td>
+                          Infield 
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Speed 
+                        </td>
+                        <td>
+                          Speed 
+                        </td>
+                        <td>
+                          Outfield 
+                        </td>
+                        <td>
+                          Outfield 
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Contact 
+                        </td>
+                        <td>
+                          Contact 
+                        </td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- Notes -->
+                  <p style="font-weight: bold;">Notes</p>
+                  <p style="margin-bottom: 50px;">
+                    Looks a little frail and lack great physical structure and strength.
+                  </p>
+                  <hr>
+                </div>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    </div>
+</div>

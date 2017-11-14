@@ -1,0 +1,30 @@
+* {
+  color: #787878;
+}
+
+select {
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 5px;
+  width: 50%;
+}
+
+span {
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+    font-size: 12px;
+    padding: 5px;
+    white-space: nowrap;
+}
+
+tr {
+    text-align: left;
+    width: 100%;
+}

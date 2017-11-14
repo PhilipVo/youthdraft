@@ -1,3 +1,146 @@
-<p>
-  formulas works!
-</p>
+<div style="height: 100%; display: flex; flex-direction: column;">
+  <div style="flex: 1; padding: 25px;">
+    <h1>Draft Formulas</h1><br>
+    <p>
+      Here is where you can create a formula to rank players differently.<br>
+      Want to see wo rises to the top in hitting? Create a custom formula below
+      to find players to draft based on your own custom coaching criteria.
+    </p>
+  </div>
+
+  <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
+    <!-- Create a Formula -->
+    <div style="background-color: white; height: 100%; margin-bottom: 20px; padding: 25px; overflow: auto;">
+      <div style="align-items: center; display: flex;">
+        <h4 style="flex: 1;">Create a Formula</h4>
+        <input placeholder="Formula name" style="flex: 1; text-align: center;" required type="text"/>
+      </div>
+      <p style="margin-top: 10px;">Assessment Skill Area Weightings: Can be adjusted between 50-150%</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Hitting</th>
+            <th>Throwing</th>
+            <th>Fielding</th>
+            <th>Baserunning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <label>Hitting Mechanics</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+            <td>
+              <label>Throwing Mechanics</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+            <td>
+              <label>Fielding</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+            <td>
+              <label>Baserunning</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Bat Speed</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+            <td>
+              <label>Arm Strength</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+            <td>
+              <label>Outfield</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+            <td>
+              <label>Speed</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Bat Contact</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+            <td>
+              <label>Arm Accuracy</label>
+              <div style="align-items: center; display: flex;">
+                <input/>
+                <p>&nbsp;%</p>
+              </div>
+            </td>
+            <td></td>
+            <td><button class="bg-green btn" style="color: white; width: 75%;">Save</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Manage Your Formulas -->
+    <div style="background-color: white; height: 100%; padding: 25px; overflow: auto;">
+      <div style="align-items: center; display: flex; white-space: nowrap">
+        <h4>Manage Your Formulas | &nbsp;</h4>
+        <h5>You can save up to 5 formulas</h5>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Formula Name</th>
+            <th>Hitting</th>
+            <th>Throwing</th>
+            <th>Fielding</th>
+            <th>Baserunning</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let formula of formulas">
+            <td>{{formula.name}}</td>
+            <td>{{formula.hitting}}</td>
+            <td>{{formula.throwing}}</td>
+            <td>{{formula.fielding}}</td>
+            <td>{{formula.baserunning}}</td>
+            <td>
+              <p style="font-weight: bold;">
+                <span ng-click="edit(formula)">Edit</span> | <span ng-click="delete(formula)">Delete</span>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    </div>
+</div>

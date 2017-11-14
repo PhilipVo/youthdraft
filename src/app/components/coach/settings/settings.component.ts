@@ -8,10 +8,11 @@ import { SessionService } from '../../../services/session.service';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-
   constructor(
     private session: SessionService
   ) { }
+
+  user = {};
 
   ngOnInit() {
   }
