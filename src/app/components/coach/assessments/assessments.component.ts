@@ -29,17 +29,17 @@ export class AssessmentsComponent implements OnInit {
     for (let i = 0; i < 5; i++)
       this.players.push({
         name: `Player ${i}`,
-        number: Math.floor(Math.random() * 100 + 1),
-        hittingMechanics: Math.floor(Math.random() * 11),
-        batSpeed: Math.floor(Math.random() * 11),
-        batContact: Math.floor(Math.random() * 11),
-        throwingMechanics: Math.floor(Math.random() * 11),
-        armStrength: Math.floor(Math.random() * 11),
-        armAccuracy: Math.floor(Math.random() * 11),
-        infield: Math.floor(Math.random() * 11),
-        outfield: Math.floor(Math.random() * 11),
-        mechanics: Math.floor(Math.random() * 11),
-        speed: Math.floor(Math.random() * 11),
+        number: Math.floor(Math.random() * 101),
+        hittingMechanics: Math.floor(Math.random() * 101) / 10,
+        batSpeed: Math.floor(Math.random() * 101) / 10,
+        batContact: Math.floor(Math.random() * 101) / 10,
+        throwingMechanics: Math.floor(Math.random() * 101) / 10,
+        armStrength: Math.floor(Math.random() * 101) / 10,
+        armAccuracy: Math.floor(Math.random() * 101) / 10,
+        infield: Math.floor(Math.random() * 101) / 10,
+        outfield: Math.floor(Math.random() * 101) / 10,
+        mechanics: Math.floor(Math.random() * 101) / 10,
+        speed: Math.floor(Math.random() * 101) / 10,
         div: 'AAA',
       });
     for (let i = 0; i < 5; i++)

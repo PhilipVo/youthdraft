@@ -109,37 +109,37 @@
                 <i class="icon ion-android-arrow-dropdown" style="font-size: 14px;"></i>
               </td>
               <td>
-                {{Math.round((player.hittingMechanics + player.batSpeed + player.batContact) / 3)}} | 
-                {{Math.round((
+                {{((player.hittingMechanics + player.batSpeed + player.batContact) / 3).toFixed(1)}} | 
+                {{((
                   player.hittingMechanics * formula.hittingMechanics + 
                   player.batSpeed * formula.batSpeed +
-                  player.batContact * formula.batContact) / 300)
+                  player.batContact * formula.batContact) / 300).toFixed(1)
                 }}
               </td>
               <td>
-                {{Math.round((player.throwingMechanics + player.armStrength + player.armAccuracy) / 3)}} | 
-                {{Math.round((
+                {{((player.throwingMechanics + player.armStrength + player.armAccuracy) / 3).toFixed(1)}} | 
+                {{((
                   player.throwingMechanics * formula.throwingMechanics + 
                   player.armStrength * formula.armStrength +
-                  player.armAccuracy * formula.armAccuracy) / 300)
+                  player.armAccuracy * formula.armAccuracy) / 300).toFixed(1)
                 }}
               </td>
               <td>
-                {{Math.round((player.infield + player.outfield) / 2)}} | 
-                {{Math.round((
+                {{((player.infield + player.outfield) / 2).toFixed(1)}} | 
+                {{((
                   player.infield * formula.infield + 
-                  player.outfield * formula.outfield) / 200)
+                  player.outfield * formula.outfield) / 200).toFixed(1)
                 }}                
               </td>
               <td>
-                {{Math.round((player.mechanics + player.speed) / 2)}} | 
-                {{Math.round((
+                {{((player.mechanics + player.speed) / 2).toFixed(1)}} | 
+                {{((
                   player.mechanics * formula.mechanics + 
-                  player.speed * formula.speed) / 200)
+                  player.speed * formula.speed) / 200).toFixed(1)
                 }}                
               </td>
               <td>
-                {{
+                {{(
                   player.hittingMechanics +
                   player.batSpeed +
                   player.batContact +
@@ -149,21 +149,21 @@
                   player.infield +
                   player.outfield +
                   player.mechanics +
-                  player.speed
+                  player.speed).toFixed(1)
                 }}
               </td>
               <td>
-                {{
-                  Math.round(player.hittingMechanics * formula.hittingMechanics / 100) +
-                  Math.round(player.batSpeed * formula.batSpeed / 100) +
-                  Math.round(player.batContact * formula.batContact / 100) +
-                  Math.round(player.throwingMechanics * formula.throwingMechanics / 100) +
-                  Math.round(player.armStrength * formula.armStrength / 100) +
-                  Math.round(player.armAccuracy * formula.armAccuracy / 100) +
-                  Math.round(player.infield * formula.infield / 100) +
-                  Math.round(player.outfield * formula.outfield / 100) +
-                  Math.round(player.mechanics * formula.mechanics / 100) +
-                  Math.round(player.speed * formula.speed / 100)
+                {{((
+                  (player.hittingMechanics * formula.hittingMechanics) +
+                  (player.batSpeed * formula.batSpeed) +
+                  (player.batContact * formula.batContact) +
+                  (player.throwingMechanics * formula.throwingMechanics) +
+                  (player.armStrength * formula.armStrength) +
+                  (player.armAccuracy * formula.armAccuracy) +
+                  (player.infield * formula.infield) +
+                  (player.outfield * formula.outfield) +
+                  (player.mechanics * formula.mechanics) +
+                  (player.speed * formula.speed)) / 100).toFixed(1)
                 }}
               </td>
               <td>{{player.div}}</td>
@@ -190,56 +190,56 @@
                         <td>
                           Mechanics
                           {{player.hittingMechanics}} | 
-                          {{Math.round(player.hittingMechanics * formula.hittingMechanics / 100)}}
+                          {{(player.hittingMechanics * formula.hittingMechanics / 100).toFixed(1)}}
                         </td>
                         <td>
                           Mechanics
                           {{player.throwingMechanics}} | 
-                          {{Math.round(player.throwingMechanics * formula.throwingMechanics / 100)}}
+                          {{(player.throwingMechanics * formula.throwingMechanics / 100).toFixed(1)}}
                         </td>
                         <td>
                           Infield
                           {{player.infield}} | 
-                          {{Math.round(player.infield * formula.infield / 100)}}
+                          {{(player.infield * formula.infield / 100).toFixed(1)}}
                         </td>
                         <td>
                           Mechanics
                           {{player.mechanics}} | 
-                          {{Math.round(player.mechanics * formula.mechanics / 100)}}
+                          {{(player.mechanics * formula.mechanics / 100).toFixed(1)}}
                         </td>
                       </tr>
                       <tr>
                         <td>
                           Speed
                           {{player.batSpeed}} | 
-                          {{Math.round(player.batSpeed * formula.batSpeed / 100)}}
+                          {{(player.batSpeed * formula.batSpeed / 100).toFixed(1)}}
                         </td>
                         <td>
                           Strength
                           {{player.armStrength}} | 
-                          {{Math.round(player.armStrength * formula.armStrength / 100)}}
+                          {{(player.armStrength * formula.armStrength / 100).toFixed(1)}}
                         </td>
                         <td>
                           Outfield
                           {{player.outfield}} | 
-                          {{Math.round(player.outfield * formula.outfield / 100)}}
+                          {{(player.outfield * formula.outfield / 100).toFixed(1)}}
                         </td>
                         <td>
                           Speed 
                           {{player.speed}} | 
-                          {{Math.round(player.speed * formula.speed / 100)}}
+                          {{(player.speed * formula.speed / 100).toFixed(1)}}
                         </td>
                       </tr>
                       <tr>
                         <td>
                           Contact
                           {{player.batContact}} | 
-                          {{Math.round(player.batContact * formula.batContact / 100)}}
+                          {{(player.batContact * formula.batContact / 100).toFixed(1)}}
                         </td>
                         <td>
                           Accuracy
                           {{player.armAccuracy}} | 
-                          {{Math.round(player.armAccuracy * formula.armAccuracy / 100)}}
+                          {{(player.armAccuracy * formula.armAccuracy / 100).toFixed(1)}}
                         </td>
                         <td></td>
                         <td></td>

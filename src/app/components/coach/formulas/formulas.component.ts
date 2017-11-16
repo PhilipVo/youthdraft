@@ -78,6 +78,13 @@ export class FormulasComponent implements OnInit {
   save() {
     this.error = null;
 
+    if (!this.index && this.formulas.length === 5) {
+      this.error = "You can only save up to 5 formulas."
+      return;
+    } else if (!this.index)
+      this.index = this.formulas.length;
+
+
     Object.keys(this.formula).map(key => {
       console.log(key, /^\d+$/.test(this.formula[key]))
       if (key !== 'name' && (!/^\d+$/.test(this.formula[key]) ||
