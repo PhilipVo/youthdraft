@@ -1,27 +1,31 @@
 <div style="height: 100%; display: flex; flex-direction: column;">
   <div style="flex: 1; display: flex; justify-content: space-between; padding: 25px;">
     <h1>Account Settings</h1>
-    <h5 style="cursor: pointer;">Logout</h5>
+    <h5 (click)="session.logout()" style="cursor: pointer;">Logout</h5>
   </div>
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <div style="background-color: white; display: flex; height: 100%; overflow: auto; padding: 25px;">
-      <form style="display:flex; flex: 1; flex-direction: column;">
+      <form 
+        #detailsForm="ngForm"
+        style="display:flex; flex: 1; flex-direction: column;">
         <h4>Account Details</h4>
         <input name="firstName" [(ngModel)]="user.firstName" placeholder="First Name" required>
         <input name="lastName" [(ngModel)]="user.lastName" placeholder="Last Name" required>
         <input name="leagueName" [(ngModel)]="user.leagueName" placeholder="League Name" required>
         <input name="email" [(ngModel)]="user.email" placeholder="Email Address" required>
         <input name="number" [(ngModel)]="user.number" placeholder="Phone Number" required>
-        <button class="bg-green btn" style="color: white; margin-top: 20px; width: 75%;">
+        <button class="bg-green btn" style="color: white; margin-top: 20px; width: 75%;" type="submit">
           Save Account Information
         </button>
       </form>
-      <form style="display:flex; flex: 1; flex-direction: column;">
+      <form 
+        #passwordForm="ngForm"
+        style="display:flex; flex: 1; flex-direction: column;">
         <h4>Change Password</h4>
         <input name="oldPassword" [(ngModel)]="user.oldPassword" placeholder="Old Password" required>
         <input name="newPassword" [(ngModel)]="user.newPassword" placeholder="New Password" required>
-        <button class="bg-green btn" style="color: white; margin-top: 20px; width: 75%;">
+        <button class="bg-green btn" style="color: white; margin-top: 20px; width: 75%;" type="submit">
           Save New Password
         </button>
       </form>

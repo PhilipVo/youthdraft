@@ -3,17 +3,23 @@
     <h1>Draft Formulas</h1><br>
     <p>
       Here is where you can create a formula to rank players differently.<br>
-      Want to see wo rises to the top in hitting? Create a custom formula below
+      Want to see who rises to the top in hitting? Create a custom formula below
       to find players to draft based on your own custom coaching criteria.
     </p>
   </div>
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <!-- Create a Formula -->
-    <div style="background-color: white; height: 100%; margin-bottom: 20px; padding: 25px; overflow: auto;">
+    <form #form="ngForm" id="create" (ngSubmit)="save()">
       <div style="align-items: center; display: flex;">
         <h4 style="flex: 1;">Create a Formula</h4>
-        <input placeholder="Formula name" style="flex: 1; text-align: center;" required type="text"/>
+        <input
+          name="name"
+          [(ngModel)]="formula.name"
+          placeholder="Formula name"
+          style="flex: 1; text-align: center;"
+          required
+          type="text"/>
       </div>
       <p style="margin-top: 10px;">Assessment Skill Area Weightings: Can be adjusted between 50-150%</p>
       <table>
@@ -30,28 +36,56 @@
             <td>
               <label>Hitting Mechanics</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="hittingMechanics"
+                  [(ngModel)]="formula.hittingMechanics"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
             <td>
               <label>Throwing Mechanics</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="throwingMechanics"
+                  [(ngModel)]="formula.throwingMechanics"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
             <td>
-              <label>Fielding</label>
+              <label>Infield</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="infield"
+                  [(ngModel)]="formula.infield"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
             <td>
-              <label>Baserunning</label>
+              <label>Mechanics</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="mechanics"
+                  [(ngModel)]="formula.mechanics"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
@@ -60,28 +94,56 @@
             <td>
               <label>Bat Speed</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="batSpeed"
+                  [(ngModel)]="formula.batSpeed"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
             <td>
               <label>Arm Strength</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="armStrength"
+                  [(ngModel)]="formula.armStrength"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
             <td>
               <label>Outfield</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="outfield"
+                  [(ngModel)]="formula.outfield"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
             <td>
               <label>Speed</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="speed"
+                  [(ngModel)]="formula.speed"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
@@ -90,23 +152,62 @@
             <td>
               <label>Bat Contact</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="batContact"
+                  [(ngModel)]="formula.batContact"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
             <td>
               <label>Arm Accuracy</label>
               <div style="align-items: center; display: flex;">
-                <input/>
+                <input
+                  min="50"
+                  max="150"
+                  name="armAccuracy"
+                  [(ngModel)]="formula.armAccuracy"
+                  required
+                  step="1"
+                  type="number"/>
                 <p>&nbsp;%</p>
               </div>
             </td>
             <td></td>
-            <td><button class="bg-green btn" style="color: white; width: 75%;">Save</button></td>
+            <td>
+              <label>&nbsp;</label>
+              <div style="align-items: center; display: flex;">
+                <button
+                  class="bg-green btn"
+                  [disabled]="!form.form.valid"
+                  id="save"
+                  [ngStyle]="{opacity: form.form.valid ? 1 : 0.5}">
+                  Save
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <p style="color: red;">{{error}}</p>
+            </td>
+            <td>
+              <p id="new">
+                <span *ngIf="index >= 0 && formulas.length < 5">
+                  <span (click)="saveAsNew()" style="cursor: pointer;">Save as new</span>
+                  {{' | '}}
+                </span>
+                <span (click)="clear()" style="cursor: pointer;">Clear</span>
+              </p>
+            </td>
           </tr>
         </tbody>
       </table>
-    </div>
+    </form>
     
     <!-- Manage Your Formulas -->
     <div style="background-color: white; height: 100%; padding: 25px; overflow: auto;">
@@ -126,15 +227,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let formula of formulas">
+          <tr *ngFor="let formula of formulas; let index = index" [attr.data-index]="index">
             <td>{{formula.name}}</td>
-            <td>{{formula.hitting}}</td>
-            <td>{{formula.throwing}}</td>
-            <td>{{formula.fielding}}</td>
-            <td>{{formula.baserunning}}</td>
+            <td>{{Math.round((formula.hittingMechanics + formula.hittingMechanics + formula.hittingMechanics) / 3.0)}}%</td>
+            <td>{{Math.round((formula.throwingMechanics + formula.armStrength + formula.armAccuracy) / 3.0)}}%</td>
+            <td>{{Math.round((formula.infield + formula.outfield) / 2.0)}}%</td>
+            <td>{{Math.round((formula.mechanics + formula.speed) / 2.0)}}%</td>
             <td>
               <p style="font-weight: bold;">
-                <span ng-click="edit(formula)">Edit</span> | <span ng-click="delete(formula)">Delete</span>
+                <span (click)="edit(formula, index)" style="cursor: pointer;">Edit</span>
+                {{' | '}}
+                <span (click)="delete(index)" style="cursor: pointer;">Delete</span>
               </p>
             </td>
           </tr>

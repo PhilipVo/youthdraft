@@ -1,3 +1,38 @@
-<p>
-  players works!
-</p>
+<div style="height: 100%; display: flex; flex-direction: column;">
+  <div style="flex: 1; padding: 25px;">
+    <h1>Manage Players</h1><br>
+  </div>
+
+  <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
+    <div style="background-color: white; height: 100%; overflow: auto; padding: 25px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Coach Name</th>
+            <th>Coach Type</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>League</th>
+            <th>Team</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coach of coaches">
+            <td>{{coach.name}}</td>
+            <td>{{coach.type}}</td>
+            <td>{{coach.number}}</td>
+            <td>{{coach.email}}</td>
+            <td>{{coach.league}}</td>
+            <td>{{coach.team}}</td>
+            <td>
+              <p style="font-weight: bold;">
+                <span ng-click="edit(formula)">Edit</span> | <span ng-click="delete(formula)">Delete</span>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -7,11 +7,7 @@ input {
   border-radius: 5px;
   box-sizing: border-box;
   padding: 5px;
-  width: 75%;
-}
-
-span {
-  cursor: pointer;
+  width: 150px;
 }
 
 table {
@@ -27,4 +23,35 @@ table, th, td {
 tr {
     text-align: left;
     width: 100%;
+}
+
+#create {
+  background-color: white;
+  height: 100%;
+  margin-bottom: 20px;
+  padding: 25px;
+  overflow: auto;
+}
+
+#new {
+  color: #8cc63e;
+  font-weight: bold;
+  text-align: center;
+  width: 150px;
+}
+
+#new > span {
+  color: #8cc63e;
+}
+
+#save {
+  color: white;
+  height: 28px;
+  margin-top: 0;
+  padding: 0;
+  width: 150px;
+}
+
+.disabled {
+  opacity: 0.5;
 }

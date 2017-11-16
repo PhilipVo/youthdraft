@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-
   constructor() { }
 
-  ngOnInit() {
-  }
+  coaches = [];
 
+  ngOnInit() {
+    for (let i = 0; i < 20; i++)
+      this.coaches.push({
+        name: 'Craig Johnson',
+        type: 'Assistant',
+        number: '3-(620)270-8429',
+        email: 'hcrawford@bluejam.info',
+        league: 'Majors',
+        team: 'Team Name'
+      });
+  }
 }

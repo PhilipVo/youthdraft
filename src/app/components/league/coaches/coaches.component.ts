@@ -5,15 +5,23 @@ import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-coaches',
-  templateUrl: './coaches.component.html'
+  templateUrl: './coaches.component.html',
+  styleUrls: ['./coaches.component.css']
 })
 export class CoachesComponent implements OnInit {
+  constructor() { }
 
-  constructor(
-    private router: Router,
-    private session: SessionService
-  ) { }
+  coaches = [];
 
-  ngOnInit() { }
-
+  ngOnInit() {
+    for (let i = 0; i < 20; i++)
+      this.coaches.push({
+        name: 'Craig Johnson',
+        type: 'Assistant',
+        number: '3-(620)270-8429',
+        email: 'hcrawford@bluejam.info',
+        league: 'Majors',
+        team: 'Team Name'
+      });
+  }
 }
