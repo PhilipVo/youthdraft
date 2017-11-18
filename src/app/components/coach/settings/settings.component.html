@@ -1,33 +1,61 @@
 <div style="height: 100%; display: flex; flex-direction: column;">
   <div style="flex: 1; display: flex; justify-content: space-between; padding: 25px;">
     <h1>Account Settings</h1>
-    <h5 (click)="session.logout()" style="cursor: pointer;">Logout</h5>
+    <div>
+      <h5 (click)="session.logout()" style="color: #8cc63e; cursor: pointer;">
+        Logout
+      </h5>
+    </div>
   </div>
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <div style="background-color: white; display: flex; height: 100%; overflow: auto; padding: 25px;">
-      <form 
-        #detailsForm="ngForm"
-        style="display:flex; flex: 1; flex-direction: column;">
+      <form  (submit)="updateCoach()" style="display:flex; flex: 1; flex-direction: column;">
         <h4>Account Details</h4>
-        <input name="firstName" [(ngModel)]="user.firstName" placeholder="First Name" required>
-        <input name="lastName" [(ngModel)]="user.lastName" placeholder="Last Name" required>
-        <input name="leagueName" [(ngModel)]="user.leagueName" placeholder="League Name" required>
-        <input name="email" [(ngModel)]="user.email" placeholder="Email Address" required>
-        <input name="number" [(ngModel)]="user.number" placeholder="Phone Number" required>
+        <input name="firstName" [(ngModel)]="coach.firstName" placeholder="First Name" required>
+        <input name="lastName" [(ngModel)]="coach.lastName" placeholder="Last Name" required>
+        <input name="leagueName" [(ngModel)]="coach.leagueName" placeholder="League Name" required>
+        <input name="email" [(ngModel)]="coach.email" placeholder="Email Address" required>
+        <input name="number" [(ngModel)]="coach.phoneNumber" placeholder="Phone Number" required>
         <button class="bg-green btn" style="color: white; margin-top: 20px; width: 75%;" type="submit">
           Save Account Information
         </button>
+        <p *ngIf="accountError" style="color: red; max-width: 75%; text-align: center;">
+          {{accountError}}
+        </p>
+        <p *ngIf="accountSuccess" style="color: #0055a5; max-width: 75%; text-align: center;">
+          Successfully updated your account information!
+        </p>
       </form>
-      <form 
-        #passwordForm="ngForm"
-        style="display:flex; flex: 1; flex-direction: column;">
+      <form  (submit)="updatePassword()" style="display:flex; flex: 1; flex-direction: column;">
         <h4>Change Password</h4>
-        <input name="oldPassword" [(ngModel)]="user.oldPassword" placeholder="Old Password" required>
-        <input name="newPassword" [(ngModel)]="user.newPassword" placeholder="New Password" required>
+        <input
+          name="oldPassword"
+          [(ngModel)]="password.oldPassword"
+          placeholder="Old Password"
+          type="password"
+          required>
+        <input
+          name="newPassword"
+          [(ngModel)]="password.newPassword"
+          placeholder="New Password"
+          type="password"
+          required>
+        <input
+          name="confirmNewPassword"
+          [(ngModel)]="password.confirmNewPassword"
+          placeholder="Confirm New Password"
+          type="password"
+          required>
         <button class="bg-green btn" style="color: white; margin-top: 20px; width: 75%;" type="submit">
           Save New Password
         </button>
+        <p *ngIf="passwordError" style="color: red; max-width: 75%; text-align: center;">
+          {{passwordError}}
+        </p>
+        <p *ngIf="passwordSuccess" style="color: #0055a5; max-width: 75%; text-align: center;">
+          Successfully updated your password!
+        </p>
       </form>
     </div>
   </div>

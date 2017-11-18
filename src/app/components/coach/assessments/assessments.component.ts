@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+import { HttpService } from '../../../services/http.service';
+
 @Component({
   selector: 'app-assessments',
   templateUrl: './assessments.component.html',
   styleUrls: ['./assessments.component.css']
 })
 export class AssessmentsComponent implements OnInit {
-  constructor() { }
+  constructor(private http: HttpService) { }
 
   defaultFormula = {
     hittingMechanics: 100,
@@ -17,8 +19,8 @@ export class AssessmentsComponent implements OnInit {
     armAccuracy: 100,
     infield: 100,
     outfield: 100,
-    mechanics: 100,
-    speed: 100
+    baserunMechanics: 100,
+    baserunSpeed: 100
   };
   formula = this.defaultFormula;
   formulas = [];
@@ -38,8 +40,8 @@ export class AssessmentsComponent implements OnInit {
         armAccuracy: Math.floor(Math.random() * 101) / 10,
         infield: Math.floor(Math.random() * 101) / 10,
         outfield: Math.floor(Math.random() * 101) / 10,
-        mechanics: Math.floor(Math.random() * 101) / 10,
-        speed: Math.floor(Math.random() * 101) / 10,
+        baserunMechanics: Math.floor(Math.random() * 101) / 10,
+        baserunSpeed: Math.floor(Math.random() * 101) / 10,
         div: 'AAA',
       });
     for (let i = 0; i < 5; i++)
@@ -53,8 +55,16 @@ export class AssessmentsComponent implements OnInit {
         armAccuracy: Math.floor(Math.random() * 100 + 50),
         infield: Math.floor(Math.random() * 100 + 50),
         outfield: Math.floor(Math.random() * 100 + 50),
-        mechanics: Math.floor(Math.random() * 100 + 50),
-        speed: Math.floor(Math.random() * 100 + 50)
+        baserunMechanics: Math.floor(Math.random() * 100 + 50),
+        baserunSpeed: Math.floor(Math.random() * 100 + 50)
       });
+
+    this.http.get('/api/formulas')
+      .then(data => this.formulas = data)
+      .catch(() => { });
+
+    this.http.get('/api/stats')
+      .then(data => this.players = data)
+      .catch(() => { });
   }
 }

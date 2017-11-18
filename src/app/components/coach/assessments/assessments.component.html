@@ -48,7 +48,7 @@
             </td>
             <td>
               <p>Baserunning</p>
-              <p>{{formula.mechanics}}%</p>
+              <p>{{formula.baserunMechanics}}%</p>
             </td>
           </tr>
           <tr>
@@ -66,7 +66,7 @@
             </td>
             <td>
               <p>Speed</p>
-              <p>{{formula.speed}}%</p>
+              <p>{{formula.baserunSpeed}}%</p>
             </td>
           </tr>
           <tr>
@@ -132,10 +132,10 @@
                 }}                
               </td>
               <td>
-                {{((player.mechanics + player.speed) / 2).toFixed(1)}} | 
+                {{((player.baserunMechanics + player.baserunSpeed) / 2).toFixed(1)}} | 
                 {{((
-                  player.mechanics * formula.mechanics + 
-                  player.speed * formula.speed) / 200).toFixed(1)
+                  player.baserunMechanics * formula.baserunMechanics + 
+                  player.baserunSpeed * formula.baserunSpeed) / 200).toFixed(1)
                 }}                
               </td>
               <td>
@@ -148,8 +148,8 @@
                   player.armAccuracy +
                   player.infield +
                   player.outfield +
-                  player.mechanics +
-                  player.speed).toFixed(1)
+                  player.baserunMechanics +
+                  player.baserunSpeed).toFixed(1)
                 }}
               </td>
               <td>
@@ -162,8 +162,8 @@
                   (player.armAccuracy * formula.armAccuracy) +
                   (player.infield * formula.infield) +
                   (player.outfield * formula.outfield) +
-                  (player.mechanics * formula.mechanics) +
-                  (player.speed * formula.speed)) / 100).toFixed(1)
+                  (player.baserunMechanics * formula.baserunMechanics) +
+                  (player.baserunSpeed * formula.baserunSpeed)) / 100).toFixed(1)
                 }}
               </td>
               <td>{{player.div}}</td>
@@ -204,8 +204,8 @@
                         </td>
                         <td>
                           Mechanics
-                          {{player.mechanics}} | 
-                          {{(player.mechanics * formula.mechanics / 100).toFixed(1)}}
+                          {{player.baserunMechanics}} | 
+                          {{(player.baserunMechanics * formula.baserunMechanics / 100).toFixed(1)}}
                         </td>
                       </tr>
                       <tr>
@@ -226,8 +226,8 @@
                         </td>
                         <td>
                           Speed 
-                          {{player.speed}} | 
-                          {{(player.speed * formula.speed / 100).toFixed(1)}}
+                          {{player.baserunSpeed}} | 
+                          {{(player.baserunSpeed * formula.baserunSpeed / 100).toFixed(1)}}
                         </td>
                       </tr>
                       <tr>

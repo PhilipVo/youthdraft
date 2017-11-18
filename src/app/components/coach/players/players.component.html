@@ -20,12 +20,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let player of players">
-            <td>{{player.name}}</td>
-            <td>{{player.age}}</td>
+            <td>{{player.firstName}} {{player.lastName}}</td>
+            <td>{{player.leagueAge}}</td>
             <td>{{player.gender}}</td>
-            <td>{{player.number}}</td>
+            <td>{{player.phoneNumber}}</td>
             <td>{{player.email}}</td>
-            <td>{{player.league}}</td>
+            <td>{{player.division}}</td>
             <td>{{player.dob}}</td>
           </tr>
         </tbody>

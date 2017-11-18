@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as moment from 'moment';
+
+import { HttpService } from '../../../services/http.service';
+
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  constructor() { }
+  constructor(private http: HttpService) { }
 
   players = [];
 
   ngOnInit() {
-    for (let i = 0; i < 20; i++)
-      this.players.push({
-        name: 'Craig Johnson',
-        age: 12,
-        gender: 'Male',
-        number: '3-(620)270-8429',
-        email: 'hcrawford@bluejam.info',
-        league: 'Majors',
-        dob: '9/24/2005'
-      });
+    this.http.get('/api/players')
+      .then(data => {
+        this.players = data.map(player => {
+          player.dob = moment(player.birthday.replace('T', ' ')).format('M/d/YYYY');
+          return player;
+        });
+      }).catch(() => { });
   }
 
 }

@@ -1,7 +1,13 @@
 <div style="height: 100%; display: flex; flex-direction: column;">
-  <div style="flex: 1; padding: 25px;">
-    <h1>Manage Coaches</h1><br>
+  <div style="flex: 1; display: flex; justify-content: space-between; padding: 25px;">
+    <h1>Manage Coaches</h1>
+    <div>
+      <h5 (click)="modal='add'" style="color: #0055a5; cursor: pointer">
+        Add a new Coach
+      </h5>
+    </div>
   </div>
+
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <div style="background-color: white; height: 100%; overflow: auto; padding: 25px;">
@@ -18,21 +24,129 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let coach of coaches">
-            <td>{{coach.name}}</td>
+          <tr *ngFor="let coach of coaches; let index = index" [attr.data-index]="index">
+            <td>{{coach.firstName}} {{coach.lastName}}</td>
             <td>{{coach.type}}</td>
-            <td>{{coach.number}}</td>
+            <td>{{coach.phoneNumber}}</td>
             <td>{{coach.email}}</td>
-            <td>{{coach.league}}</td>
+            <td>{{coach.division}}</td>
             <td>{{coach.team}}</td>
             <td>
               <p style="font-weight: bold;">
-                <span ng-click="edit(formula)">Edit</span> | <span ng-click="delete(formula)">Delete</span>
+                <span (click)="select('edit', index, coach)" style="cursor: pointer;">
+                  Edit
+                </span> | 
+                <span (click)="select('delete', index, coach)" style="cursor: pointer;">
+                  Delete
+                </span>
               </p>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+
+<!-- Add modal -->
+<div class="modal" (click)="close()" *ngIf="modal==='add'">
+  <div
+    (click)="stopPropagation($event)"
+    style="background-color: white; width: 50%; padding: 20px">
+    <h1>Add a new Coach</h1>
+    <form>
+      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
+        <input name="firstName" [(ngModel)]="selected.firstName" placeholder="First Name">
+        <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
+        <input name="email" [(ngModel)]="selected.email" placeholder="Email Address">
+        <input name="phoneNumber" [(ngModel)]="selected.phoneNumber" placeholder="Phone Number">
+      </div>
+      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
+        <input name="leagueName" [(ngModel)]="selected.leagueName" placeholder="League">
+        <input name="team" [(ngModel)]="selected.team" placeholder="Team">
+        <input name="type" [(ngModel)]="selected.type" placeholder="Coach Type">
+      </div>
+    </form>
+
+    <div style="display: flex; justify-content: center;">
+      <button
+        class="bg-gray btn"
+        (click)="close()"
+        style="color: white; margin-right: 20px;">
+        Cancel
+      </button>
+      <button
+        class="bg-blue btn"
+        (click)="add()"
+        style="color: white;">
+        Save
+      </button>
+    </div>
+    <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
+  </div>
+</div>
+
+<!-- Edit modal -->
+<div class="modal" (click)="close()" *ngIf="modal==='edit'">
+  <div
+    (click)="stopPropagation($event)"
+    style="background-color: white; width: 50%; padding: 20px">
+    <h1>Edit this Coach</h1>
+    <form>
+      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
+        <input name="firstName" [(ngModel)]="selected.firstName" placeholder="First Name">
+        <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
+        <input name="email" [(ngModel)]="selected.email" placeholder="Email Address">
+        <input name="phoneNumber" [(ngModel)]="selected.phoneNumber" placeholder="Phone Number">
+      </div>
+      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
+        <input name="leagueName" [(ngModel)]="selected.leagueName" placeholder="League">
+        <input name="team" [(ngModel)]="selected.team" placeholder="Team">
+        <input name="type" [(ngModel)]="selected.type" placeholder="Coach Type">
+      </div>
+    </form>
+
+    <div style="display: flex; justify-content: center;">
+      <button
+        class="bg-gray btn"
+        (click)="close()"
+        style="color: white; margin-right: 20px;">
+        Cancel
+      </button>
+      <button
+        class="bg-blue btn"
+        (click)="edit()"
+        style="color: white;">
+        Save
+      </button>
+    </div>
+    <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
+  </div>
+</div>
+
+<!-- Delete modal -->
+<div class="modal" (click)="close()" *ngIf="modal==='delete'">
+  <div
+    (click)="stopPropagation($event)"
+    style="background-color: white; width: 50%; padding: 20px 50px;">
+    <h2 style="text-align: center;">
+      Deleting this coach would delete their access to your league.<br><br>
+      Are you sure you would like to delete this coach?
+    </h2>
+    <div style="display: flex; justify-content: center;">
+      <button
+        class="bg-gray btn"
+        (click)="close()"
+        style="color: white; margin-right: 20px;">
+        No
+      </button>
+      <button
+        class="bg-blue btn"
+        (click)="delete()"
+        style="color: white;">
+        Yes
+      </button>
+    </div>
+    <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
   </div>
 </div>

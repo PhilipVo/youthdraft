@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+import { HttpService } from '../../../services/http.service';
+
 @Component({
   selector: 'app-formulas',
   templateUrl: './formulas.component.html',
   styleUrls: ['./formulas.component.css']
 })
 export class FormulasComponent implements OnInit {
-  constructor() { }
+  constructor(private http: HttpService) { }
 
   error = null;
   formula = {
@@ -19,28 +21,17 @@ export class FormulasComponent implements OnInit {
     armAccuracy: '',
     infield: '',
     outfield: '',
-    mechanics: '',
-    speed: ''
+    baserunMechanics: '',
+    baserunSpeed: ''
   }
   formulas = [];
-  index;
+  index = null;
   Math = Math;
 
   ngOnInit() {
-    for (let i = 0; i < 5; i++)
-      this.formulas.push({
-        name: `Formula ${i + 1}`,
-        hittingMechanics: Math.floor(Math.random() * 100 + 50),
-        batSpeed: Math.floor(Math.random() * 100 + 50),
-        batContact: Math.floor(Math.random() * 100 + 50),
-        throwingMechanics: Math.floor(Math.random() * 100 + 50),
-        armStrength: Math.floor(Math.random() * 100 + 50),
-        armAccuracy: Math.floor(Math.random() * 100 + 50),
-        infield: Math.floor(Math.random() * 100 + 50),
-        outfield: Math.floor(Math.random() * 100 + 50),
-        mechanics: Math.floor(Math.random() * 100 + 50),
-        speed: Math.floor(Math.random() * 100 + 50)
-      });
+    this.http.get('/api/formulas')
+      .then(data => this.formulas = data)
+      .catch(() => { });
   }
 
   clear() {
@@ -55,8 +46,8 @@ export class FormulasComponent implements OnInit {
       armAccuracy: '',
       infield: '',
       outfield: '',
-      mechanics: '',
-      speed: ''
+      baserunMechanics: '',
+      baserunSpeed: ''
     }
     this.index = null;
   }
@@ -67,7 +58,7 @@ export class FormulasComponent implements OnInit {
   }
 
   delete(index) {
-    if (this.index) {
+    if (this.index === null) {
       if (index === this.index) this.index = null;
       if (index < this.index) this.index--;
     }
@@ -78,7 +69,7 @@ export class FormulasComponent implements OnInit {
   save() {
     this.error = null;
 
-    if (!this.index && this.formulas.length === 5) {
+    if (this.index && this.formulas.length === 5) {
       this.error = "You can only save up to 5 formulas."
       return;
     } else if (!this.index)

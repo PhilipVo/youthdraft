@@ -10,18 +10,3 @@ input {
   padding: 10px;
   width: 75%;
 }
-
-table {
-  width: 100%;
-}
-
-table, th, td {
-    font-size: 12px;
-    padding: 5px;
-    white-space: nowrap;
-}
-
-tr {
-    text-align: left;
-    width: 100%;
-}
