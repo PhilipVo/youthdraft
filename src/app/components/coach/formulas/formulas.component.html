@@ -15,7 +15,7 @@
         <h4 style="flex: 1;">Create a Formula</h4>
         <input
           name="name"
-          [(ngModel)]="formula.name"
+          [(ngModel)]="formula.title"
           placeholder="Formula name"
           style="flex: 1; text-align: center;"
           required
@@ -67,8 +67,8 @@
                 <input
                   min="50"
                   max="150"
-                  name="infield"
-                  [(ngModel)]="formula.infield"
+                  name="inField"
+                  [(ngModel)]="formula.inField"
                   required
                   step="1"
                   type="number"/>
@@ -81,7 +81,7 @@
                 <input
                   min="50"
                   max="150"
-                  name="mechanics"
+                  name="baserunMechanics"
                   [(ngModel)]="formula.baserunMechanics"
                   required
                   step="1"
@@ -125,8 +125,8 @@
                 <input
                   min="50"
                   max="150"
-                  name="outfield"
-                  [(ngModel)]="formula.outfield"
+                  name="outField"
+                  [(ngModel)]="formula.outField"
                   required
                   step="1"
                   type="number"/>
@@ -139,7 +139,7 @@
                 <input
                   min="50"
                   max="150"
-                  name="speed"
+                  name="baserunSpeed"
                   [(ngModel)]="formula.baserunSpeed"
                   required
                   step="1"
@@ -197,7 +197,7 @@
             </td>
             <td>
               <p id="new">
-                <span *ngIf="index >= 0 && formulas.length < 5">
+                <span *ngIf="formulas.length < 5">
                   <span (click)="saveAsNew()" style="cursor: pointer;">Save as new</span>
                   {{' | '}}
                 </span>
@@ -227,17 +227,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let formula of formulas; let index = index" [attr.data-index]="index">
-            <td>{{formula.name}}</td>
+          <tr *ngFor="let formula of formulas;">
+            <td>{{formula.title}}</td>
             <td>{{Math.round((formula.hittingMechanics + formula.hittingMechanics + formula.hittingMechanics) / 3.0)}}%</td>
             <td>{{Math.round((formula.throwingMechanics + formula.armStrength + formula.armAccuracy) / 3.0)}}%</td>
-            <td>{{Math.round((formula.infield + formula.outfield) / 2.0)}}%</td>
+            <td>{{Math.round((formula.inField + formula.outField) / 2.0)}}%</td>
             <td>{{Math.round((formula.baserunMechanics + formula.baserunSpeed) / 2.0)}}%</td>
             <td>
               <p style="font-weight: bold;">
-                <span (click)="edit(formula, index)" style="cursor: pointer;">Edit</span>
+                <span (click)="edit(formula)" style="cursor: pointer;">Edit</span>
                 {{' | '}}
-                <span (click)="delete(index)" style="cursor: pointer;">Delete</span>
+                <span (click)="delete(formula)" style="cursor: pointer;">Delete</span>
               </p>
             </td>
           </tr>

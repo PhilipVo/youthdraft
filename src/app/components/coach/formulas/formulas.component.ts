@@ -11,85 +11,122 @@ export class FormulasComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   error = null;
-  formula = {
-    name: '',
+  formula: any = {
+    title: '',
     hittingMechanics: '',
     batSpeed: '',
     batContact: '',
     throwingMechanics: '',
     armStrength: '',
     armAccuracy: '',
-    infield: '',
-    outfield: '',
+    inField: '',
+    outField: '',
     baserunMechanics: '',
     baserunSpeed: ''
   }
   formulas = [];
-  index = null;
   Math = Math;
 
   ngOnInit() {
-    this.http.get('/api/formulas')
-      .then(data => this.formulas = data)
-      .catch(() => { });
+    this.getFormulas();
   }
 
   clear() {
     this.error = null;
     this.formula = {
-      name: '',
+      title: '',
       hittingMechanics: '',
       batSpeed: '',
       batContact: '',
       throwingMechanics: '',
       armStrength: '',
       armAccuracy: '',
-      infield: '',
-      outfield: '',
+      inField: '',
+      outField: '',
       baserunMechanics: '',
       baserunSpeed: ''
     }
-    this.index = null;
   }
 
-  edit(formula, index) {
+  edit(formula) {
     this.formula = Object.assign({}, formula);
-    this.index = index;
   }
 
-  delete(index) {
-    if (this.index === null) {
-      if (index === this.index) this.index = null;
-      if (index < this.index) this.index--;
-    }
+  delete(formula) {
+    this.http.delete(`/api/formulas/${formula.id}`)
+      .then(() => {
+        if (this.formula.id === formula.id)
+          this.formula.id === null;
+        this.getFormulas();
+      }).catch(error => console.log(error));
+  }
 
-    this.formulas.splice(index, 1);
+  getFormulas() {
+    this.http.get('/api/formulas')
+      .then(data => this.formulas = data)
+      .catch(() => { });
   }
 
   save() {
     this.error = null;
 
-    if (this.index && this.formulas.length === 5) {
-      this.error = "You can only save up to 5 formulas."
-      return;
-    } else if (!this.index)
-      this.index = this.formulas.length;
-
-
-    Object.keys(this.formula).map(key => {
-      console.log(key, /^\d+$/.test(this.formula[key]))
-      if (key !== 'name' && (!/^\d+$/.test(this.formula[key]) ||
-        this.formula[key] < 50 || this.formula[key] > 150)) {
-        this.error = 'Weights must be an integer between 50 and 150.';
-        return;
-      }
-    });
-
-    this.formulas[this.index] = Object.assign({}, this.formula);
+    if (this.formulas.length === 5) this.error = "You can only save up to 5 formulas."
+    else if (!this.formula.title) this.error = 'Formula Name cannot be blank.';
+    else if (!this.formula.hittingMechanics ||
+      this.formula.hittingMechanics < 50 ||
+      this.formula.hittingMechanics > 150)
+      this.error = 'Hitting Mechanics must be an integer between 50 and 150.';
+    else if (!this.formula.batSpeed ||
+      this.formula.batSpeed < 50 ||
+      this.formula.batSpeed > 150)
+      this.error = 'Bat Speed must be an integer between 50 and 150.';
+    else if (!this.formula.batContact ||
+      this.formula.batContact < 50 ||
+      this.formula.batContact > 150)
+      this.error = 'Bat Contact must be an integer between 50 and 150.';
+    else if (!this.formula.throwingMechanics ||
+      this.formula.throwingMechanics < 50 ||
+      this.formula.throwingMechanics > 150)
+      this.error = 'Throwing Mechanics must be an integer between 50 and 150.';
+    else if (!this.formula.armStrength ||
+      this.formula.armStrength < 50 ||
+      this.formula.armStrength > 150)
+      this.error = 'Arm Strength must be an integer between 50 and 150.';
+    else if (!this.formula.armAccuracy ||
+      this.formula.armAccuracy < 50 ||
+      this.formula.armAccuracy > 150)
+      this.error = 'Arm Accuracy must be an integer between 50 and 150.';
+    else if (!this.formula.inField ||
+      this.formula.inField < 50 ||
+      this.formula.inField > 150)
+      this.error = 'Infield must be an integer between 50 and 150.';
+    else if (!this.formula.outField ||
+      this.formula.outField < 50 ||
+      this.formula.outField > 150)
+      this.error = 'Outfield must be an integer between 50 and 150.';
+    else if (!this.formula.baserunMechanics ||
+      this.formula.baserunMechanics < 50 ||
+      this.formula.baserunMechanics > 150)
+      this.error = 'Baserunning Mechanics must be an integer between 50 and 150.';
+    else if (!this.formula.baserunSpeed ||
+      this.formula.baserunSpeed < 50 ||
+      this.formula.baserunSpeed > 150)
+      this.error = 'Baserunning Speed must be an integer between 50 and 150.';
+    else if (this.formula.id) {
+      this.http.put(`/api/formulas/${this.formula.id}`, this.formula)
+        .then(() => this.getFormulas())
+        .catch(error => console.log(error));
+    } else {
+      this.http.post('/api/formulas', this.formula)
+        .then(id => {
+          this.formula.id = id;
+          this.getFormulas();
+        }).catch(error => console.log(error));
+    }
   }
 
   saveAsNew() {
-    this.index = this.formulas.length;
+    this.formula.id = null;
     this.save();
   }
 }

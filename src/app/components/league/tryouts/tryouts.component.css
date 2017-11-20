@@ -2,17 +2,32 @@
   color: #787878;
 }
 
-table {
-  width: 100%;
+form {
+  background-color: white;
+  height: 100%;
+  overflow: auto;
+  padding: 25px;
 }
 
-table, th, td {
-    font-size: 12px;
-    padding: 5px;
-    white-space: nowrap;
+input {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 75%;
 }
 
-tr {
-    text-align: left;
-    width: 100%;
+span {
+  cursor: pointer;
+  font-size: 10px;
+  color: #0055a5;
+}
+
+#add {
+  color: #0055a5;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  width: 75%;
 }

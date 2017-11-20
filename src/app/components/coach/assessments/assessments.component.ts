@@ -17,8 +17,8 @@ export class AssessmentsComponent implements OnInit {
     throwingMechanics: 100,
     armStrength: 100,
     armAccuracy: 100,
-    infield: 100,
-    outfield: 100,
+    inField: 100,
+    outField: 100,
     baserunMechanics: 100,
     baserunSpeed: 100
   };
@@ -28,37 +28,6 @@ export class AssessmentsComponent implements OnInit {
   players = [];
 
   ngOnInit() {
-    for (let i = 0; i < 5; i++)
-      this.players.push({
-        name: `Player ${i}`,
-        number: Math.floor(Math.random() * 101),
-        hittingMechanics: Math.floor(Math.random() * 101) / 10,
-        batSpeed: Math.floor(Math.random() * 101) / 10,
-        batContact: Math.floor(Math.random() * 101) / 10,
-        throwingMechanics: Math.floor(Math.random() * 101) / 10,
-        armStrength: Math.floor(Math.random() * 101) / 10,
-        armAccuracy: Math.floor(Math.random() * 101) / 10,
-        infield: Math.floor(Math.random() * 101) / 10,
-        outfield: Math.floor(Math.random() * 101) / 10,
-        baserunMechanics: Math.floor(Math.random() * 101) / 10,
-        baserunSpeed: Math.floor(Math.random() * 101) / 10,
-        div: 'AAA',
-      });
-    for (let i = 0; i < 5; i++)
-      this.formulas.push({
-        name: `Formula ${i + 1}`,
-        hittingMechanics: Math.floor(Math.random() * 100 + 50),
-        batSpeed: Math.floor(Math.random() * 100 + 50),
-        batContact: Math.floor(Math.random() * 100 + 50),
-        throwingMechanics: Math.floor(Math.random() * 100 + 50),
-        armStrength: Math.floor(Math.random() * 100 + 50),
-        armAccuracy: Math.floor(Math.random() * 100 + 50),
-        infield: Math.floor(Math.random() * 100 + 50),
-        outfield: Math.floor(Math.random() * 100 + 50),
-        baserunMechanics: Math.floor(Math.random() * 100 + 50),
-        baserunSpeed: Math.floor(Math.random() * 100 + 50)
-      });
-
     this.http.get('/api/formulas')
       .then(data => this.formulas = data)
       .catch(() => { });

@@ -4,44 +4,53 @@
   </div>
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
-    <div style="background-color: white; height: 100%; overflow: auto; padding: 25px;">
-    <form 
-      (ngSubmit)="next()"
-      #form="ngForm"
-      style="align-items: center; display: flex; flex-direction: column;">
+    <form (ngSubmit)="submit()" #form="ngForm">
 
-        <div style="display: flex; justify-content: space-between; width: 50%;">
-          <div style="width: 48%">
+        <div style="display: flex;">
+          <div style="width: 75%;">
             <label>Date &amp; Time</label>
           </div>
-          <div style="width: 48%">
+          <div style="width: 75%;">
             <label>Location</label>
           </div>
         </div>
         
-        <div 
-          *ngFor="let date of dates"
-          style="display: flex; justify-content: space-between; width: 50%;">
-          <div style="width: 48%">
-            <input
-              [(ngModel)]="date.date"
-              name="date"
-              required
-              type="datetime-local">
-          </div>
-          <div style="width: 48%">
-            <input
-              [(ngModel)]="date.address"
-              name="address"
-              placeholder="123 Fake Street, San Jose, CA, 95127"
-              required
-              type="text">
+        <div *ngFor="let tryout of tryouts; let index = index;"  [attr.data-index]="index">
+          <span (click)="tryouts.splice(index, 1)">Remove</span>
+          <div style="display: flex;">
+            <div style="width: 75%;">
+              <input
+                [(ngModel)]="tryout.date"
+                name="date{{index}}"
+                required
+                type="datetime-local">
+            </div>
+            <div style="width: 75%;">
+              <input
+                [(ngModel)]="tryout.address"
+                name="address{{index}}"
+                placeholder="123 Fake Street, San Jose, CA, 95127"
+                required
+                type="text">
+            </div>
           </div>
         </div>
         
-        <button class="bg-blue btn" [disabled]="!form.form.valid" type="submit">Next</button>
-      
+        <div style="display: flex;">
+          <div style="width: 75%;"></div>
+          <div style="width: 75%;">
+            <button
+              class="bg-blue btn"
+              [disabled]="form.form.valid"
+              [ngStyle]="{'opacity': form.form.valid ? 1 : 0.5}"
+              style="align-self: flex-end; color: white; width: 75%"
+              type="submit">
+              Save
+            </button>
+            <p id="add" (click)="tryouts.push({})">+ add another date</p>
+            <p style="color: red; text-align: center; width: 75%;">{{Error}}</p>
+          </div>
+        </div>
     </form>
-    </div>
   </div>
 </div>

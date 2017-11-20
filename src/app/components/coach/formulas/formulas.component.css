@@ -40,7 +40,7 @@ tr {
   width: 150px;
 }
 
-#new > span {
+#new > span, #new > span > span {
   color: #8cc63e;
 }
 

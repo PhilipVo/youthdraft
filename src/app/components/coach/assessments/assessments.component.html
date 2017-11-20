@@ -8,7 +8,7 @@
     <select [(ngModel)]="formula" required style="margin-top: 20px;">
       <option [ngValue]="defaultFormula"></option>
       <option *ngFor="let formula of formulas" [ngValue]="formula">
-        {{formula.name}}
+        {{formula.title}}
       </option>
     </select>
   </div>
@@ -44,7 +44,7 @@
             </td>
             <td>
               <p>Fielding</p>
-              <p>{{formula.infield}}%</p>
+              <p>{{formula.inField}}%</p>
             </td>
             <td>
               <p>Baserunning</p>
@@ -62,7 +62,7 @@
             </td>
             <td>
               <p>Outfield</p>
-              <p>{{formula.outfield}}%</p>
+              <p>{{formula.outField}}%</p>
             </td>
             <td>
               <p>Speed</p>
@@ -105,7 +105,7 @@
               <td 
                 (click)="player.show ? player.show = false : player.show = true"
                 style="cursor: pointer;">
-                {{player.number}} | {{player.name}}&nbsp;
+                {{player.teamNumber}} | {{player.firstName}} {{player.lastName}}&nbsp;
                 <i class="icon ion-android-arrow-dropdown" style="font-size: 14px;"></i>
               </td>
               <td>
@@ -125,10 +125,10 @@
                 }}
               </td>
               <td>
-                {{((player.infield + player.outfield) / 2).toFixed(1)}} | 
+                {{((player.inField + player.outField) / 2).toFixed(1)}} | 
                 {{((
-                  player.infield * formula.infield + 
-                  player.outfield * formula.outfield) / 200).toFixed(1)
+                  player.inField * formula.inField + 
+                  player.outField * formula.outField) / 200).toFixed(1)
                 }}                
               </td>
               <td>
@@ -146,8 +146,8 @@
                   player.throwingMechanics +
                   player.armStrength +
                   player.armAccuracy +
-                  player.infield +
-                  player.outfield +
+                  player.inField +
+                  player.outField +
                   player.baserunMechanics +
                   player.baserunSpeed).toFixed(1)
                 }}
@@ -160,8 +160,8 @@
                   (player.throwingMechanics * formula.throwingMechanics) +
                   (player.armStrength * formula.armStrength) +
                   (player.armAccuracy * formula.armAccuracy) +
-                  (player.infield * formula.infield) +
-                  (player.outfield * formula.outfield) +
+                  (player.inField * formula.inField) +
+                  (player.outField * formula.outField) +
                   (player.baserunMechanics * formula.baserunMechanics) +
                   (player.baserunSpeed * formula.baserunSpeed)) / 100).toFixed(1)
                 }}
@@ -199,8 +199,8 @@
                         </td>
                         <td>
                           Infield
-                          {{player.infield}} | 
-                          {{(player.infield * formula.infield / 100).toFixed(1)}}
+                          {{player.inField}} | 
+                          {{(player.inField * formula.inField / 100).toFixed(1)}}
                         </td>
                         <td>
                           Mechanics
@@ -221,8 +221,8 @@
                         </td>
                         <td>
                           Outfield
-                          {{player.outfield}} | 
-                          {{(player.outfield * formula.outfield / 100).toFixed(1)}}
+                          {{player.outField}} | 
+                          {{(player.outField * formula.outField / 100).toFixed(1)}}
                         </td>
                         <td>
                           Speed 
