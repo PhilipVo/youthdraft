@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpService } from '../../../services/http.service';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-settings',
@@ -8,7 +9,10 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  constructor(private http: HttpService) { }
+  constructor(
+    private http: HttpService,
+    private session: SessionService
+  ) { }
 
   league = {};
   password = {};

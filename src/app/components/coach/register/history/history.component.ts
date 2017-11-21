@@ -16,14 +16,14 @@ export class HistoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!(this.session.newUser.firstName &&
-      this.session.newUser.lastName &&
-      this.session.newUser.leagueName &&
-      this.session.newUser.email &&
-      this.session.newUser.phoneNumber &&
-      this.session.newUser.city &&
-      this.session.newUser.state))
-      this.router.navigate(['/coach/register']);
+    // if (!(this.session.newUser.firstName &&
+    //   this.session.newUser.lastName &&
+    //   this.session.newUser.leagueName &&
+    //   this.session.newUser.email &&
+    //   this.session.newUser.phoneNumber &&
+    //   this.session.newUser.city &&
+    //   this.session.newUser.state))
+    //   this.router.navigate(['/coach/register']);
   }
 
   register(): void {

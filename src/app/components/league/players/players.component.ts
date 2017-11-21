@@ -21,12 +21,15 @@ export class PlayersComponent implements OnInit {
   ngOnInit() {
     this.http.get('/api/players')
       .then(data => {
-        const now = moment();
-        // this.players = data.map(player => {
-        //   player.age = now.diff(player.birthday.replace('T', ' '), 'years');
-        //   return player;
-        // });
-        this.players = data;
+        this.players = data.map(player => {
+          const number = player.phoneNumber.split('-');
+          player.area = number[0];
+          player.prefix = number[1];
+          player.line = number[2];
+          player.dob = moment.utc(player.birthday).format('M/D/YYYY');
+          player.birthday = player.birthday.substring(0, 10);
+          return player;
+        });
       }).catch(() => { });
   }
 

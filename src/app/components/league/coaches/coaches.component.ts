@@ -16,6 +16,7 @@ export class CoachesComponent implements OnInit {
   ) { }
 
   coaches = [];
+  teams = [];
   error = null;
   index = null;
   modal = null;
@@ -24,6 +25,10 @@ export class CoachesComponent implements OnInit {
   ngOnInit() {
     this.http.get('/api/coaches/all')
       .then(data => this.coaches = data)
+      .catch(error => console.log(error));
+
+    this.http.get('/api/teams')
+      .then(data => this.teams = data)
       .catch(error => console.log(error));
   }
 

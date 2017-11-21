@@ -18,7 +18,7 @@
             <th>Coach Type</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>League</th>
+            <th>Division</th>
             <th>Team</th>
             <th>Actions</th>
           </tr>
@@ -30,7 +30,7 @@
             <td>{{coach.phoneNumber}}</td>
             <td>{{coach.email}}</td>
             <td>{{coach.division}}</td>
-            <td>{{coach.team}}</td>
+            <td>{{coach.teamName}}</td>
             <td>
               <p style="font-weight: bold;">
                 <span (click)="select('edit', index, coach)" style="cursor: pointer;">
@@ -91,18 +91,42 @@
   <div
     (click)="stopPropagation($event)"
     style="background-color: white; width: 50%; padding: 20px">
-    <h1>Edit this Coach</h1>
+    <h1>{{selected.firstName}} {{selected.lastName}}</h1>
     <form>
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
-        <input name="firstName" [(ngModel)]="selected.firstName" placeholder="First Name">
-        <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
-        <input name="email" [(ngModel)]="selected.email" placeholder="Email Address">
-        <input name="phoneNumber" [(ngModel)]="selected.phoneNumber" placeholder="Phone Number">
-      </div>
-      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
-        <input name="leagueName" [(ngModel)]="selected.leagueName" placeholder="League">
-        <input name="team" [(ngModel)]="selected.team" placeholder="Team">
-        <input name="type" [(ngModel)]="selected.type" placeholder="Coach Type">
+        <select name="division" [(ngModel)]="selected.division" required>
+          <option [ngValue]="undefined" disabled>Division</option>
+          <option [ngValue]="'8U'">8U</option>
+          <option [ngValue]="'9U'">9U</option>
+          <option [ngValue]="'10U'">10U</option>
+          <option [ngValue]="'11U'">11U</option>
+          <option [ngValue]="'12U'">12U</option>
+          <option [ngValue]="'13U'">13U</option>
+          <option [ngValue]="'14U'">14U</option>
+          <option [ngValue]="'15U'">15U</option>
+          <option [ngValue]="'16U'">16U</option>
+          <option [ngValue]="'17U'">17U</option>
+          <option [ngValue]="'18U'">18U</option>
+          <option [ngValue]="'A'">A</option>
+          <option [ngValue]="'AA'">AA</option>
+          <option [ngValue]="'AAA'">AAA</option>
+          <option [ngValue]="'Farm'">Farm</option>
+          <option [ngValue]="'Majors'">Majors</option>
+          <option [ngValue]="'Intermediate'">Intermediate</option>
+          <option [ngValue]="'T-ball'">T-ball</option>
+          <option [ngValue]="'Rookie'">Rookie</option>
+        </select>
+        <select name="team" [(ngModel)]="selected.team" required>
+          <option [ngValue]="undefined" disabled>Team</option>
+          <option *ngFor="let team of teams" [ngValue]="team.name">
+            {{team.name}} - {{team.division}}
+          </option>
+        </select>
+        <select name="coachType" [(ngModel)]="selected.coachType" required>
+          <option [ngValue]="undefined" disabled>Coach Type</option>
+          <option [ngValue]="'Assistant Coach'">Assistant Coach</option>
+          <option [ngValue]="'Head Coach'">Head Coach</option>
+        </select>
       </div>
     </form>
 

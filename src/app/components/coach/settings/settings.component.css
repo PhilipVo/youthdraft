@@ -2,7 +2,7 @@
   color: #787878;
 }
 
-input {
+input, select {
   border: 1px solid lightgray;
   border-radius: 5px;
   box-sizing: border-box;
