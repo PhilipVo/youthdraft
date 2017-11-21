@@ -49,7 +49,7 @@
 </div>
 
 <!-- Add modal -->
-<div class="modal" (click)="close()" *ngIf="modal==='add'">
+<div class="modal" (click)="close()" *ngIf="modal===null">
   <div
     (click)="stopPropagation($event)"
     style="background-color: white; width: 50%; padding: 20px">
@@ -58,13 +58,72 @@
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
         <input name="firstName" [(ngModel)]="selected.firstName" placeholder="First Name">
         <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
+        <select name="gender" [(ngModel)]="selected.gender" required>
+          <option [ngValue]="undefined" disabled>Gender</option>
+          <option [ngValue]="'Male'">Male</option>
+          <option [ngValue]="'Female'">Female</option>
+        </select>
         <input name="email" [(ngModel)]="selected.email" placeholder="Email Address">
-        <input name="phoneNumber" [(ngModel)]="selected.phoneNumber" placeholder="Phone Number">
+        <div style="margin-top: 10px; width: 90%;">
+          <label>Phone Number</label>
+        </div>
+        <div style="display: flex; width: 90%;">
+          <input
+            maxlength="3"
+            name="area"
+            [(ngModel)]="selected.area"
+            placeholder="123"
+            required
+            style="margin-right: 5px;">
+          <input
+            maxlength="4"
+            name="prefix"
+            [(ngModel)]="selected.prefix"
+            placeholder="456"
+            required
+            style="margin-right: 5px;">
+          <input
+            maxlength="4"
+            name="line"
+            [(ngModel)]="selected.line"
+            placeholder="7890"
+            required>
+        </div>
       </div>
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
-        <input name="leagueName" [(ngModel)]="selected.leagueName" placeholder="League">
-        <input name="team" [(ngModel)]="selected.team" placeholder="Team">
-        <input name="type" [(ngModel)]="selected.type" placeholder="Coach Type">
+        <select name="division" [(ngModel)]="selected.division" required>
+          <option [ngValue]="undefined" disabled>Division</option>
+          <option [ngValue]="'8U'">8U</option>
+          <option [ngValue]="'9U'">9U</option>
+          <option [ngValue]="'10U'">10U</option>
+          <option [ngValue]="'11U'">11U</option>
+          <option [ngValue]="'12U'">12U</option>
+          <option [ngValue]="'13U'">13U</option>
+          <option [ngValue]="'14U'">14U</option>
+          <option [ngValue]="'15U'">15U</option>
+          <option [ngValue]="'16U'">16U</option>
+          <option [ngValue]="'17U'">17U</option>
+          <option [ngValue]="'18U'">18U</option>
+          <option [ngValue]="'A'">A</option>
+          <option [ngValue]="'AA'">AA</option>
+          <option [ngValue]="'AAA'">AAA</option>
+          <option [ngValue]="'Farm'">Farm</option>
+          <option [ngValue]="'Majors'">Majors</option>
+          <option [ngValue]="'Intermediate'">Intermediate</option>
+          <option [ngValue]="'T-ball'">T-ball</option>
+          <option [ngValue]="'Rookie'">Rookie</option>
+        </select>
+        <select name="team" [(ngModel)]="selected.team" required>
+          <option [ngValue]="undefined" disabled>Team</option>
+          <option *ngFor="let team of teams" [ngValue]="team.name">
+            {{team.name}} - {{team.division}}
+          </option>
+        </select>
+        <select name="coachType" [(ngModel)]="selected.coachType" required>
+          <option [ngValue]="undefined" disabled>Coach Type</option>
+          <option [ngValue]="'Assistant Coach'">Assistant Coach</option>
+          <option [ngValue]="'Head Coach'">Head Coach</option>
+        </select>
       </div>
     </form>
 

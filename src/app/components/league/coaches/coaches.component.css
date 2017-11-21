@@ -19,6 +19,11 @@ input, select {
   width: 90%;
 }
 
+label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
 table {
   width: 100%;
 }

@@ -12,25 +12,39 @@ import { HttpService } from '../../../services/http.service';
 export class PlayersComponent implements OnInit {
   constructor(private http: HttpService) { }
 
+  _moment = moment;
   players = [];
   error = null;
   index = null;
   modal = null;
   selected: any = {};
+  teams: {};
+
+  catcher: boolean;
+  coachsKid: boolean;
+  pitcher: boolean;
 
   ngOnInit() {
     this.http.get('/api/players')
       .then(data => {
+        console.log(data)
         this.players = data.map(player => {
           const number = player.phoneNumber.split('-');
           player.area = number[0];
           player.prefix = number[1];
           player.line = number[2];
-          player.dob = moment.utc(player.birthday).format('M/D/YYYY');
           player.birthday = player.birthday.substring(0, 10);
           return player;
         });
       }).catch(() => { });
+
+    this.http.get('/api/teams')
+      .then(data => this.teams = data)
+      .catch(error => console.log(error));
+  }
+
+  log() {
+    console.log(this.pitcher)
   }
 
   add() {

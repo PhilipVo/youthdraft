@@ -12,7 +12,7 @@
         <thead>
           <tr>
             <th>Player Name</th>
-            <th>Age</th>
+            <th>League Age</th>
             <th>Gender</th>
             <th>Parent Number</th>
             <th>Parent Email</th>
@@ -29,7 +29,7 @@
             <td>{{player.phoneNumber}}</td>
             <td>{{player.email}}</td>
             <td>{{player.division}}</td>
-            <td>{{player.dob}}</td>
+            <td>{{_moment(player.birthday).format('M/D/YYYY')}}</td>
             <td>
               <p style="font-weight: bold;">
                 <span (click)="select('edit', index, player)" style="cursor: pointer;">
@@ -58,43 +58,36 @@
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
         <div style="display: flex; justify-content: space-between; width: 90%;">
           <input
-            name="firstName"
-            [(ngModel)]="selected.firstName"
-            placeholder="First Name"
-            style="width: 58%;">
-          <input
             name="teamNumber"
             [(ngModel)]="selected.teamNumber"
-            placeholder="Draft #"
-            style="width: 38%;">
+            placeholder="Draft #" style="margin-right: 5px; width: 40%;">
+          <input
+            name="firstName"
+            [(ngModel)]="selected.firstName"
+            placeholder="First Name">
         </div>
         <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
+        <div style="margin-top: 10px; width: 90%;">
+          <label>DOB</label>
+        </div>
+        <input name="birthday" [(ngModel)]="selected.birthday" type="date">
         <div style="display: flex; justify-content: space-between; width: 90%;">
-          <input
-            name="gender"
-            [(ngModel)]="selected.gender"
-            placeholder="Gender"
-            style="width: 48%;">
+          <select name="gender" [(ngModel)]="selected.gender" required style="margin-right: 5px;">
+            <option [ngValue]="undefined" disabled>Gender</option>
+            <option [ngValue]="Male">Male</option>
+            <option [ngValue]="Female">Female</option>
+          </select>
           <input
             name="leagueAge"
             [(ngModel)]="selected.leagueAge"
-            placeholder="Age"
-            style="width: 48%;">
+            placeholder="League Age">
         </div>
-        <div style="display: flex; justify-content: space-between; width: 90%;">
-          <input
-            name="division"
-            [(ngModel)]="selected.disvision"
-            placeholder="Division"
-            style="width: 48%;">
-          <input
-            name="experience"
-            [(ngModel)]="selected.experience"
-            placeholder="Exp."
-            style="width: 48%;">
-        </div>
-        <label for="birthday" style="margin-top: 10px; width: 90%;">DOB</label>
-        <input name="birthday" [(ngModel)]="selected.birthday" type="date">
+        <select name="team" [(ngModel)]="selected.teamId" required style="width: 90%;">
+          <option [ngValue]="undefined" disabled>Team</option>
+          <option *ngFor="let team of teams" [ngValue]="team.id">
+            {{team.name}} - {{team.division}}
+          </option>
+        </select>
       </div>
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
         <input
@@ -105,28 +98,13 @@
           name="parentLastName"
           [(ngModel)]="selected.parentLastName"
           placeholder="Parent Last Name">
-        <div style="display: flex; width: 90%;">
-          <input
-            maxlength="3"
-            name="area"
-            [(ngModel)]="coach.area"
-            placeholder="Area"
-            required
-            style="margin-right: 5px;">
-          <input
-            maxlength="4"
-            name="prefix"
-            [(ngModel)]="coach.prefix"
-            placeholder="Prefix"
-            required
-            style="margin-right: 5px;">
-          <input
-            maxlength="4"
-            name="line"
-            [(ngModel)]="coach.line"
-            placeholder="Line"
-            required>
+        <div style="margin-top: 10px; width: 90%;">
+          <label>Phone Number</label>
         </div>
+        <input
+          name="email"
+          [(ngModel)]="selected.email"
+          placeholder="Parent Email">
       </div>
     </form>
 
@@ -149,7 +127,7 @@
 </div>
 
 <!-- Edit modal -->
-<div class="modal" (click)="close()" *ngIf="modal==='edit'">
+<div class="modal" (click)="close()" *ngIf="modal===null">
   <div
     (click)="stopPropagation($event)"
     style="background-color: white; width: 50%; padding: 20px">
@@ -158,21 +136,22 @@
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
         <div style="display: flex; justify-content: space-between; width: 90%;">
           <input
-            name="firstName"
-            [(ngModel)]="selected.firstName"
-            placeholder="First Name"
-            style="margin-right: 5px;">
-          <input
             name="teamNumber"
             [(ngModel)]="selected.teamNumber"
-            placeholder="Draft #">
+            placeholder="Draft #" style="margin-right: 5px; width: 40%;">
+          <input
+            name="firstName"
+            [(ngModel)]="selected.firstName"
+            placeholder="First Name">
         </div>
         <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
-        {{selected.birthday}}
+        <div style="margin-top: 10px; width: 90%;">
+          <label>DOB</label>
+        </div>
         <input name="birthday" [(ngModel)]="selected.birthday" type="date">
         <div style="display: flex; justify-content: space-between; width: 90%;">
           <select name="gender" [(ngModel)]="selected.gender" required style="margin-right: 5px;">
-            <option [ngValue]="undefined" disabled>Gender</option>
+            <option [ngValue]="null" disabled>Gender</option>
             <option [ngValue]="Male">Male</option>
             <option [ngValue]="Female">Female</option>
           </select>
@@ -181,27 +160,11 @@
             [(ngModel)]="selected.leagueAge"
             placeholder="Age">
         </div>
-        <select name="division" [(ngModel)]="selected.division" required style="margin-right: 5px;">
-          <option [ngValue]="undefined" disabled>Division</option>
-          <option [ngValue]="'8U'">8U</option>
-          <option [ngValue]="'9U'">9U</option>
-          <option [ngValue]="'10U'">10U</option>
-          <option [ngValue]="'11U'">11U</option>
-          <option [ngValue]="'12U'">12U</option>
-          <option [ngValue]="'13U'">13U</option>
-          <option [ngValue]="'14U'">14U</option>
-          <option [ngValue]="'15U'">15U</option>
-          <option [ngValue]="'16U'">16U</option>
-          <option [ngValue]="'17U'">17U</option>
-          <option [ngValue]="'18U'">18U</option>
-          <option [ngValue]="'A'">A</option>
-          <option [ngValue]="'AA'">AA</option>
-          <option [ngValue]="'AAA'">AAA</option>
-          <option [ngValue]="'Farm'">Farm</option>
-          <option [ngValue]="'Majors'">Majors</option>
-          <option [ngValue]="'Intermediate'">Intermediate</option>
-          <option [ngValue]="'T-ball'">T-ball</option>
-          <option [ngValue]="'Rookie'">Rookie</option>
+        <select name="team" [(ngModel)]="selected.teamId" required>
+          <option [ngValue]="null" disabled>Team</option>
+          <option *ngFor="let team of teams" [ngValue]="team.id">
+            {{team.name}} - {{team.division}}
+          </option>
         </select>
       </div>
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
@@ -213,6 +176,9 @@
           name="parentLastName"
           [(ngModel)]="selected.parentLastName"
           placeholder="Parent Last Name">
+        <div style="margin-top: 10px; width: 90%;">
+          <label>Parent Phone Number</label>
+        </div>
         <div style="display: flex; width: 90%;">
           <input
             maxlength="3"
@@ -234,6 +200,34 @@
             [(ngModel)]="selected.line"
             placeholder="Line"
             required>
+        </div>
+        <input
+          name="email"
+          [(ngModel)]="selected.email"
+          placeholder="Parent Email">
+        <div style="margin-top: 10px; width: 90%;">
+          <label>Check the following that apply:</label><br>
+          <div style="">
+            <input
+              (change)="log()"
+              class="checkbox"
+              name="pitcher"
+              [(ngModel)]="pitcher"
+              type="checkbox"/>
+            <label for="pitcher">Pitcher</label><br>
+            <input
+              class="checkbox"
+              name="catcher"
+              [(ngModel)]="catcher"
+              type="checkbox"/>
+            <label for="catcher">Catcher</label><br>
+            <input
+              class="checkbox"
+              name="coachsKid"
+              [(ngModel)]="coachsKid"
+              type="checkbox"/>
+            <label for="coachsKid">Coach's Kid</label>
+          </div>
         </div>
       </div>
     </form>
