@@ -1,20 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import { SessionService } from '../../../services/session.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
   styleUrls: ['./nav.component.css'],
   templateUrl: './nav.component.html'
 })
-export class NavComponent implements OnInit {
+export class NavComponent {
+  show = false;
 
-  constructor(
-    private session: SessionService,
-  ) { }
-
-  ngOnInit() { console.log('init') }
-
-  ngOnDestroy() { }
-
+  hide(event) {
+    this.show = false;
+    event.stopPropagation();
+    return false;
+  }
 }

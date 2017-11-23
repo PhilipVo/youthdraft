@@ -1,5 +1,5 @@
 <div style="display: flex; position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
-  <div class="bg-green" style="align-items: center; display: flex; flex: 1; flex-direction: column; overflow-y:auto;">
+  <div class="bg-green" id="nav-big">
     <a>
       <img src="../../../../assets/logo-white.png" style="object-fit: contain;">
     </a>
@@ -8,6 +8,22 @@
     <a routerLink="/coach/assessments" routerLinkActive="active-link">Assessments</a>
     <a routerLink="/coach/settings" routerLinkActive="active-link">Settings</a>
   </div>
+
+  <div
+    (click)="hide($event)"
+    *ngIf="show" 
+    style="bottom: 0; left: 0; position: absolute; right: 0; top: 0;">
+  </div>
+
+  <div class="bg-green" id="nav-small" *ngIf="show">
+    <i class="icon ion-minus-round" (click)="show=false"></i>
+    <a routerLink="/coach/players" routerLinkActive="active-link">Players</a>
+    <a routerLink="/coach/formulas" routerLinkActive="active-link">Formulas</a>
+    <a routerLink="/coach/assessments" routerLinkActive="active-link">Assessments</a>
+    <a routerLink="/coach/settings" routerLinkActive="active-link">Settings</a>
+  </div>
+
+  <i class="icon ion-navicon-round hide-if-big" (click)="show=true" *ngIf="!show"></i>
 
   <div style="flex: 3; overflow-y:auto;">
     <router-outlet></router-outlet>

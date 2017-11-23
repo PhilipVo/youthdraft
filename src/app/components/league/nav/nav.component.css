@@ -1,18 +1,68 @@
-a {
-  box-sizing: border-box;
-  color: white;
-  font-size: 30px;
-  padding: 15px;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
+@media only screen and (min-width: 768px) {
+  a {
+    box-sizing: border-box;
+    color: white;
+    font-size: 30px;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  #nav-big {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow-y:auto;
+  }
+
+  #nav-small {
+    display: none;
+  }
 }
 
+@media only screen and (max-width: 767px) {
+  a {
+    box-sizing: border-box;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  #nav-big {
+    display: none;
+  }
+
+  #nav-small {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+  }
+}
 
 div > a:not(:first-child):not(:last-child) {
-    border-bottom: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .active-link {
   background-color: #7ca1b9;
+}
+
+.ion-minus-round {
+  align-self: flex-start;
+  color: white;
+  font-size: 20px;
+  padding: 10px 10px 0;
+  width: 100%;
+}
+
+.ion-navicon-round {
+  font-size: 20px;
+  color: #0055a5;
+  padding: 10px;
+  position: absolute;
 }

@@ -23,11 +23,3 @@ span {
   font-size: 10px;
   color: #0055a5;
 }
-
-#add {
-  color: #0055a5;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-  width: 75%;
-}

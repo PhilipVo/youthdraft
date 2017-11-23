@@ -1,8 +1,13 @@
 <div style="height: 100%; display: flex; flex-direction: column;">
-  <div style="flex: 1; padding: 25px;">
-    <h1>Tryout Dates</h1><br>
+  <div style="flex: 1; display: flex; justify-content: space-between; padding: 25px;">
+    <h1>Tryout Dates</h1>
+    <div>
+      <h5 (click)="tryouts.push({})" style="color: #0055a5; cursor: pointer">
+        Add another date
+      </h5>
+    </div>
   </div>
-
+  
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <form (ngSubmit)="submit()" #form="ngForm">
 
@@ -47,7 +52,6 @@
               type="submit">
               Save
             </button>
-            <p id="add" (click)="tryouts.push({})">+ add another date</p>
             <p style="color: red; text-align: center; width: 75%;">{{Error}}</p>
           </div>
         </div>

@@ -18,24 +18,23 @@ export class CoachesComponent implements OnInit {
   coaches = [];
   teams = [];
   error = null;
-  index = null;
   modal = null;
   selected: any = {};
 
   ngOnInit() {
-    this.http.get('/api/coaches/all')
-      .then(data => this.coaches = data)
-      .catch(error => console.log(error));
-
+    this.getCoaches();
     this.http.get('/api/teams')
       .then(data => this.teams = data)
       .catch(error => console.log(error));
   }
 
   add() {
+    this.error = null;
+    this.selected.phoneNumber = `${this.selected.area}-${this.selected.prefix}-${this.selected.line}`;
+    console.log(this.selected);
     this.http.post('/api/coaches', this.selected)
       .then(() => {
-        this.coaches.unshift(this.selected);
+        this.getCoaches();
         this.close();
       }).catch(error => this.error = typeof error === 'string' ?
         error : 'Something went wrong.');
@@ -48,33 +47,40 @@ export class CoachesComponent implements OnInit {
 
   close() {
     this.error = null;
-    this.index = null;
     this.modal = null;
     this.selected = {};
   }
 
   delete() {
+    this.error = null;
     this.http.delete(`/api/coaches/${this.selected.id}`)
       .then(() => {
-        this.coaches.splice(this.index, 1);
+        this.getCoaches();
         this.close();
       }).catch(error => this.error = typeof error === 'string' ?
         error : 'Something went wrong.');
   }
 
   edit() {
+    console.log(this.selected)
+    this.error = null;
     this.http.put(`/api/coaches/${this.selected.id}`, this.selected)
       .then(() => {
-        this.coaches[this.index] = Object.assign({}, this.selected);
+        this.getCoaches();
         this.close();
       }).catch(error => this.error = typeof error === 'string' ?
         error : 'Something went wrong.');
 
   }
 
-  select(modal, index, coach) {
+  getCoaches() {
+    this.http.get('/api/coaches/all')
+      .then(data => this.coaches = data)
+      .catch(error => console.log(error));
+  }
+
+  select(modal, coach) {
     this.modal = modal;
-    this.index = index;
     this.selected = Object.assign({}, coach);
   }
 

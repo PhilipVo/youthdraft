@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let player of players; let index = index" [attr.data-index]="index">
+          <tr *ngFor="let player of players;" >
             <td>{{player.firstName}} {{player.lastName}}</td>
             <td>{{player.leagueAge}}</td>
             <td>{{player.gender}}</td>
@@ -32,10 +32,10 @@
             <td>{{_moment(player.birthday).format('M/D/YYYY')}}</td>
             <td>
               <p style="font-weight: bold;">
-                <span (click)="select('edit', index, player)" style="cursor: pointer;">
+                <span (click)="select('edit', player)" style="cursor: pointer;">
                   Edit
                 </span> | 
-                <span (click)="select('delete', index, player)" style="cursor: pointer;">
+                <span (click)="select('delete', player)" style="cursor: pointer;">
                   Delete
                 </span>
               </p>
@@ -47,15 +47,16 @@
   </div>
 </div>
 
-
-<!-- Add modal -->
-<div class="modal" (click)="close()" *ngIf="modal==='add'">
+<!-- Add/Edit modal -->
+<div class="modal" (click)="close()" *ngIf="modal==='add' || modal==='edit'">
   <div
     (click)="stopPropagation($event)"
-    style="background-color: white; width: 50%; padding: 20px">
-    <h1>Add a new Player</h1>
+    class="modal-width"
+    style="background-color: white; padding: 20px;">
+    <h1 *ngIf="modal === 'add'">Add a new Player</h1>
+    <h1 *ngIf="modal === 'edit'">Edit this Player</h1>
     <form>
-      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
         <div style="display: flex; justify-content: space-between; width: 90%;">
           <input
             name="teamNumber"
@@ -73,87 +74,9 @@
         <input name="birthday" [(ngModel)]="selected.birthday" type="date">
         <div style="display: flex; justify-content: space-between; width: 90%;">
           <select name="gender" [(ngModel)]="selected.gender" required style="margin-right: 5px;">
-            <option [ngValue]="undefined" disabled>Gender</option>
-            <option [ngValue]="Male">Male</option>
-            <option [ngValue]="Female">Female</option>
-          </select>
-          <input
-            name="leagueAge"
-            [(ngModel)]="selected.leagueAge"
-            placeholder="League Age">
-        </div>
-        <select name="team" [(ngModel)]="selected.teamId" required style="width: 90%;">
-          <option [ngValue]="undefined" disabled>Team</option>
-          <option *ngFor="let team of teams" [ngValue]="team.id">
-            {{team.name}} - {{team.division}}
-          </option>
-        </select>
-      </div>
-      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
-        <input
-          name="parentFirstName"
-          [(ngModel)]="selected.parentFirstName"
-          placeholder="Parent First Name">
-        <input
-          name="parentLastName"
-          [(ngModel)]="selected.parentLastName"
-          placeholder="Parent Last Name">
-        <div style="margin-top: 10px; width: 90%;">
-          <label>Phone Number</label>
-        </div>
-        <input
-          name="email"
-          [(ngModel)]="selected.email"
-          placeholder="Parent Email">
-      </div>
-    </form>
-
-    <div style="display: flex; justify-content: center;">
-      <button
-        class="bg-gray btn"
-        (click)="close()"
-        style="color: white; margin-right: 20px;">
-        Cancel
-      </button>
-      <button
-        class="bg-blue btn"
-        (click)="add()"
-        style="color: white;">
-        Save
-      </button>
-    </div>
-    <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
-  </div>
-</div>
-
-<!-- Edit modal -->
-<div class="modal" (click)="close()" *ngIf="modal===null">
-  <div
-    (click)="stopPropagation($event)"
-    style="background-color: white; width: 50%; padding: 20px">
-    <h1>Edit this Player</h1>
-    <form>
-      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
-        <div style="display: flex; justify-content: space-between; width: 90%;">
-          <input
-            name="teamNumber"
-            [(ngModel)]="selected.teamNumber"
-            placeholder="Draft #" style="margin-right: 5px; width: 40%;">
-          <input
-            name="firstName"
-            [(ngModel)]="selected.firstName"
-            placeholder="First Name">
-        </div>
-        <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
-        <div style="margin-top: 10px; width: 90%;">
-          <label>DOB</label>
-        </div>
-        <input name="birthday" [(ngModel)]="selected.birthday" type="date">
-        <div style="display: flex; justify-content: space-between; width: 90%;">
-          <select name="gender" [(ngModel)]="selected.gender" required style="margin-right: 5px;">
-            <option [ngValue]="null" disabled>Gender</option>
-            <option [ngValue]="Male">Male</option>
-            <option [ngValue]="Female">Female</option>
+            <option [ngValue]="modal==='add' ? undefined : null" disabled>Gender</option>
+            <option [ngValue]="'Male'">Male</option>
+            <option [ngValue]="'Female'">Female</option>
           </select>
           <input
             name="leagueAge"
@@ -161,13 +84,13 @@
             placeholder="Age">
         </div>
         <select name="team" [(ngModel)]="selected.teamId" required>
-          <option [ngValue]="null" disabled>Team</option>
+          <option [ngValue]="modal==='add' ? undefined : null" disabled>Team</option>
           <option *ngFor="let team of teams" [ngValue]="team.id">
             {{team.name}} - {{team.division}}
           </option>
         </select>
       </div>
-      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
         <input
           name="parentFirstName"
           [(ngModel)]="selected.parentFirstName"
@@ -184,21 +107,21 @@
             maxlength="3"
             name="area"
             [(ngModel)]="selected.area"
-            placeholder="Area"
+            placeholder="123"
             required
             style="margin-right: 5px;">
           <input
             maxlength="4"
             name="prefix"
             [(ngModel)]="selected.prefix"
-            placeholder="Prefix"
+            placeholder="456"
             required
             style="margin-right: 5px;">
           <input
             maxlength="4"
             name="line"
             [(ngModel)]="selected.line"
-            placeholder="Line"
+            placeholder="7890"
             required>
         </div>
         <input
@@ -207,27 +130,42 @@
           placeholder="Parent Email">
         <div style="margin-top: 10px; width: 90%;">
           <label>Check the following that apply:</label><br>
-          <div style="">
-            <input
-              (change)="log()"
-              class="checkbox"
-              name="pitcher"
-              [(ngModel)]="pitcher"
-              type="checkbox"/>
-            <label for="pitcher">Pitcher</label><br>
-            <input
-              class="checkbox"
-              name="catcher"
-              [(ngModel)]="catcher"
-              type="checkbox"/>
-            <label for="catcher">Catcher</label><br>
-            <input
-              class="checkbox"
-              name="coachsKid"
-              [(ngModel)]="coachsKid"
-              type="checkbox"/>
-            <label for="coachsKid">Coach's Kid</label>
-          </div>
+            <div 
+              (click)="selected.pitcher = selected.pitcher === 1 ? 0 : 1"
+              style="display: inline-block;">
+              <i
+                [ngClass]="selected.pitcher === 1 ?
+                  'ion-android-checkbox-outline' :
+                  'ion-android-checkbox-outline-blank'"
+                class="icon"
+                style="font-size: 16px;">
+              </i>
+              <label>Pitcher</label>
+            </div><br>
+            <div 
+              (click)="selected.catcher = selected.catcher === 1 ? 0 : 1"
+              style="display: inline-block;">
+              <i
+                [ngClass]="selected.catcher === 1 ?
+                  'ion-android-checkbox-outline' :
+                  'ion-android-checkbox-outline-blank'"
+                class="icon"
+                style="font-size: 16px;">
+              </i>
+              <label>Catcher</label>
+            </div><br>
+            <div 
+              (click)="selected.coachsKid = selected.coachsKid === 1 ? 0 : 1"
+              style="display: inline-block;">
+              <i
+                [ngClass]="selected.coachsKid === 1 ?
+                  'ion-android-checkbox-outline' :
+                  'ion-android-checkbox-outline-blank'"
+                class="icon"
+                style="font-size: 16px;">
+              </i>
+              <label>Coach's Kid</label>
+            </div><br>
         </div>
       </div>
     </form>
@@ -241,7 +179,7 @@
       </button>
       <button
         class="bg-blue btn"
-        (click)="edit()"
+        (click)="save()"
         style="color: white;">
         Save
       </button>
@@ -254,10 +192,11 @@
 <div class="modal" (click)="close()" *ngIf="modal==='delete'">
   <div
     (click)="stopPropagation($event)"
-    style="background-color: white; width: 50%; padding: 20px 50px;">
+    class="modal-width"
+    style="background-color: white; padding: 20px 50px;">
     <h2 style="text-align: center;">
       Deleting this player would delete their assessment results.<br><br>
-      Are you sure you would like to delete this player?
+      Are you sure you would like to delete {{selected.firstName}} {{selected.lastName}}?
     </h2>
     <div style="display: flex; justify-content: center;">
       <button

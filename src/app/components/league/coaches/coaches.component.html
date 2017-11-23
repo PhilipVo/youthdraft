@@ -24,7 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let coach of coaches; let index = index" [attr.data-index]="index">
+          <tr *ngFor="let coach of coaches;">
             <td>{{coach.firstName}} {{coach.lastName}}</td>
             <td>{{coach.type}}</td>
             <td>{{coach.phoneNumber}}</td>
@@ -33,10 +33,10 @@
             <td>{{coach.teamName}}</td>
             <td>
               <p style="font-weight: bold;">
-                <span (click)="select('edit', index, coach)" style="cursor: pointer;">
+                <span (click)="select('edit', coach)" style="cursor: pointer;">
                   Edit
                 </span> | 
-                <span (click)="select('delete', index, coach)" style="cursor: pointer;">
+                <span (click)="select('delete', coach)" style="cursor: pointer;">
                   Delete
                 </span>
               </p>
@@ -49,18 +49,23 @@
 </div>
 
 <!-- Add modal -->
-<div class="modal" (click)="close()" *ngIf="modal===null">
+<div class="modal" (click)="close()" *ngIf="modal==='add'">
   <div
     (click)="stopPropagation($event)"
-    style="background-color: white; width: 50%; padding: 20px">
+    class="modal-width"
+    style="background-color: white; padding: 20px;">
     <h1>Add a new Coach</h1>
     <form>
-      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
         <input name="firstName" [(ngModel)]="selected.firstName" placeholder="First Name">
         <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
+        <div style="margin-top: 10px; width: 90%;">
+          <label>DOB</label>
+        </div>
+        <input name="birthday" [(ngModel)]="selected.birthday" type="date">
         <select name="gender" [(ngModel)]="selected.gender" required>
           <option [ngValue]="undefined" disabled>Gender</option>
-          <option [ngValue]="'Male'">Male</option>
+          <option [ngValue]="true">Male</option>
           <option [ngValue]="'Female'">Female</option>
         </select>
         <input name="email" [(ngModel)]="selected.email" placeholder="Email Address">
@@ -90,7 +95,18 @@
             required>
         </div>
       </div>
-      <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+        <input name="street" [(ngModel)]="selected.address" placeholder="Street Address">
+        <input name="city" [(ngModel)]="selected.city" placeholder="City">
+        <div style="display: flex; width: 90%;">
+          <input
+            maxlength="2"
+            name="state"
+            [(ngModel)]="selected.state"
+            placeholder="State"
+            style="margin-right: 5px;">
+          <input name="zip" [(ngModel)]="selected.zip" placeholder="Zip">
+        </div>
         <select name="division" [(ngModel)]="selected.division" required>
           <option [ngValue]="undefined" disabled>Division</option>
           <option [ngValue]="'8U'">8U</option>
@@ -113,9 +129,9 @@
           <option [ngValue]="'T-ball'">T-ball</option>
           <option [ngValue]="'Rookie'">Rookie</option>
         </select>
-        <select name="team" [(ngModel)]="selected.team" required>
+        <select name="team" [(ngModel)]="selected.teamId" required>
           <option [ngValue]="undefined" disabled>Team</option>
-          <option *ngFor="let team of teams" [ngValue]="team.name">
+          <option *ngFor="let team of teams" [ngValue]="team.id">
             {{team.name}} - {{team.division}}
           </option>
         </select>
@@ -149,12 +165,13 @@
 <div class="modal" (click)="close()" *ngIf="modal==='edit'">
   <div
     (click)="stopPropagation($event)"
-    style="background-color: white; width: 50%; padding: 20px">
-    <h1>{{selected.firstName}} {{selected.lastName}}</h1>
+    class="modal-width"
+    style="background-color: white; padding: 20px;">
+    <h1>Edit Coach {{selected.firstName}} {{selected.lastName}}</h1>
     <form>
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
         <select name="division" [(ngModel)]="selected.division" required>
-          <option [ngValue]="undefined" disabled>Division</option>
+          <option [ngValue]="null" disabled>Division</option>
           <option [ngValue]="'8U'">8U</option>
           <option [ngValue]="'9U'">9U</option>
           <option [ngValue]="'10U'">10U</option>
@@ -175,14 +192,14 @@
           <option [ngValue]="'T-ball'">T-ball</option>
           <option [ngValue]="'Rookie'">Rookie</option>
         </select>
-        <select name="team" [(ngModel)]="selected.team" required>
-          <option [ngValue]="undefined" disabled>Team</option>
-          <option *ngFor="let team of teams" [ngValue]="team.name">
+        <select name="team" [(ngModel)]="selected.teamId" required>
+          <option [ngValue]="null" disabled>Team</option>
+          <option *ngFor="let team of teams" [ngValue]="team.id">
             {{team.name}} - {{team.division}}
           </option>
         </select>
         <select name="coachType" [(ngModel)]="selected.coachType" required>
-          <option [ngValue]="undefined" disabled>Coach Type</option>
+          <option [ngValue]="null" disabled>Coach Type</option>
           <option [ngValue]="'Assistant Coach'">Assistant Coach</option>
           <option [ngValue]="'Head Coach'">Head Coach</option>
         </select>
@@ -211,10 +228,11 @@
 <div class="modal" (click)="close()" *ngIf="modal==='delete'">
   <div
     (click)="stopPropagation($event)"
-    style="background-color: white; width: 50%; padding: 20px 50px;">
+    class="modal-width"
+    style="background-color: white; padding: 20px 50px;">
     <h2 style="text-align: center;">
-      Deleting this coach would delete their access to your league.<br><br>
-      Are you sure you would like to delete this coach?
+      Deleting this Coach would delete their access to your league.<br><br>
+      Are you sure you would like to delete Coach {{selected.firstName}} {{selected.lastName}}?
     </h2>
     <div style="display: flex; justify-content: center;">
       <button
