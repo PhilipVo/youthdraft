@@ -16,16 +16,16 @@ export class FinalizeComponent implements OnInit {
     private session: SessionService
   ) { }
 
-  dates = [];
+  tryouts = [];
 
   ngOnInit() {
-    if (!this.session.newUser.dates ||
-      this.session.newUser.dates.length < 1 ||
-      !this.session.newUser.dates[0].date ||
-      !this.session.newUser.dates[0].address)
+    if (!this.session.newUser.tryouts ||
+      this.session.newUser.tryouts.length < 1 ||
+      !this.session.newUser.tryouts[0].date ||
+      !this.session.newUser.tryouts[0].address)
       this.router.navigate(['/league/register/select-dates']);
-    else this.dates = this.session.newUser.dates.map(date =>
-      moment(date.date).format('MMMM Do YYYY, h:mm:ss a'));
+    else this.tryouts = this.session.newUser.tryouts.map(tryout =>
+      moment(tryout.date).format('MMMM Do YYYY, h:mm:ss a'));
   }
 
   register(): void {

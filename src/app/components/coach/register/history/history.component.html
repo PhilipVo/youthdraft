@@ -60,7 +60,7 @@
     <!-- Right Column -->
     <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
       <!-- Experience -->
-      <select name="years" [(ngModel)]="session.newUser.years" required>
+      <select name="yearsExperience" [(ngModel)]="session.newUser.yearsExperience" required>
         <option [ngValue]="undefined" disabled>Years of Experience</option>
         <option [ngValue]="0">0</option>
         <option [ngValue]="1">1</option>
@@ -72,13 +72,15 @@
         <option [ngValue]="7">7</option>
         <option [ngValue]="8">8</option>
         <option [ngValue]="9">9</option>
-        <option [ngValue]="10">10</option>
+        <option [ngValue]="10">10+</option>
       </select>
 
 
       <!-- Past Divisions Coached -->
+      <div style="margin-bottom: 2%; width: 50%;">
+        <label>Desired Coaching Div.</label>
+      </div>
       <select multiple name="pastDivisons" [(ngModel)]="session.newUser.pastDivisions" required>
-        <option [ngValue]="undefined" disabled>Past Divisions Coached</option>
         <option [ngValue]="'8U'">8U</option>
         <option [ngValue]="'9U'">9U</option>
         <option [ngValue]="'10U'">10U</option>

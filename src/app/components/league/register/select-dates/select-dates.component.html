@@ -21,35 +21,41 @@
     #form="ngForm"
     style="align-items: center; display: flex; flex-direction: column;">
 
-      <div style="display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
+      <div style="display: flex; margin-bottom: 10px; width: 50%;">
+        <div style="width: 50%">
           <label>Date &amp; Time</label>
         </div>
-        <div style="width: 48%">
+        <div style="width: 50%">
           <label>Location</label>
         </div>
       </div>
-      
-      <div 
-        *ngFor="let date of dates"
-        style="display: flex; justify-content: space-between; width: 50%;">
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="date.date"
-            name="date"
-            required
-            type="datetime-local">
-        </div>
-        <div style="width: 48%">
-          <input
-            [(ngModel)]="date.address"
-            name="address"
-            placeholder="123 Fake Street, San Jose, CA, 95127"
-            required
-            type="text">
+      {{tryouts.length}}
+      <div
+        *ngFor="let tryout of tryouts; let index = index;"
+        [attr.data-index]="index"
+        style="width: 50%;">
+        <span
+          (click)="tryouts.splice(index, 1)" 
+          style="font-size: 12px; color: red; cursor: pointer;">
+          Remove
+        </span>
+        <div style="display: flex;">
+            <input
+              [(ngModel)]="tryout.date"
+              name="date{{index}}"
+              required
+              style="margin-right: 5px;"
+              type="datetime-local">
+            <input
+              [(ngModel)]="tryout.address"
+              name="address{{index}}"
+              placeholder="123 Fake Street, San Jose, CA, 95127"
+              required
+              type="text">
         </div>
       </div>
       
+      <p (click)="tryouts.push({})" style="cursor: pointer;">+ add a new date</p>
       <button class="bg-blue btn" [disabled]="!form.form.valid" type="submit">Next</button>
     
   </form>

@@ -1,8 +1,12 @@
-input {
+input, select {
   border-radius: 5px;
   border-width: 0px;
   box-sizing: border-box;
   margin-bottom: 2%;
   padding: 10px;
   width: 50%;
+}
+
+label {
+  font-weight: bold;
 }

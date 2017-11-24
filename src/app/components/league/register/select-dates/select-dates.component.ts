@@ -14,7 +14,7 @@ export class SelectDatesComponent implements OnInit {
     private session: SessionService
   ) { }
 
-  dates = this.session.newUser.dates ? this.session.newUser.dates : [{}];
+  tryouts = this.session.newUser.tryouts ? this.session.newUser.tryouts : [{}];
 
   ngOnInit() {
     if (!this.session.newUser.playerRoster)
@@ -22,7 +22,8 @@ export class SelectDatesComponent implements OnInit {
   }
 
   next(): void {
-    this.session.newUser = { dates: this.dates };
+    console.log('next')
+    this.session.newUser = { tryouts: this.tryouts };
     this.router.navigate(['/league/register/finalize']);
   }
 }

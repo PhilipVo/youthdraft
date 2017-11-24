@@ -15,6 +15,7 @@ export class IndexComponent {
   ) { }
 
   next(): void {
+    this.session.newUser.phoneNumber = `${this.session.newUser.area}-${this.session.newUser.prefix}-${this.session.newUser.line}`;
     this.router.navigate(['/league/register/upload-coach']);
   }
 

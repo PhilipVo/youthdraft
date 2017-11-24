@@ -25,33 +25,92 @@
     <!-- Left Column -->
     <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
       <!-- First Name -->
-        <input [(ngModel)]="session.newUser.firstName" name="firstName" placeholder="First Name" required type="text">
+      <input [(ngModel)]="session.newUser.firstName" name="firstName" placeholder="First Name" required type="text">
 
       <!-- Last Name -->
-        <input [(ngModel)]="session.newUser.lastName" name="LastName" placeholder="Last Name" required type="text">
+      <input [(ngModel)]="session.newUser.lastName" name="lastName" placeholder="Last Name" required type="text">
+      
+      <!-- DOB -->
+      <div style="margin-bottom: 2%; width: 50%;">
+        <label>DOB</label>
+      </div>
+      <input [(ngModel)]="session.newUser.birthday" name="birthday" placeholder="Last Name" required type="date">
 
-      <!-- League Name -->
-        <input [(ngModel)]="session.newUser.leagueName" name="leagueName" placeholder="League Name" required type="text">
+      <!-- Gender -->
+      <select name="gender" [(ngModel)]="session.newUser.gender" required>
+        <option [ngValue]="undefined" disabled>Gender</option>
+        <option [ngValue]="'Male'">Male</option>
+        <option [ngValue]="'Female'">Female</option>
+      </select>
+        
+      <select name="league" [(ngModel)]="session.newUser.league" required>
+        <option [ngValue]="league" disabled>Choose Desired League</option>
+        <option *ngFor="let league of leagues" [ngValue]="league">
+          {{league.leagueName}} - {{league.city}}, {{league.state}}
+        </option>
+      </select>    
     </div>
 
     <!-- Right Column -->
     <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
       <!-- Email -->
-        <input [(ngModel)]="session.newUser.email" name="email" placeholder="Email Address" required type="text">
+      <input [(ngModel)]="session.newUser.email" name="email" placeholder="Email Address" required type="text">
 
       <!-- Phone Number -->
-        <input [(ngModel)]="session.newUser.phoneNumber" name="phoneNumber" placeholder="Phone Number" required type="text">
+      <div style="margin-bottom: 2%; width: 50%;">
+        <label>Phone Number</label>
+      </div>
+      <div style="display: flex; margin-bottom: 2%; width: 50%;">
+        <input
+          [(ngModel)]="session.newUser.phoneNumber"
+          maxlength="3"
+          name="phoneNumber"
+          placeholder="123"
+          required
+          style="margin-bottom: 0; margin-right: 5px;"
+          type="text">
+        <input
+          [(ngModel)]="session.newUser.phoneNumber"
+          maxlength="3"
+          name="phoneNumber"
+          placeholder="456"
+          required
+          style="margin-bottom: 0; margin-right: 5px;"
+          type="text">
+        <input
+          [(ngModel)]="session.newUser.phoneNumber"
+          maxlength="4"
+          name="phoneNumber"
+          placeholder="7890"
+          required
+          style="margin-bottom: 0;"
+          type="text">
+      </div>
+
+      <!-- Address -->
+      <input [(ngModel)]="session.newUser.address" name="address" placeholder="Street Address" required type="text">
+      
+      <!-- City -->
+      <input [(ngModel)]="session.newUser.city" name="city" placeholder="City" required type="text">
 
       <div style="display: flex; justify-content: space-between; width: 50%;">
-        <!-- City -->
-        <div style="flex: 2; margin-right: 5px;">
-          <input [(ngModel)]="session.newUser.city" name="city" placeholder="City" required style="width: 100%" type="text">
-        </div>
-
         <!-- State -->
-        <div style="flex: 1">
-          <input [(ngModel)]="session.newUser.state" maxLength="2" name="state" placeholder="State" required style="width: 100%" type="text">
-        </div>
+        <input
+          [(ngModel)]="session.newUser.state"
+          maxLength="2"
+          name="state"
+          placeholder="State"
+          required 
+          style="margin-right: 5px;"
+          type="text">
+        
+        <!-- Zip -->
+        <input
+          [(ngModel)]="session.newUser.zip"
+          name="zip"
+          placeholder="Zip"
+          required
+          type="text">
       </div>
 
       <!-- Next -->

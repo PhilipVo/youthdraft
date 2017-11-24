@@ -41,7 +41,35 @@
       <input [(ngModel)]="session.newUser.email" name="email" placeholder="Email Address" required type="text">
 
       <!-- Phone Number -->
-      <input [(ngModel)]="session.newUser.phoneNumber" name="phoneNumber" placeholder="Phone Number" required type="text">
+      <div style="margin-bottom: 2%; width: 50%;">
+        <label>Phone Number</label>
+      </div>
+      <div style="display: flex; margin-bottom: 2%; width: 50%;">
+        <input
+          [(ngModel)]="session.newUser.phoneNumber"
+          maxlength="3"
+          name="phoneNumber"
+          placeholder="123"
+          required
+          style="margin-bottom: 0; margin-right: 5px;"
+          type="text">
+        <input
+          [(ngModel)]="session.newUser.phoneNumber"
+          maxlength="3"
+          name="phoneNumber"
+          placeholder="456"
+          required
+          style="margin-bottom: 0; margin-right: 5px;"
+          type="text">
+        <input
+          [(ngModel)]="session.newUser.phoneNumber"
+          maxlength="4"
+          name="phoneNumber"
+          placeholder="7890"
+          required
+          style="margin-bottom: 0;"
+          type="text">
+      </div>
 
       <div style="display: flex; justify-content: space-between; width: 50%;">
         <!-- City -->
