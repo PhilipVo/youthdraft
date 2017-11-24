@@ -17,6 +17,7 @@ export class PlayersComponent implements OnInit {
   ngOnInit() {
     this.http.get('/api/players')
       .then(data => {
+        console.log(data)
         this.players = data.map(player => {
           player.dob = moment(player.birthday.replace('T', ' ')).format('M/d/YYYY');
           return player;

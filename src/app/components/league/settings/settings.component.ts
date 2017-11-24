@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
     private session: SessionService
   ) { }
 
-  league = {};
+  league: any = {};
   password = {};
 
   accountError = null;
@@ -24,13 +24,24 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('/api/league')
-      .then(data => this.league = data)
-      .catch(() => { });
+      .then(data => {
+        console.log(data)
+        try {
+          const number = data.phoneNumber.split('-');
+          data.area = number[0];
+          data.prefix = number[1];
+          data.line = number[2];
+          data.birthday = data.birthday.substring(0, 10);
+        } catch (error) { }
+        this.league = data;
+      }).catch(() => { });
   }
 
   updateLeague() {
     this.accountError = null;
     this.accountSuccess = false;
+
+    this.league.phoneNumber = `${this.league.area}-${this.league.prefix}-${this.league.line}`;
 
     this.http.put(`/api/league`, this.league)
       .then(() => this.accountSuccess = true)

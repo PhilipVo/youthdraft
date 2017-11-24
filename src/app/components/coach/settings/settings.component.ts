@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
     private session: SessionService
   ) { }
 
-  coach = {};
+  coach: any = {};
   password = {};
 
   accountError = null;
@@ -24,14 +24,25 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('/api/coaches')
-      .then(data => this.coach = data)
-      .catch(() => { });
+      .then(data => {
+        try {
+          const number = data.phoneNumber.split('-');
+          data.area = number[0];
+          data.prefix = number[1];
+          data.line = number[2];
+          data.birthday = data.birthday.substring(0, 10);
+        } catch (error) { }
+        console.log('data', data)
+        this.coach = data;
+      }).catch(error => { console.log(error) });
   }
 
   updateCoach() {
     this.accountError = null;
     this.accountSuccess = false;
 
+    this.coach.phoneNumber = `${this.coach.area}-${this.coach.prefix}-${this.coach.line}`;
+    console.log(this.coach)
     this.http.put(`/api/coaches/${this.session.id}`, this.coach)
       .then(() => this.accountSuccess = true)
       .catch(error => this.accountError = typeof error === 'string' ? error : 'Something went wrong.');

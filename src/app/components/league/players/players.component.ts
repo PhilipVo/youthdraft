@@ -51,11 +51,6 @@ export class PlayersComponent implements OnInit {
     console.log(this.selected)
     this.error = null;
 
-    const temp = Object.assign({}, this.selected);
-
-    this.selected.catcher = this.selected.catcher === 1 ? 'true' : 'false';
-    this.selected.pitcher = this.selected.pitcher === 1 ? 'true' : 'false';
-    this.selected.coachsKid = this.selected.coachsKid === 1 ? 'true' : 'false';
     this.selected.phoneNumber = `${this.selected.area}-${this.selected.prefix}-${this.selected.line}`;
 
     if (this.modal === 'add')
@@ -64,7 +59,6 @@ export class PlayersComponent implements OnInit {
           this.getPlayers();
           this.close();
         }).catch(error => {
-          this.selected = Object.assign({}, temp);
           this.error = typeof error === 'string' ? error : 'Something went wrong.'
         });
     else if (this.modal === 'edit')
@@ -73,7 +67,6 @@ export class PlayersComponent implements OnInit {
           this.getPlayers();
           this.close();
         }).catch(error => {
-          this.selected = Object.assign({}, temp);
           this.error = typeof error === 'string' ? error : 'Something went wrong.'
         });
   }
@@ -83,11 +76,13 @@ export class PlayersComponent implements OnInit {
       .then(data => {
         console.log(data)
         this.players = data.map(player => {
-          const number = player.phoneNumber.split('-');
-          player.area = number[0];
-          player.prefix = number[1];
-          player.line = number[2];
-          player.birthday = player.birthday.substring(0, 10);
+          try {
+            const number = player.phoneNumber.split('-');
+            player.area = number[0];
+            player.prefix = number[1];
+            player.line = number[2];
+            player.birthday = player.birthday.substring(0, 10);
+          } catch (error) { }
           return player;
         });
       }).catch(() => { });

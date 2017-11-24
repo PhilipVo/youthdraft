@@ -46,12 +46,13 @@
           <div style="width: 75%;">
             <button
               class="bg-blue btn"
-              [disabled]="form.form.valid"
+              [disabled]="!form.form.valid"
               [ngStyle]="{'opacity': form.form.valid ? 1 : 0.5}"
               style="align-self: flex-end; color: white; width: 75%;"
               type="submit">
               Save
             </button>
+            <p *ngIf="success" style="text-align: center; width: 75%;">Saved!</p>
             <p style="color: red; text-align: center; width: 75%;">{{Error}}</p>
           </div>
         </div>

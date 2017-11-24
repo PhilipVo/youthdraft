@@ -9,40 +9,47 @@
   </div>
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
-    <div style="background-color: white; display: flex; height: 100%; overflow: auto; padding: 25px;">
-      <form  (submit)="updateCoach()" style="display:flex; flex: 1; flex-direction: column;">
+    <div style="background-color: white; display: flex; flex: 1; overflow: auto; padding: 25px;">
+      <form  (submit)="updateCoach()">
         <h4>Account Details</h4>
         <input name="firstName" [(ngModel)]="coach.firstName" placeholder="First Name" required>
         <input name="lastName" [(ngModel)]="coach.lastName" placeholder="Last Name" required>
+        <div style="margin-top: 20px; width: 75%;">
+          <label>DOB</label>
+        </div>
+        <input name="birthday" [(ngModel)]="coach.birthday" required type="date">
         <select name="gender" [(ngModel)]="coach.gender" required>
-          <option [ngValue]="undefined" disabled>Gender</option>
-          <option [ngValue]="Male">Male</option>
-          <option [ngValue]="Female">Female</option>
+          <option [ngValue]="null" disabled>Gender</option>
+          <option [ngValue]="'Male'">Male</option>
+          <option [ngValue]="'Female'">Female</option>
         </select>
-        <input name="dob" [(ngModel)]="coach.dob" placeholder="9/11/2001" required type="date">
         <input name="email" [(ngModel)]="coach.email" placeholder="Email Address" required>
+        <div style="margin-top: 20px; width: 75%;">
+          <label>Phone Number</label>
+        </div>
         <div style="display: flex; width: 75%;">
           <input
             maxlength="3"
             name="area"
             [(ngModel)]="coach.area"
-            placeholder="Area"
+            placeholder="123"
             required
             style="margin-right: 5px;">
           <input
             maxlength="4"
             name="prefix"
             [(ngModel)]="coach.prefix"
-            placeholder="Prefix"
+            placeholder="456"
             required
             style="margin-right: 5px;">
           <input
             maxlength="4"
             name="line"
             [(ngModel)]="coach.line"
-            placeholder="Line"
+            placeholder="7890"
             required>
         </div>
+        <input name="address" [(ngModel)]="coach.address" placeholder="Address" required>
         <input name="city" [(ngModel)]="coach.city" placeholder="City" required>
         <div style="display: flex; width: 75%;">
           <input
@@ -64,7 +71,7 @@
           Successfully updated your account information!
         </p>
       </form>
-      <form  (submit)="updatePassword()" style="display:flex; flex: 1; flex-direction: column;">
+      <form  (submit)="updatePassword()">
         <h4>Change Password</h4>
         <input
           name="oldPassword"

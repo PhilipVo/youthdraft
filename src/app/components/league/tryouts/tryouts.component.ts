@@ -11,6 +11,7 @@ export class TryoutsComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   error = null;
+  success = false;
   tryouts = [];
 
   ngOnInit() {
@@ -24,7 +25,12 @@ export class TryoutsComponent implements OnInit {
   }
 
   submit() {
-    this.http.post('/api/tryouts', this.tryouts)
+    console.log('submitting')
+    this.error = null;
+    this.success = false;
+
+    this.http.post('/api/tryouts', { tryouts: this.tryouts })
+      .then(() => this.success = true)
       .catch(error => this.error = typeof error === 'string' ? error : 'Something went wrong.');
   }
 }

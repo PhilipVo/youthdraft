@@ -111,7 +111,7 @@
             required
             style="margin-right: 5px;">
           <input
-            maxlength="4"
+            maxlength="3"
             name="prefix"
             [(ngModel)]="selected.prefix"
             placeholder="456"
@@ -131,10 +131,10 @@
         <div style="margin-top: 10px; width: 90%;">
           <label>Check the following that apply:</label><br>
             <div 
-              (click)="selected.pitcher = selected.pitcher === 1 ? 0 : 1"
+              (click)="selected.pitcher = selected.pitcher === 'true' ? 'false' : 'true'"
               style="display: inline-block;">
               <i
-                [ngClass]="selected.pitcher === 1 ?
+                [ngClass]="selected.pitcher === 'true' ?
                   'ion-android-checkbox-outline' :
                   'ion-android-checkbox-outline-blank'"
                 class="icon"
@@ -143,10 +143,10 @@
               <label>Pitcher</label>
             </div><br>
             <div 
-              (click)="selected.catcher = selected.catcher === 1 ? 0 : 1"
+              (click)="selected.catcher = selected.catcher === 'true' ? 'false' : 'true'"
               style="display: inline-block;">
               <i
-                [ngClass]="selected.catcher === 1 ?
+                [ngClass]="selected.catcher === 'true' ?
                   'ion-android-checkbox-outline' :
                   'ion-android-checkbox-outline-blank'"
                 class="icon"
@@ -155,10 +155,10 @@
               <label>Catcher</label>
             </div><br>
             <div 
-              (click)="selected.coachsKid = selected.coachsKid === 1 ? 0 : 1"
+              (click)="selected.coachsKid = selected.coachsKid === 'true' ? 'false' : 'true'"
               style="display: inline-block;">
               <i
-                [ngClass]="selected.coachsKid === 1 ?
+                [ngClass]="selected.coachsKid === 'true' ?
                   'ion-android-checkbox-outline' :
                   'ion-android-checkbox-outline-blank'"
                 class="icon"

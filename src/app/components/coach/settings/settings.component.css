@@ -10,3 +10,8 @@ input, select {
   padding: 10px;
   width: 75%;
 }
+
+label {
+  font-size: 12px;
+  font-weight: bold;
+}

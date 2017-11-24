@@ -36,6 +36,7 @@
         required
         type="password">
       <select name="league" [(ngModel)]="league" required>
+        <option [ngValue]="league" disabled>Choose Your League</option>
         <option *ngFor="let league of leagues" [ngValue]="league">
           {{league.leagueName}} - {{league.city}}, {{league.state}}
         </option>

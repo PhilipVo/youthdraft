@@ -9,15 +9,37 @@
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <div style="background-color: white; display: flex; height: 100%; overflow: auto; padding: 25px;">
-      <form (submit)="updateLeague()" style="display:flex; flex: 1; flex-direction: column;">
+      <form (submit)="updateLeague()">
         <h4>Account Details</h4>
         <input name="firstName" [(ngModel)]="league.firstName" placeholder="First Name" required>
         <input name="lastName" [(ngModel)]="league.lastName" placeholder="Last Name" required>
         <input name="leagueName" [(ngModel)]="league.leagueName" placeholder="League Name" required>
         <input name="email" [(ngModel)]="league.email" placeholder="Email Address" required>
-        <input name="number" [(ngModel)]="league.phoneNumber" placeholder="Phone Number" required>        
-        
-        <!-- City, State -->
+        <div style="margin-top: 20px; width: 75%;">
+          <label>Phone Number</label>
+        </div>
+        <div style="display: flex; width: 75%;">
+          <input
+            maxlength="3"
+            name="area"
+            [(ngModel)]="league.area"
+            placeholder="123"
+            required
+            style="margin-right: 5px;">
+          <input
+            maxlength="4"
+            name="prefix"
+            [(ngModel)]="league.prefix"
+            placeholder="456"
+            required
+            style="margin-right: 5px;">
+          <input
+            maxlength="4"
+            name="line"
+            [(ngModel)]="league.line"
+            placeholder="7890"
+            required>
+        </div>        
         <div style="display: flex; justify-content: space-between; width: 75%;">
           <div style="flex: 2; margin-right: 5px;">
             <input name="city" [(ngModel)]="league.city" placeholder="City" required style="width: 100%">
@@ -43,7 +65,7 @@
           Successfully updated your account information!
         </p>
       </form>
-      <form (submit)="updatePassword()" style="display:flex; flex: 1; flex-direction: column;">
+      <form (submit)="updatePassword()">
         <h4>Change Password</h4>
         <input
           name="oldPassword"

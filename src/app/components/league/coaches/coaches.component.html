@@ -26,7 +26,7 @@
         <tbody>
           <tr *ngFor="let coach of coaches;">
             <td>{{coach.firstName}} {{coach.lastName}}</td>
-            <td>{{coach.type}}</td>
+            <td>{{coach.coachType}}</td>
             <td>{{coach.phoneNumber}}</td>
             <td>{{coach.email}}</td>
             <td>{{coach.division}}</td>
@@ -65,7 +65,7 @@
         <input name="birthday" [(ngModel)]="selected.birthday" type="date">
         <select name="gender" [(ngModel)]="selected.gender" required>
           <option [ngValue]="undefined" disabled>Gender</option>
-          <option [ngValue]="true">Male</option>
+          <option [ngValue]="'Male'">Male</option>
           <option [ngValue]="'Female'">Female</option>
         </select>
         <input name="email" [(ngModel)]="selected.email" placeholder="Email Address">
@@ -81,7 +81,7 @@
             required
             style="margin-right: 5px;">
           <input
-            maxlength="4"
+            maxlength="3"
             name="prefix"
             [(ngModel)]="selected.prefix"
             placeholder="456"
