@@ -14,22 +14,22 @@ export class UploadPlayerComponent implements OnInit {
     private session: SessionService
   ) { }
 
-  file = this.session.newUser.playerRoster && this.session.newUser.playerRoster.name ?
-    this.session.newUser.playerRoster.name : null;
+  file = this.session.newUser.players && this.session.newUser.players.name ?
+    this.session.newUser.players.name : null;
 
   ngOnInit() {
-    if (!this.session.newUser.coachRoster)
+    if (!this.session.newUser.coaches)
       this.router.navigate(['/league/register/upload-coach']);
   }
 
   next(): void {
-    this.router.navigate(['/league/register/select-dates']);
+    this.router.navigate(['/league/register/upload-team']);
   }
 
   upload(event) {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0].name;
-      this.session.newUser = { playerRoster: event.target.files[0] };
+      this.session.newUser = { players: event.target.files[0] };
     }
   }
 }

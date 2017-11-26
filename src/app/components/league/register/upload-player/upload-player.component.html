@@ -16,93 +16,38 @@
     We promise we don't share any of this information to a third party.
   </p>
   
-  <div style="align-items: flex-start; display: flex; justify-content: space-around;">
+  <div style="align-items: center; display: flex; flex-direction: column;">
+    <img src="../../../../../assets/player-template.png" style="object-fit: contain; max-width: 90%;">
+    <a 
+      download
+      href="../../../../../assets/players.xlsx"
+      style="color: #cce6ff; cursor: pointer; font-size: 20px; margin-top: 5px;">
+      Click <span style="text-decoration: underline;">here</span> to download our template
+    </a>
 
-    <!-- Left Column -->
-    <div style="flex: 2; padding: 2%;">
-      <table style="background-color: white; color: black;">
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>League (Majors, AAA, etc.)</th>
-          <th>Years Exp.</th>
-          <th>Parent Name</th>
-          <th>Parent Email</th>
-          <th>Phone Cell</th>
-        </tr>
-        <tr>
-          <td>Scott</td>
-          <td>Jeter</td>
-          <td>12</td>
-          <td>M</td>
-          <td>Majors</td>
-          <td>3</td>
-          <td>Derek Jeter</td>
-          <td>derek@jeter.com</td>
-          <td>123-456-7890</td>
-        </tr>
-        <tr>
-          <td>Ben</td>
-          <td>Ruth</td>
-          <td>11</td>
-          <td>M</td>
-          <td>AAA</td>
-          <td>$</td>
-          <td>Babe Ruth</td>
-          <td>babe@ruth.com</td>
-          <td>234-567-8901</td>
-        </tr>
-        <tr>
-          <td>Matt</td>
-          <td>Trout</td>
-          <td>6</td>
-          <td>M</td>
-          <td>Teeball</td>
-          <td>0</td>
-          <td>Mike Trout</td>
-          <td>mike@trout.com</td>
-          <td>345-678-9012</td>
-        </tr>
-      </table>
-
-      <p style="color: white; font-size: 20px; margin-top: 5%;">
-        Formatting Notes:<br>
-        <span style="margin-left: 20px;">- available divisions are<br></span>
-        <span style="margin-left: 40px;">- Majors, AAA, AA, A, Farm, Rookie, Teeball</span>
-      </p>
-    </div>
-
-    <!-- Right Column -->
-    <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
-      <p style="color: white; font-size: 20px;">
-        Download roster template:<br>
-        Use our template to populate your player's information
-      </p>
-
-      <button  class="bg-gray btn" (click)="next()" style="margin-top: 5%;">Download</button>
-
-      <p style="color: white; font-size: 20px; margin-top: 5%;">
-        Upload roster template:<br>
-        Once you populate the template from above, upload it here.
-      </p>
-
-      <label for="upload" class="bg-gray btn" style="text-align: center;">Upload</label>
-      <input
-        accept=".csv,
-        .png,
-        .xlsx"
-        (change)="upload($event)"
-        id="upload"
-        required style="display: none;"
-        type="file">
-      <p *ngIf="file">{{file}}</p>
-
-      <!-- Next -->
-      <button  class="bg-blue btn" (click)="next()" [disabled]="!file" style="margin-top: 10%;">Next</button>
-
-    </div>
+    <div style="display: flex; justify-content: space-between;">
+      <div style="flex: 1; padding: 20px;">
+        <p style="color: white; font-size: 20px;">
+          <span style="font-weight: bold;">Formatting Notes:</span><br>
+          <span style="margin-left: 20px;">- available Divisions are:<br></span>
+          <span style="margin-left: 40px;">- 8U, 9U, ..., 17U, 18U, A, AA, AAA, Farm, Majors, Intermediate, T-ball, Rookie</span><br><br>
+        </p>
+      </div>
+      <div style="flex: 1; padding: 20px;">
+        <p style="color: white; font-size: 20px;">
+          <span style="font-weight: bold;">Upload roster template:</span><br>
+          Once you populate the template from above, upload it here:
+        </p>
     
+        <div style="align-items: center; display: flex; flex-direction: column; justify-content: center">
+          <label for="upload" class="btn" style="background-color: #a2a2a2; text-align: center;">Upload</label>
+          <input accept=".csv, .png, .xlsx" (change)="upload($event)" id="upload" required style="display: none;" type="file">
+          <p *ngIf="file">{{file}}</p>
+          
+          <!-- Next -->
+          <button  class="bg-blue btn" (click)="next()" [disabled]="!file" style="margin-top: 10%;">Next</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

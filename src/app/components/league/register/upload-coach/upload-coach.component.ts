@@ -14,8 +14,8 @@ export class UploadCoachComponent implements OnInit {
     private session: SessionService
   ) { }
 
-  file = this.session.newUser.coachRoster && this.session.newUser.coachRoster.name ?
-    this.session.newUser.coachRoster.name : null;
+  file = this.session.newUser.coaches && this.session.newUser.coaches.name ?
+    this.session.newUser.coaches.name : null;
 
   ngOnInit() {
     if (!(this.session.newUser.firstName &&
@@ -35,7 +35,7 @@ export class UploadCoachComponent implements OnInit {
   upload(event) {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0].name;
-      this.session.newUser = { coachRoster: event.target.files[0] };
+      this.session.newUser = { coaches: event.target.files[0] };
     }
   }
 }

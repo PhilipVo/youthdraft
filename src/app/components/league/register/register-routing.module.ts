@@ -7,6 +7,7 @@ import { IndexComponent } from './index/index.component';
 import { SelectDatesComponent } from './select-dates/select-dates.component';
 import { UploadCoachComponent } from './upload-coach/upload-coach.component';
 import { UploadPlayerComponent } from './upload-player/upload-player.component';
+import { UploadTeamComponent } from './upload-team/upload-team.component';
 
 import { AuthGuardService } from '../../../services/auth-guard.service';
 
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'select-dates', component: SelectDatesComponent },
       { path: 'upload-coach', component: UploadCoachComponent },
       { path: 'upload-player', component: UploadPlayerComponent },
+      { path: 'upload-team', component: UploadTeamComponent },
       { path: '', component: IndexComponent },
     ]
   }

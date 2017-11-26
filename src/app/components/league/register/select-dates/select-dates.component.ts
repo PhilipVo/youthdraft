@@ -17,7 +17,7 @@ export class SelectDatesComponent implements OnInit {
   tryouts = this.session.newUser.tryouts ? this.session.newUser.tryouts : [{}];
 
   ngOnInit() {
-    if (!this.session.newUser.playerRoster)
+    if (!this.session.newUser.teams)
       this.router.navigate(['/league/register/upload-player']);
   }
 

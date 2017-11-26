@@ -9,6 +9,7 @@ import { IndexComponent } from './index/index.component';
 import { SelectDatesComponent } from './select-dates/select-dates.component';
 import { UploadCoachComponent } from './upload-coach/upload-coach.component';
 import { UploadPlayerComponent } from './upload-player/upload-player.component';
+import { UploadTeamComponent } from './upload-team/upload-team.component';
 
 import { RegisterRoutingModule } from './register-routing.module';
 
@@ -24,7 +25,8 @@ import { RegisterRoutingModule } from './register-routing.module';
     IndexComponent,
     SelectDatesComponent,
     UploadCoachComponent,
-    UploadPlayerComponent
+    UploadPlayerComponent,
+    UploadTeamComponent
   ]
 })
 export class LeagueRegisterModule {

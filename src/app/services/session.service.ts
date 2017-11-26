@@ -47,7 +47,7 @@ export class SessionService {
   }
 
   register(user): Promise<any> {
-    return this.http.post(`/${user}/register`, this.newUser)
+    return this.http.post(`/test`, this.newUser)
       .catch(error => Promise.reject(error));
   }
 
