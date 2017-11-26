@@ -17,19 +17,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   error = null;
-  league = {
-    city: '',
-    leagueName: '',
-    state: ''
-  };
   leagues = [];
-  user = {
-    city: '',
-    email: '',
-    leagueName: '',
-    password: '',
-    state: ''
-  };
+  user: any = {};
 
   ngOnInit() {
     this.http.get('/leagues')
@@ -39,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     this.error = null;
-    this.user = { ...this.user, ...this.league };
+    this.user = { ...this.user, ...this.user.league };
 
     this.session.login('league', this.user)
       .then(() => this.router.navigate(['/league/coaches']))

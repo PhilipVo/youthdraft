@@ -28,6 +28,12 @@ export class CoachesComponent implements OnInit {
       .catch(error => console.log(error));
   }
 
+  accept(id) {
+    this.http.post(`/api/coaches/validate/${id}`, {})
+      .then(() => this.getCoaches())
+      .catch(error => console.log(error));
+  }
+
   add() {
     this.error = null;
     this.selected.phoneNumber = `${this.selected.area}-${this.selected.prefix}-${this.selected.line}`;
@@ -75,7 +81,16 @@ export class CoachesComponent implements OnInit {
 
   getCoaches() {
     this.http.get('/api/coaches/all')
-      .then(data => this.coaches = data)
+      .then(data => {
+        console.log(data)
+        this.coaches = data
+      })
+      .catch(error => console.log(error));
+  }
+
+  reject(id) {
+    this.http.post(`/api/coaches/reject/${id}`, {})
+      .then(() => this.getCoaches())
       .catch(error => console.log(error));
   }
 

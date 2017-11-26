@@ -24,7 +24,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let coach of coaches;">
+          <tr 
+            *ngFor="let coach of coaches;" 
+            [ngStyle]="{'background-color': !coach.validated && '#0055a53d'}">
             <td>{{coach.firstName}} {{coach.lastName}}</td>
             <td>{{coach.coachType}}</td>
             <td>{{coach.phoneNumber}}</td>
@@ -32,7 +34,15 @@
             <td>{{coach.division}}</td>
             <td>{{coach.teamName}}</td>
             <td>
-              <p style="font-weight: bold;">
+              <p *ngIf="coach.validated === 0" style="font-weight: bold;">
+                <span (click)="accept(coach.id)" style="cursor: pointer;">
+                  Accept
+                </span> | 
+                <span (click)="reject(coach.id)" style="cursor: pointer;">
+                  Reject
+                </span>
+              </p>
+              <p *ngIf="coach.validated === 1" style="font-weight: bold;">
                 <span (click)="select('edit', coach)" style="cursor: pointer;">
                   Edit
                 </span> | 
