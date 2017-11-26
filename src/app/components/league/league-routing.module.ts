@@ -5,8 +5,10 @@ import { CoachesComponent } from './coaches/coaches.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { PlayersComponent } from './players/players.component';
+import { RejectComponent } from './reject/reject.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TryoutsComponent } from './tryouts/tryouts.component';
+import { ValidateComponent } from './validate/validate.component';
 
 import { AuthGuardService } from '../../services/auth-guard.service';
 
@@ -16,12 +18,15 @@ const routes: Routes = [
     path: 'register',
     loadChildren: './register/league-register.module#LeagueRegisterModule'
   },
+  { path: 'reject/:jwt', component: RejectComponent },
+  { path: 'validate/:jwt', component: ValidateComponent },
   {
     path: '',
     component: NavComponent,
     children: [
       { path: 'coaches', component: CoachesComponent },
       { path: 'players', component: PlayersComponent },
+      { path: 'reject', component: RejectComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'tryouts', component: TryoutsComponent },
       { path: '**', redirectTo: 'coaches' }

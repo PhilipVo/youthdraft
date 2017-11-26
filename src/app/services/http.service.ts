@@ -18,6 +18,7 @@ export class HttpService {
   }
 
   private handleResponse(response: any): Promise<any> {
+    console.log(response)
     try {
       return Promise.resolve(response.json());
     } catch (error) {
@@ -56,6 +57,21 @@ export class HttpService {
   post(url: string, data: any): Promise<any> {
     const http = url.includes('/api/') ? this.authHttp : this.http;
     return http.post(`${this._ip}${url}`, JSON.stringify(data), { headers: this.headers })
+      .toPromise()
+      .then(response => this.handleResponse(response))
+      .catch(error => this.handleError(error));
+  }
+
+  postFormData(url: string, data: any): Promise<any> {
+    return this.http.post(`${this._ip}${url}`, data)
+      .toPromise()
+      .then(response => this.handleResponse(response))
+      .catch(error => this.handleError(error));
+  }
+
+  postJwt(url: string, jwt: any): Promise<any> {
+    const header = new Headers({ 'Authorization': `Bearer ${jwt}` });
+    return this.http.post(`${this._ip}${url}`, '', { headers: header })
       .toPromise()
       .then(response => this.handleResponse(response))
       .catch(error => this.handleError(error));

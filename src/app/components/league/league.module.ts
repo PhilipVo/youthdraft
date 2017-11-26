@@ -7,8 +7,10 @@ import { CoachesComponent } from './coaches/coaches.component';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import { PlayersComponent } from './players/players.component';
+import { RejectComponent } from './reject/reject.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TryoutsComponent } from './tryouts/tryouts.component';
+import { ValidateComponent } from './validate/validate.component';
 
 import { LeagueRoutingModule } from './league-routing.module';
 
@@ -23,8 +25,10 @@ import { LeagueRoutingModule } from './league-routing.module';
     NavComponent,
     LoginComponent,
     PlayersComponent,
+    RejectComponent,
     SettingsComponent,
     TryoutsComponent,
+    ValidateComponent
   ]
 })
 export class LeagueModule {

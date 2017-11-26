@@ -47,7 +47,24 @@ export class SessionService {
   }
 
   register(user): Promise<any> {
-    return this.http.post(`/test`, this.newUser)
+    console.log(this.newUser)
+    const formData = new FormData();
+
+    Object.keys(this.newUser).map(key => {
+      console.log(key)
+      if (key === 'coaches' || key === 'players' || key === 'teams') {
+        console.log(this.newUser[key].name)
+        formData.append(key, this.newUser[key], this.newUser[key].name)
+      } if (key === 'tryouts') {
+        formData.append(key, JSON.stringify(this.newUser.tryouts));
+        // this.newUser.tryouts.map((tryout, index) => {
+        //   console.log(index)
+        //   formData.append(`tryouts[${index}][date]`, tryout.date);
+        //   formData.append(`tryouts[${index}][address]`, tryout.address);
+        // });
+      } else formData.append(key, this.newUser[key]);
+    });
+    return this.http.postFormData(`/test`, formData)
       .catch(error => Promise.reject(error));
   }
 

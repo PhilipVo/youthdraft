@@ -41,7 +41,9 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     const youthdraftToken = Cookie.get('youthdraftToken');
     const url = state.url;
     console.log(state, this.session.user)
-    if ((url.includes('login') || url.includes('register'))) {
+    if (url.includes('reject') || url.includes('validate')) {
+      return true;
+    } else if ((url.includes('login') || url.includes('register'))) {
       if (this.session.user) {
         this.router.navigate([`/${this.session.user}`]);
         return false;
