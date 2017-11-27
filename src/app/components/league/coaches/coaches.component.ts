@@ -12,7 +12,7 @@ import { SessionService } from '../../../services/session.service';
 export class CoachesComponent implements OnInit {
   constructor(
     private http: HttpService,
-    private session: SessionService
+    public session: SessionService
   ) { }
 
   coaches = [];
@@ -25,19 +25,19 @@ export class CoachesComponent implements OnInit {
     this.getCoaches();
     this.http.get('/api/teams')
       .then(data => this.teams = data)
-      .catch(error => console.log(error));
+      .catch(() => { });
   }
 
   accept(id) {
     this.http.post(`/api/coaches/validate/${id}`, {})
       .then(() => this.getCoaches())
-      .catch(error => console.log(error));
+      .catch(() => { });
   }
 
   add() {
     this.error = null;
     this.selected.phoneNumber = `${this.selected.area}-${this.selected.prefix}-${this.selected.line}`;
-    console.log(this.selected);
+
     this.http.post('/api/coaches', this.selected)
       .then(() => {
         this.getCoaches();
@@ -68,7 +68,6 @@ export class CoachesComponent implements OnInit {
   }
 
   edit() {
-    console.log(this.selected)
     this.error = null;
     this.http.put(`/api/coaches/${this.selected.id}`, this.selected)
       .then(() => {
@@ -81,17 +80,14 @@ export class CoachesComponent implements OnInit {
 
   getCoaches() {
     this.http.get('/api/coaches/all')
-      .then(data => {
-        console.log(data)
-        this.coaches = data
-      })
-      .catch(error => console.log(error));
+      .then(data => this.coaches = data)
+      .catch(() => { });
   }
 
   reject(id) {
-    this.http.post(`/api/coaches/reject/${id}`, {})
+    this.http.delete(`/api/coaches/${id}`)
       .then(() => this.getCoaches())
-      .catch(error => console.log(error));
+      .catch((error) => { console.log(error) });
   }
 
   select(modal, coach) {

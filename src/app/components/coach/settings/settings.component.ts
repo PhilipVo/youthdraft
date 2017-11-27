@@ -10,12 +10,12 @@ import { SessionService } from '../../../services/session.service';
 })
 export class SettingsComponent implements OnInit {
   constructor(
+    public session: SessionService,
     private http: HttpService,
-    private session: SessionService
   ) { }
 
   coach: any = {};
-  password = {};
+  password: any = {};
 
   accountError = null;
   accountSuccess = false;
@@ -32,9 +32,8 @@ export class SettingsComponent implements OnInit {
           data.line = number[2];
           data.birthday = data.birthday.substring(0, 10);
         } catch (error) { }
-        console.log('data', data)
         this.coach = data;
-      }).catch(error => { console.log(error) });
+      }).catch(() => { });
   }
 
   updateCoach() {
@@ -42,7 +41,6 @@ export class SettingsComponent implements OnInit {
     this.accountSuccess = false;
 
     this.coach.phoneNumber = `${this.coach.area}-${this.coach.prefix}-${this.coach.line}`;
-    console.log(this.coach)
     this.http.put(`/api/coaches/${this.session.id}`, this.coach)
       .then(() => this.accountSuccess = true)
       .catch(error => this.accountError = typeof error === 'string' ? error : 'Something went wrong.');

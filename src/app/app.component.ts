@@ -11,12 +11,11 @@ import { SessionService } from './services/session.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private session: SessionService
+    public session: SessionService
   ) { }
 
   ngOnInit() {
     const youthdraftToken: string = Cookie.get('youthdraftToken');
-    console.log(youthdraftToken)
     if (youthdraftToken)
       this.session.setSession(youthdraftToken);
   }

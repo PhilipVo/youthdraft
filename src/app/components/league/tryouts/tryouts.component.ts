@@ -25,7 +25,6 @@ export class TryoutsComponent implements OnInit {
   }
 
   submit() {
-    console.log('submitting')
     this.error = null;
     this.success = false;
 

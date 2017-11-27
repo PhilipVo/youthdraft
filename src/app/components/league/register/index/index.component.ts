@@ -10,8 +10,8 @@ import { SessionService } from '../../../../services/session.service';
 })
 export class IndexComponent {
   constructor(
-    private router: Router,
-    private session: SessionService
+    public session: SessionService,
+    public router: Router,
   ) { }
 
   next(): void {

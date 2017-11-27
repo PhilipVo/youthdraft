@@ -11,11 +11,11 @@ import { SessionService } from '../../../services/session.service';
 export class SettingsComponent implements OnInit {
   constructor(
     private http: HttpService,
-    private session: SessionService
+    public session: SessionService
   ) { }
 
   league: any = {};
-  password = {};
+  password: any = {};
 
   accountError = null;
   accountSuccess = false;
@@ -25,7 +25,6 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.http.get('/api/league')
       .then(data => {
-        console.log(data)
         try {
           const number = data.phoneNumber.split('-');
           data.area = number[0];

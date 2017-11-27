@@ -11,9 +11,9 @@ import { SessionService } from '../../../services/session.service';
 })
 export class LoginComponent implements OnInit {
   constructor(
+    public session: SessionService,
     private http: HttpService,
-    private router: Router,
-    private session: SessionService,
+    public router: Router
   ) { }
 
   error = null;
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.http.get('/leagues')
       .then(data => this.leagues = data)
-      .catch(error => console.log(error))
+      .catch(() => { })
   }
 
   submit(): void {

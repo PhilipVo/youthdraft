@@ -10,8 +10,8 @@ import { SessionService } from '../../../../services/session.service';
 })
 export class SelectDatesComponent implements OnInit {
   constructor(
-    private router: Router,
-    private session: SessionService
+    public session: SessionService,
+    public router: Router,
   ) { }
 
   tryouts = this.session.newUser.tryouts ? this.session.newUser.tryouts : [{}];
@@ -22,7 +22,6 @@ export class SelectDatesComponent implements OnInit {
   }
 
   next(): void {
-    console.log('next')
     this.session.newUser = { tryouts: this.tryouts };
     this.router.navigate(['/league/register/finalize']);
   }

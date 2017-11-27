@@ -58,7 +58,7 @@ export class FormulasComponent implements OnInit {
         if (this.formula.id === formula.id)
           this.formula.id === null;
         this.getFormulas();
-      }).catch(error => console.log(error));
+      }).catch(() => { });
   }
 
   getFormulas() {
@@ -115,13 +115,13 @@ export class FormulasComponent implements OnInit {
     else if (this.formula.id) {
       this.http.put(`/api/formulas/${this.formula.id}`, this.formula)
         .then(() => this.getFormulas())
-        .catch(error => console.log(error));
+        .catch(() => { });
     } else {
       this.http.post('/api/formulas', this.formula)
         .then(id => {
           this.formula.id = id;
           this.getFormulas();
-        }).catch(error => console.log(error));
+        }).catch(() => { });
     }
   }
 

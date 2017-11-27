@@ -23,7 +23,7 @@ export class PlayersComponent implements OnInit {
     this.getPlayers();
     this.http.get('/api/teams')
       .then(data => this.teams = data)
-      .catch(error => console.log(error));
+      .catch(() => { });
   }
 
   click(event) {
@@ -48,9 +48,7 @@ export class PlayersComponent implements OnInit {
   }
 
   save() {
-    console.log(this.selected)
     this.error = null;
-
     this.selected.phoneNumber = `${this.selected.area}-${this.selected.prefix}-${this.selected.line}`;
 
     if (this.modal === 'add')
@@ -74,7 +72,6 @@ export class PlayersComponent implements OnInit {
   getPlayers() {
     this.http.get('/api/players')
       .then(data => {
-        console.log(data)
         this.players = data.map(player => {
           try {
             const number = player.phoneNumber.split('-');

@@ -11,9 +11,9 @@ import { SessionService } from '../../../../services/session.service';
 })
 export class IndexComponent implements OnInit {
   constructor(
+    public session: SessionService,
+    public router: Router,
     private http: HttpService,
-    private router: Router,
-    private session: SessionService
   ) { }
 
   leagues = [];

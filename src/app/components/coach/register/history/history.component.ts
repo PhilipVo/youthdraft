@@ -11,8 +11,8 @@ import { SessionService } from '../../../../services/session.service';
 })
 export class HistoryComponent implements OnInit {
   constructor(
-    private router: Router,
-    private session: SessionService
+    public session: SessionService,
+    public router: Router,
   ) { }
 
   error = null;

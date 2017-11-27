@@ -10,8 +10,8 @@ import { SessionService } from '../../../../services/session.service';
 })
 export class UploadTeamComponent implements OnInit {
   constructor(
-    private router: Router,
-    private session: SessionService
+    public session: SessionService,
+    public router: Router,
   ) { }
 
   file = this.session.newUser.teams && this.session.newUser.teams.name ?

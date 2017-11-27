@@ -44,7 +44,7 @@
       </select>
         
       <select name="league" [(ngModel)]="session.newUser.league" required>
-        <option [ngValue]="league" disabled>Choose Desired League</option>
+        <option [ngValue]="undefined" disabled>Choose Desired League</option>
         <option *ngFor="let league of leagues" [ngValue]="league">
           {{league.leagueName}} - {{league.city}}, {{league.state}}
         </option>

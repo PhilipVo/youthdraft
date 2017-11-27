@@ -16,6 +16,6 @@ export class ValidateComponent implements OnInit {
 
   ngOnInit() {
     this.http.postJwt('/api/league/validate', this.route.snapshot.paramMap.get('jwt'))
-      .catch(error => console.log(error));
+      .catch(() => { });
   }
 }

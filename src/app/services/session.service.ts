@@ -10,7 +10,7 @@ import { HttpService } from './http.service';
 export class SessionService {
   constructor(
     private http: HttpService,
-    private router: Router,
+    public router: Router,
   ) { }
 
   private jwtHelper: JwtHelper = new JwtHelper();
