@@ -15,25 +15,28 @@ export class HistoryComponent implements OnInit {
     private session: SessionService
   ) { }
 
+  error = null;
+
   ngOnInit() {
-    // if (!(this.session.newUser.firstName &&
-    //   this.session.newUser.lastName &&
-    //   this.session.newUser.birthday &&
-    //   this.session.newUser.gender &&
-    //   this.session.newUser.leagueName &&
-    //   this.session.newUser.leagueCity &&
-    //   this.session.newUser.leagueState &&
-    //   this.session.newUser.email &&
-    //   this.session.newUser.phoneNumber &&
-    //   this.session.newUser.address &&
-    //   this.session.newUser.city &&
-    //   this.session.newUser.state &&
-    //   this.session.newUser.zip))
-    //   this.router.navigate(['/coach/register']);
+    if (!(this.session.newUser.firstName &&
+      this.session.newUser.lastName &&
+      this.session.newUser.birthday &&
+      this.session.newUser.gender &&
+      this.session.newUser.leagueName &&
+      this.session.newUser.leagueCity &&
+      this.session.newUser.leagueState &&
+      this.session.newUser.email &&
+      this.session.newUser.phoneNumber &&
+      this.session.newUser.address &&
+      this.session.newUser.city &&
+      this.session.newUser.state &&
+      this.session.newUser.zip))
+      this.router.navigate(['/coach/register']);
   }
 
   register(): void {
-    // this.router.navigate(['/coach/register/complete']);
-    console.log(this.session.newUser);
+    this.session.registerCoach()
+      .then(() => this.router.navigate(['/coach/register/complete']))
+      .catch(error => this.error = typeof error === 'string' ? error : 'Something went wrong.')
   }
 }

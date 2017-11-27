@@ -33,7 +33,7 @@
         type="text">
 
       <!-- Desired Coaching Div. -->
-      <select name="desired" [(ngModel)]="session.newUser.desired" required>
+      <select name="division" [(ngModel)]="session.newUser.division" required>
         <option [ngValue]="undefined" disabled>Desired Coaching Div.</option>
         <option [ngValue]="'8U'">8U</option>
         <option [ngValue]="'9U'">9U</option>
@@ -103,8 +103,9 @@
       </select>
 
       <!-- Next -->
-      <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
+      <div style="display: flex; align-items: flex-end; flex-direction: column; margin-top: 10%; width: 50%;">
         <button class="bg-green btn" [disabled]="!form.form.valid" type="submit">Finish</button>
+        <p style="color: red; text-align: center;">{{error}}</p>
       </div>
 
     </div>

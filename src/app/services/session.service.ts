@@ -39,32 +39,30 @@ export class SessionService {
     // Clear cookies:
     Cookie.delete('youthdraftToken', '/');
     const youthdraftToken: string = Cookie.get('youthdraftToken');
-    console.log(youthdraftToken)
-
 
     // Navigate to index:
     this.router.navigate(['']);
   }
 
-  register(user): Promise<any> {
-    console.log(this.newUser)
+  registerCoach(): Promise<any> {
+    return this.http.post('/coaches/register', this.newUser)
+      .then(() => this._newUser = {})
+      .catch(error => Promise.reject(error));
+  }
+
+  registerLeague(): Promise<any> {
     const formData = new FormData();
 
     Object.keys(this.newUser).map(key => {
-      console.log(key)
-      if (key === 'coaches' || key === 'players' || key === 'teams') {
-        console.log(this.newUser[key].name)
+      if (key === 'coaches' || key === 'teams' || key === 'players') {
         formData.append(key, this.newUser[key], this.newUser[key].name)
-      } if (key === 'tryouts') {
+      } else if (key === 'tryouts') {
         formData.append(key, JSON.stringify(this.newUser.tryouts));
-        // this.newUser.tryouts.map((tryout, index) => {
-        //   console.log(index)
-        //   formData.append(`tryouts[${index}][date]`, tryout.date);
-        //   formData.append(`tryouts[${index}][address]`, tryout.address);
-        // });
       } else formData.append(key, this.newUser[key]);
     });
+
     return this.http.postFormData(`/test`, formData)
+      .then(() => this._newUser = {})
       .catch(error => Promise.reject(error));
   }
 

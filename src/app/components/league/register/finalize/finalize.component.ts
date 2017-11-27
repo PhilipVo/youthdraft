@@ -16,6 +16,7 @@ export class FinalizeComponent implements OnInit {
     private session: SessionService
   ) { }
 
+  error = null;
   tryouts = [];
 
   ngOnInit() {
@@ -29,10 +30,8 @@ export class FinalizeComponent implements OnInit {
   }
 
   register(): void {
-    this.session.register('league')
+    this.session.registerLeague()
       .then(() => this.router.navigate(['league/register/complete']))
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => this.error = typeof error === 'string' ? error : 'Something went wrong.')
   }
 }

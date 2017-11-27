@@ -43,7 +43,14 @@
     
         <div style="align-items: center; display: flex; flex-direction: column; justify-content: center">
           <label for="upload" class="btn" style="background-color: #a2a2a2; text-align: center;">Upload</label>
-          <input accept=".csv, .png, .xlsx" (change)="upload($event)" id="upload" required style="display: none;" type="file">
+          <input
+            accept=".csv, .xlsx"
+            (change)="upload($event)"
+            id="upload"
+            name="coaches"
+            required
+            style="display: none;"
+            type="file">
           <p *ngIf="file">{{file}}</p>
           
           <!-- Next -->

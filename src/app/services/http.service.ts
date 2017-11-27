@@ -18,7 +18,6 @@ export class HttpService {
   }
 
   private handleResponse(response: any): Promise<any> {
-    console.log(response)
     try {
       return Promise.resolve(response.json());
     } catch (error) {
