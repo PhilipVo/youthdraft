@@ -11,9 +11,9 @@ import { SessionService } from '../../../services/session.service';
 })
 export class LoginComponent implements OnInit {
   constructor(
-    private http: HttpService,
     public router: Router,
     public session: SessionService,
+    private http: HttpService,
   ) { }
 
   error = null;
