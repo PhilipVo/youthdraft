@@ -9,7 +9,7 @@
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <div style="background-color: white; display: flex; height: 100%; overflow: auto; padding: 25px;">
-      <form (submit)="updateLeague()">
+      <form (submit)="updateLeague()" #account="ngForm">
         <h4>Account Details</h4>
         <input name="firstName" [(ngModel)]="league.firstName" placeholder="First Name" required>
         <input name="lastName" [(ngModel)]="league.lastName" placeholder="Last Name" required>
@@ -55,7 +55,13 @@
           </div>
         </div>        
         
-        <button class="bg-blue btn" style="color: white; margin-top: 20px; width: 75%;" type="submit">
+        <button
+          class="bg-blue btn"
+          [disabled]="!account.form.valid"
+          [ngStyle]="{cursor: account.form.valid ? 'pointer' : 'not-allowed',
+            opacity: account.form.valid ? 1.0 : 0.5}"
+          style="color: white; margin-top: 20px; width: 75%;"
+          type="submit">
           Save Account Information
         </button>
         <p *ngIf="accountError" style="color: red; max-width: 75%; text-align: center;">
@@ -65,7 +71,7 @@
           Successfully updated your account information!
         </p>
       </form>
-      <form (submit)="updatePassword()">
+      <form (submit)="updatePassword()" #password="ngForm">
         <h4>Change Password</h4>
         <input
           name="oldPassword"
@@ -85,7 +91,13 @@
           placeholder="Confirm New Password"
           type="password"
           required>
-        <button class="bg-blue btn" style="color: white; margin-top: 20px; width: 75%;" type="submit">
+        <button
+          class="bg-blue btn"
+          [disabled]="!password.form.valid"
+          [ngStyle]="{cursor: password.form.valid ? 'pointer' : 'not-allowed',
+            opacity: password.form.valid ? 1.0 : 0.5}"
+          style="color: white; margin-top: 20px; width: 75%;"
+          type="submit">
           Save New Password
         </button>
         <p *ngIf="passwordError" style="color: red; max-width: 75%; text-align: center;">

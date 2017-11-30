@@ -6,14 +6,18 @@
       </a>
     </div>
     <div style="flex: 2;">
-      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Coach Rejected</h1>
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Would you like to reject this application?</h1>
     </div>
     <div style="flex:1"></div>
   </div>
 
-  <div style="margin-top: 50px;">
+  <div style="align-items: center; display: flex; flex-direction: column; margin-top: 50px;">
     <p style="text-align: center;">
-      This coach's application has been rejected from your league.
+      This Coach won't have access to your League if you reject this application.
     </p>
+    <button class="btn bg-blue" (click)="reject()">
+      Reject
+    </button>
+    <a routerLink="/" style="color: white; text-decoration: none;">Cancel</a>
   </div>
 </div>

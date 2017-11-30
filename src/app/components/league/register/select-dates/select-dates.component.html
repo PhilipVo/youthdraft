@@ -13,50 +13,106 @@
 
   <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
     Please mark your tyrout dates.<br>
-    You can mark up to 8 tryout dates over 4 weekends.<br>
+    You must select between 1-8 tryout dates and locations.<br>
   </p>
   
-  <form 
-    (ngSubmit)="next()"
-    #form="ngForm"
-    style="align-items: center; display: flex; flex-direction: column;">
+  <form (ngSubmit)="next()" #form="ngForm" style="padding: 20px;">
+    <div style="display: flex;">
+      <!-- Left column -->
+      <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+        <label>Date &amp; Time</label>
+         <div
+          *ngFor="let tryout of tryouts; let index = index;"
+          [attr.data-index]="index">
 
-      <div style="display: flex; margin-bottom: 10px; width: 50%;">
-        <div style="width: 50%">
-          <label>Date &amp; Time</label>
-        </div>
-        <div style="width: 50%">
-          <label>Location</label>
+          <span
+            (click)="tryouts.splice(index, 1)" 
+            style="font-size: 12px; color: red; cursor: pointer;">
+            Remove
+          </span>
+
+          <div style="align-items: center; display: flex;">
+            <select
+              name="mm{{index}}"
+              [(ngModel)]="tryout.mm"
+              required
+              style="">
+              <option [ngValue]="undefined" disabled>mm</option>
+              <option *ngFor="let month of months" [ngValue]="i">{{month}}</option>
+            </select>
+            
+            <p>&nbsp;/&nbsp;</p>
+            
+            <select
+              name="dd{{index}}"
+              [(ngModel)]="tryout.dd"
+              required
+              style="">
+              <option [ngValue]="undefined" disabled>dd</option>
+              <option *ngFor="let day of days" [ngValue]="i">{{day}}</option>
+            </select>
+            
+            <p>&nbsp;/&nbsp;</p>
+            
+            <select
+              name="yyyy{{index}}"
+              [(ngModel)]="tryout.yyyy"
+              required
+              style="">
+              <option [ngValue]="undefined" disabled>yyyy</option>
+              <option *ngFor="let year of years" [ngValue]="i">{{year}}</option>
+            </select>             
+            
+            <p>&nbsp;at&nbsp;</p>
+            
+            <select
+              name="hh{{index}}"
+              [(ngModel)]="tryout.hh"
+              required
+              style="">
+              <option [ngValue]="undefined" disabled>hh</option>
+              <option *ngFor="let hour of hours" [ngValue]="i">{{hour}}</option>
+            </select>
+            
+            <p>&nbsp;:&nbsp;</p>
+            
+            <select
+              name="ss{{index}}"
+              [(ngModel)]="tryout.ss"
+              required
+              style="">
+              <option [ngValue]="undefined" disabled>ss</option>
+              <option *ngFor="let second of seconds" [ngValue]="i">{{second}}</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <div
-        *ngFor="let tryout of tryouts; let index = index;"
-        [attr.data-index]="index"
-        style="width: 50%;">
-        <span
-          (click)="tryouts.splice(index, 1)" 
-          style="font-size: 12px; color: red; cursor: pointer;">
-          Remove
-        </span>
-        <div style="display: flex;">
-            <input
-              [(ngModel)]="tryout.date"
-              name="date{{index}}"
-              required
-              style="margin-right: 5px;"
-              type="datetime-local">
-            <input
-              [(ngModel)]="tryout.address"
-              name="address{{index}}"
-              placeholder="123 Fake Street, San Jose, CA, 95127"
-              required
-              type="text">
+      <!-- Right column -->
+      <div style="flex: 1;">
+        <label>Location</label>
+        <div *ngFor="let tryout of tryouts; let index = index;" [attr.data-index]="index">
+          <input
+            [(ngModel)]="tryout.location"
+            name="location{{index}}"
+            placeholder="123 Fake St., San Jose, Ca 95127"
+            required
+            type="text">
         </div>
       </div>
-      
-      <p (click)="tryouts.push({})" style="cursor: pointer;">+ add a new date</p>
-      <button class="bg-blue btn" [disabled]="!form.form.valid" type="submit">Next</button>
+
+    </div>
+
+  
+        <p (click)="tryouts.push({})" style="cursor: pointer;">+ add a new date</p>
+        <button
+          class="bg-blue btn"
+          [disabled]="!form.form.valid"
+          [ngStyle]="{cursor: form.form.valid && tryouts.length > 0 ? 'pointer' : 'not-allowed',
+            opacity: form.form.valid && tryouts.length > 0 ? 1.0 : 0.5}"
+          type="submit">
+          Next
+        </button>
     
   </form>
 </div>

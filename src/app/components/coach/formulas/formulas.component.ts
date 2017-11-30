@@ -121,7 +121,7 @@ export class FormulasComponent implements OnInit {
         .then(id => {
           this.formula.id = id;
           this.getFormulas();
-        }).catch(() => { });
+        }).catch((error) => {console.log(error) });
     }
   }
 

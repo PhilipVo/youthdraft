@@ -98,7 +98,14 @@
 
       <!-- Next -->
       <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
-        <button  class="bg-blue btn" [disabled]="!form.form.valid" type="submit">Next</button>
+        <button
+          class="bg-blue btn"
+          [disabled]="!form.form.valid"
+          [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
+            opacity: form.form.valid ? 1.0 : 0.5}"
+          type="submit">
+          Next
+        </button>
       </div>
     </div>
     

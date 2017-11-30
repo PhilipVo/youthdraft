@@ -43,6 +43,8 @@
       <button 
         class="bg-green btn"
         [disabled]="!form.form.valid"
+        [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
+          opacity: form.form.valid ? 1.0 : 0.5}"
         style="width: 100%;"
         type="submit">
         Login

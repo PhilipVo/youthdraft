@@ -55,23 +55,26 @@
     style="background-color: white; padding: 20px;">
     <h1 *ngIf="modal === 'add'">Add a new Player</h1>
     <h1 *ngIf="modal === 'edit'">Edit this Player</h1>
-    <form>
+    <form #form="ngForm">
       <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
         <div style="display: flex; justify-content: space-between; width: 90%;">
           <input
             name="teamNumber"
             [(ngModel)]="selected.teamNumber"
-            placeholder="Draft #" style="margin-right: 5px; width: 40%;">
+            placeholder="Draft #"
+            required
+            style="margin-right: 5px; width: 40%;">
           <input
             name="firstName"
             [(ngModel)]="selected.firstName"
-            placeholder="First Name">
+            placeholder="First Name"
+            required>
         </div>
-        <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
+        <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name" required>
         <div style="margin-top: 10px; width: 90%;">
           <label>DOB</label>
         </div>
-        <input name="birthday" [(ngModel)]="selected.birthday" type="date">
+        <input name="birthday" [(ngModel)]="selected.birthday" required type="date">
         <div style="display: flex; justify-content: space-between; width: 90%;">
           <select name="gender" [(ngModel)]="selected.gender" required style="margin-right: 5px;">
             <option [ngValue]="modal==='add' ? undefined : null" disabled>Gender</option>
@@ -81,7 +84,8 @@
           <input
             name="leagueAge"
             [(ngModel)]="selected.leagueAge"
-            placeholder="Age">
+            placeholder="Age"
+            required>
         </div>
         <select name="division" [(ngModel)]="selected.division" required>
           <option [ngValue]="modal==='add' ? undefined : null" disabled>Division</option>
@@ -116,11 +120,13 @@
         <input
           name="parentFirstName"
           [(ngModel)]="selected.parentFirstName"
-          placeholder="Parent First Name">
+          placeholder="Parent First Name"
+          required>
         <input
           name="parentLastName"
           [(ngModel)]="selected.parentLastName"
-          placeholder="Parent Last Name">
+          placeholder="Parent Last Name"
+          required>
         <div style="margin-top: 10px; width: 90%;">
           <label>Parent Phone Number</label>
         </div>
@@ -149,7 +155,8 @@
         <input
           name="email"
           [(ngModel)]="selected.email"
-          placeholder="Parent Email">
+          placeholder="Parent Email"
+          required>
         <div style="margin-top: 10px; width: 90%;">
           <label>Check the following that apply:</label><br>
             <div 
@@ -202,6 +209,9 @@
       <button
         class="bg-blue btn"
         (click)="save()"
+        [disabled]="!form.form.valid"
+        [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
+          opacity: form.form.valid ? 1.0 : 0.5}"
         style="color: white;">
         Save
       </button>

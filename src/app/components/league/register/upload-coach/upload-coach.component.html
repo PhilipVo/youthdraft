@@ -42,7 +42,12 @@
         </p>
     
         <div style="align-items: center; display: flex; flex-direction: column; justify-content: center">
-          <label for="upload" class="btn" style="background-color: #a2a2a2; text-align: center;">Upload</label>
+          <label 
+            for="upload" 
+            class="btn"
+            style="background-color: #a2a2a2; cursor: pointer; text-align: center;">
+            Upload
+          </label>
           <input
             accept=".csv, .xlsx"
             (change)="upload($event)"
@@ -54,7 +59,15 @@
           <p *ngIf="file">{{file}}</p>
           
           <!-- Next -->
-          <button  class="bg-blue btn" (click)="next()" [disabled]="!file" style="margin-top: 10%;">Next</button>
+          <button
+            class="bg-blue btn"
+            (click)="next()"
+            [disabled]="!file"
+            [ngStyle]="{cursor: file ? 'pointer' : 'not-allowed',
+              opacity: file ? 1.0 : 0.5}"
+            style="margin-top: 10%;">
+            Next
+          </button>
         </div>
       </div>
     </div>

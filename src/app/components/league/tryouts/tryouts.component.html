@@ -47,7 +47,8 @@
             <button
               class="bg-blue btn"
               [disabled]="!form.form.valid"
-              [ngStyle]="{'opacity': form.form.valid ? 1 : 0.5}"
+              [ngStyle]="{cursor: form.form.valid && tryouts.length > 0 ? 'pointer' : 'not-allowed',
+                opacity: form.form.valid && tryouts.length > 0? 1.0 : 0.5}"
               style="align-self: flex-end; color: white; width: 75%;"
               type="submit">
               Save

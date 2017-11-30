@@ -65,7 +65,7 @@
     class="modal-width"
     style="background-color: white; padding: 20px;">
     <h1>Add a new Coach</h1>
-    <form>
+    <form #addForm="ngForm">
       <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
         <input name="firstName" [(ngModel)]="selected.firstName" placeholder="First Name">
         <input name="lastName" [(ngModel)]="selected.lastName" placeholder="Last Name">
@@ -163,6 +163,9 @@
       <button
         class="bg-blue btn"
         (click)="add()"
+        [disabled]="!addForm.form.valid"
+        [ngStyle]="{cursor: addForm.form.valid ? 'pointer' : 'not-allowed',
+          opacity: addForm.form.valid ? 1.0 : 0.5}"
         style="color: white;">
         Save
       </button>
@@ -178,7 +181,7 @@
     class="modal-width"
     style="background-color: white; padding: 20px;">
     <h1>Edit Coach {{selected.firstName}} {{selected.lastName}}</h1>
-    <form>
+    <form #editForm="ngForm">
       <div style="align-items: center; display:flex; flex: 1; flex-direction: column;">
         <select name="division" [(ngModel)]="selected.division" required>
           <option [ngValue]="null" disabled>Division</option>
@@ -226,6 +229,9 @@
       <button
         class="bg-blue btn"
         (click)="edit()"
+        [disabled]="!editForm.form.valid"
+        [ngStyle]="{cursor: editForm.form.valid ? 'pointer' : 'not-allowed',
+          opacity: editForm.form.valid ? 1.0 : 0.5}"
         style="color: white;">
         Save
       </button>

@@ -6,6 +6,10 @@
   text-overflow: ellipsis;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* Big screens */
 @media only screen and (min-width: 768px) {
   .hide-if-big {

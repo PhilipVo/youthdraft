@@ -6,15 +6,20 @@
       </a>
     </div>
     <div style="flex: 2;">
-      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Coach Verified</h1>
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">
+        Would you like to validate this Coach?
+      </h1>
     </div>
     <div style="flex:1"></div>
   </div>
 
-  <div style="margin-top: 50px;">
+  <div style="align-items: center; display: flex; flex-direction: column; margin-top: 50px;">
     <p style="text-align: center;">
-      Thank you for verifying this coach. 
-      We will notify the coach that he has been accepted into you league.
+      Accepting this application will allow this Coach access to your League.
     </p>
+    <button class="btn bg-blue" (click)="accept()">
+      Accept
+    </button>
+    <a routerLink="/" style="color: white; text-decoration: none;">Cancel</a>
   </div>
 </div>

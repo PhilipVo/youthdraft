@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpService } from '../../../services/http.service';
 
@@ -8,14 +8,16 @@ import { HttpService } from '../../../services/http.service';
   templateUrl: './validate.component.html',
   styleUrls: ['./validate.component.css']
 })
-export class ValidateComponent implements OnInit {
+export class ValidateComponent {
   constructor(
+    public router: Router,
     private route: ActivatedRoute,
     private http: HttpService
   ) { }
 
-  ngOnInit() {
+  reject() {
     this.http.postJwt('/api/league/validate', this.route.snapshot.paramMap.get('jwt'))
+      .then(() => this.router.navigate(['/']))
       .catch(() => { });
   }
 }

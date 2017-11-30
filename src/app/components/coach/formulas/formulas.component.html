@@ -185,7 +185,8 @@
                   class="bg-green btn"
                   [disabled]="!form.form.valid"
                   id="save"
-                  [ngStyle]="{opacity: form.form.valid ? 1 : 0.5}">
+                  [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
+                    opacity: form.form.valid ? 1.0 : 0.5}">
                   Save
                 </button>
               </div>

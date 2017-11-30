@@ -78,7 +78,7 @@
 
       <!-- Past Divisions Coached -->
       <div style="margin-bottom: 2%; width: 50%;">
-        <label>Desired Coaching Div.</label>
+        <label>Past Divisions Coached</label>
       </div>
       <select multiple name="pastDivisons" [(ngModel)]="session.newUser.pastDivisions" required>
         <option [ngValue]="'8U'">8U</option>
@@ -104,7 +104,14 @@
 
       <!-- Next -->
       <div style="display: flex; align-items: flex-end; flex-direction: column; margin-top: 10%; width: 50%;">
-        <button class="bg-green btn" [disabled]="!form.form.valid" type="submit">Finish</button>
+        <button
+          class="bg-green btn"
+          [disabled]="!form.form.valid"
+          [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
+            opacity: form.form.valid ? 1.0 : 0.5}"
+          type="submit">
+          Finish
+        </button>
         <p style="color: red; text-align: center;">{{error}}</p>
       </div>
 
