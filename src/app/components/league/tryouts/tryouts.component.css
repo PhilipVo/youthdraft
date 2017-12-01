@@ -15,7 +15,13 @@ input {
   box-sizing: border-box;
   margin-bottom: 20px;
   padding: 10px;
-  width: 75%;
+}
+
+select {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 span {

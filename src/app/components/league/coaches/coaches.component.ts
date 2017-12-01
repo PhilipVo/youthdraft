@@ -87,7 +87,7 @@ export class CoachesComponent implements OnInit {
   reject(id) {
     this.http.delete(`/api/coaches/${id}`)
       .then(() => this.getCoaches())
-      .catch((error) => { console.log(error) });
+      .catch(() => { });
   }
 
   select(modal, coach) {

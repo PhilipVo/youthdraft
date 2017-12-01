@@ -12,107 +12,83 @@
   </div>
 
   <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
-    Please mark your tyrout dates.<br>
+    Please mark your tryout dates.<br>
     You must select between 1-8 tryout dates and locations.<br>
   </p>
   
   <form (ngSubmit)="next()" #form="ngForm" style="padding: 20px;">
-    <div style="display: flex;">
-      <!-- Left column -->
-      <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-        <label>Date &amp; Time</label>
-         <div
-          *ngFor="let tryout of tryouts; let index = index;"
-          [attr.data-index]="index">
+    <div style="align-items: center; display: flex; flex-direction: column;">
+      <div *ngFor="let tryout of tryouts; let index = index;" [attr.data-index]="index">
 
-          <span
-            (click)="tryouts.splice(index, 1)" 
-            style="font-size: 12px; color: red; cursor: pointer;">
-            Remove
-          </span>
+        <span
+          (click)="tryouts.splice(index, 1)" 
+          style="color: red; cursor: pointer; font-size: 12px;">
+          Remove
+        </span>
 
-          <div style="align-items: center; display: flex;">
-            <select
-              name="mm{{index}}"
-              [(ngModel)]="tryout.mm"
-              required
-              style="">
-              <option [ngValue]="undefined" disabled>mm</option>
-              <option *ngFor="let month of months" [ngValue]="i">{{month}}</option>
-            </select>
-            
-            <p>&nbsp;/&nbsp;</p>
-            
-            <select
-              name="dd{{index}}"
-              [(ngModel)]="tryout.dd"
-              required
-              style="">
-              <option [ngValue]="undefined" disabled>dd</option>
-              <option *ngFor="let day of days" [ngValue]="i">{{day}}</option>
-            </select>
-            
-            <p>&nbsp;/&nbsp;</p>
-            
-            <select
-              name="yyyy{{index}}"
-              [(ngModel)]="tryout.yyyy"
-              required
-              style="">
-              <option [ngValue]="undefined" disabled>yyyy</option>
-              <option *ngFor="let year of years" [ngValue]="i">{{year}}</option>
-            </select>             
-            
-            <p>&nbsp;at&nbsp;</p>
-            
-            <select
-              name="hh{{index}}"
-              [(ngModel)]="tryout.hh"
-              required
-              style="">
-              <option [ngValue]="undefined" disabled>hh</option>
-              <option *ngFor="let hour of hours" [ngValue]="i">{{hour}}</option>
-            </select>
-            
-            <p>&nbsp;:&nbsp;</p>
-            
-            <select
-              name="ss{{index}}"
-              [(ngModel)]="tryout.ss"
-              required
-              style="">
-              <option [ngValue]="undefined" disabled>ss</option>
-              <option *ngFor="let second of seconds" [ngValue]="i">{{second}}</option>
-            </select>
-          </div>
+        <!-- Date & Time -->
+        <div style="align-items: center; display: flex;">
+          <select name="mm{{index}}" [(ngModel)]="tryout.mm" required>
+            <option [ngValue]="undefined" disabled>month</option>
+            <option *ngFor="let month of months" [ngValue]="month">{{month}}</option>
+          </select>
+          
+          <p>&nbsp;/&nbsp;</p>
+          
+          <select name="dd{{index}}" [(ngModel)]="tryout.dd" required>
+            <option [ngValue]="undefined" disabled>day</option>
+            <option *ngFor="let day of days" [ngValue]="day">{{day}}</option>
+          </select>
+          
+          <p>&nbsp;/&nbsp;</p>
+          
+          <select name="yyyy{{index}}" [(ngModel)]="tryout.yyyy" required>
+            <option [ngValue]="undefined" disabled>year</option>
+            <option *ngFor="let year of years" [ngValue]="year">{{year}}</option>
+          </select>             
+          
+          <p>&nbsp;at&nbsp;</p>
+          
+          <select name="hh{{index}}" [(ngModel)]="tryout.hh" required>
+            <option *ngFor="let hour of hours" [ngValue]="hour">{{hour}}</option>
+          </select>
+          
+          <p>&nbsp;:&nbsp;</p>
+          
+          <select name="min{{index}}" [(ngModel)]="tryout.min" required>
+            <option *ngFor="let minute of minutes" [ngValue]="minute">{{minute}}</option>
+          </select>
         </div>
-      </div>
-
-      <!-- Right column -->
-      <div style="flex: 1;">
-        <label>Location</label>
-        <div *ngFor="let tryout of tryouts; let index = index;" [attr.data-index]="index">
+        
+        <!-- Address -->
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
           <input
-            [(ngModel)]="tryout.location"
-            name="location{{index}}"
-            placeholder="123 Fake St., San Jose, Ca 95127"
+            [(ngModel)]="tryout.address"
+            name="address{{index}}"
+            placeholder="123 Fake St., San Jose, CA 95127"
             required
+            style=" width: 100%;"
             type="text">
         </div>
       </div>
-
     </div>
 
-  
-        <p (click)="tryouts.push({})" style="cursor: pointer;">+ add a new date</p>
-        <button
-          class="bg-blue btn"
-          [disabled]="!form.form.valid"
-          [ngStyle]="{cursor: form.form.valid && tryouts.length > 0 ? 'pointer' : 'not-allowed',
-            opacity: form.form.valid && tryouts.length > 0 ? 1.0 : 0.5}"
-          type="submit">
-          Next
-        </button>
+    <div style="align-items: center; display: flex; flex-direction: column;">
+      <p
+        (click)="tryouts.push({})"
+        *ngIf="tryouts.length < 8"
+        style="cursor: pointer;">
+        + add a new date
+      </p>
+      <button
+        class="bg-blue btn"
+        [disabled]="!form.form.valid"
+        [ngStyle]="{cursor: form.form.valid && tryouts.length > 0 ? 'pointer' : 'not-allowed',
+          opacity: form.form.valid && tryouts.length > 0 ? 1.0 : 0.5}"
+        type="submit">
+        Next
+      </button>
+    </div>
     
   </form>
 </div>

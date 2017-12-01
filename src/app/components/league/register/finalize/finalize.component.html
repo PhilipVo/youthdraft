@@ -26,22 +26,17 @@
       {{session.newUser.firstName}} {{session.newUser.lastName}}<br>
       {{session.newUser.email}}<br>
       {{session.newUser.leagueName}}<br><br>
-      Coach Roster Uploaded<br>
-      <i class="icon ion-android-checkbox" style="color: #30c219; font-size: 200%;"></i><br>
-      Player Roster Uploaded<br>
-      <i class="icon ion-android-checkbox" style="color: #30c219; font-size: 200%;"></i><br>
-      Team Roster Uploaded<br>
-      <i class="icon ion-android-checkbox" style="color: #30c219; font-size: 200%;"></i>
+      Coach Roster: {{session.newUser.coaches.name}}<br>
+      Player Roster: {{session.newUser.players.name}}<br>
+      Team Roster: {{session.newUser.teams.name}}<br>
     </div>
 
     <!-- Right Column -->
     <div style="align-items: center; display: flex; flex-direction: column;">
       Selected Tryout Dates:
       <p *ngFor="let tryout of tryouts">{{tryout}}</p>
-      <div style="align-items: flex-end; display: flex; flex-direction: column; margin-top: 10%;">
-        <button class="bg-blue btn"  style="margin-top: 20px;" type="submit">Finish</button>
-        <p style="color: red; text-align: center;">{{error}}</p>
-      </div>
+      <button class="bg-blue btn"  style="margin-top: 100px;" type="submit">Finish</button>
+      <p style="color: red; text-align: center;">{{error}}</p>
     </div>
     
   </form>

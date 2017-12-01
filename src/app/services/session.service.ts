@@ -61,7 +61,7 @@ export class SessionService {
       } else formData.append(key, this.newUser[key]);
     });
 
-    return this.http.postFormData(`/test`, formData)
+    return this.http.postFormData(`/league/register`, formData)
       .then(() => this._newUser = {})
       .catch(error => Promise.reject(error));
   }

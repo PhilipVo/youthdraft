@@ -2,14 +2,13 @@ input {
   border-radius: 5px;
   border-width: 0px;
   box-sizing: border-box;
-  margin-bottom: 2%;
+  margin-bottom: 20px;
   padding: 10px;
-  width: 70%;
 }
 
 select {
   border-radius: 5px;
   border-width: 0px;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 10px;
 }
