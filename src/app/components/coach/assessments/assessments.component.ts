@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { HttpService } from '../../../services/http.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-assessments',
@@ -8,7 +7,7 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./assessments.component.css']
 })
 export class AssessmentsComponent implements OnInit {
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpClient) { }
 
   defaultFormula = {
     hittingMechanics: 100,
@@ -28,12 +27,10 @@ export class AssessmentsComponent implements OnInit {
   players = [];
 
   ngOnInit() {
-    this.http.get('/api/formulas')
-      .then(data => this.formulas = data)
-      .catch(() => { });
+    this.http.get<any>('https://youthdraft.com/api/formulas')
+      .subscribe(data => this.formulas = data);
 
-    this.http.get('/api/stats')
-      .then(data => this.players = data)
-      .catch(() => { });
+    this.http.get<any>('https://youthdraft.com/api/stats')
+      .subscribe(data => this.players = data);
   }
 }

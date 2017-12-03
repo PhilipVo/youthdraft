@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { HttpService } from '../../../services/http.service';
 
 @Component({
   selector: 'app-reject',
@@ -12,14 +11,18 @@ export class RejectComponent {
   constructor(
     public router: Router,
     private route: ActivatedRoute,
-    private http: HttpService
+    private http: HttpClient
   ) { }
   
+  options = {
+    headers: new HttpHeaders({
+      'Authorization': `Bearer ${this.route.snapshot.paramMap.get('jwt')}`
+    })
+  };
   success = false;
 
   reject() {
-    this.http.postJwt('/api/league/reject', this.route.snapshot.paramMap.get('jwt'))
-      .then(() => this.success = true)
-      .catch(() => { });
+    this.http.post('https://youthdraft.com/api/league/reject', '', this.options)
+      .subscribe(() => this.success = true)
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { HttpService } from '../../../services/http.service';
 import { SessionService } from '../../../services/session.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { SessionService } from '../../../services/session.service';
 })
 export class CoachesComponent implements OnInit {
   constructor(
-    private http: HttpService,
+    private http: HttpClient,
     public session: SessionService
   ) { }
 
@@ -19,31 +19,29 @@ export class CoachesComponent implements OnInit {
   teams = [];
   error = null;
   modal = null;
+  options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   selected: any = {};
 
   ngOnInit() {
     this.getCoaches();
-    this.http.get('/api/teams')
-      .then(data => this.teams = data)
-      .catch(() => { });
+    this.http.get<any>('https://youthdraft.com/api/teams')
+      .subscribe(data => this.teams = data);
   }
 
   accept(id) {
-    this.http.post(`/api/coaches/validate/${id}`, {})
-      .then(() => this.getCoaches())
-      .catch(() => { });
+    this.http.post(`https://youthdraft.com/api/coaches/validate/${id}`, {}, this.options)
+      .subscribe(() => this.getCoaches());
   }
 
   add() {
     this.error = null;
     this.selected.phoneNumber = `${this.selected.area}-${this.selected.prefix}-${this.selected.line}`;
 
-    this.http.post('/api/coaches', this.selected)
-      .then(() => {
+    this.http.post('https://youthdraft.com/api/coaches', this.selected, this.options)
+      .subscribe(() => {
         this.getCoaches();
         this.close();
-      }).catch(error => this.error = typeof error === 'string' ?
-        error : 'Something went wrong.');
+      }, error => this.error = error.error.message ? error.error.message : 'Something went wrong.');
   }
 
   click(event) {
@@ -59,35 +57,30 @@ export class CoachesComponent implements OnInit {
 
   delete() {
     this.error = null;
-    this.http.delete(`/api/coaches/${this.selected.id}`)
-      .then(() => {
+    this.http.delete(`https://youthdraft.com/api/coaches/${this.selected.id}`)
+      .subscribe(() => {
         this.getCoaches();
         this.close();
-      }).catch(error => this.error = typeof error === 'string' ?
-        error : 'Something went wrong.');
+      }, error => this.error = error.error.message ? error.error.message : 'Something went wrong.')
   }
 
   edit() {
     this.error = null;
-    this.http.put(`/api/coaches/${this.selected.id}`, this.selected)
-      .then(() => {
+    this.http.put(`https://youthdraft.com/api/coaches/${this.selected.id}`, this.selected)
+      .subscribe(() => {
         this.getCoaches();
         this.close();
-      }).catch(error => this.error = typeof error === 'string' ?
-        error : 'Something went wrong.');
-
+      }, error => this.error = error.error.message ? error.error.message : 'Oops, something went wrong.');
   }
 
   getCoaches() {
-    this.http.get('/api/coaches/all')
-      .then(data => this.coaches = data)
-      .catch(() => { });
+    this.http.get<any>('https://youthdraft.com/api/coaches/all')
+      .subscribe(data => this.coaches = data);
   }
 
   reject(id) {
-    this.http.delete(`/api/coaches/${id}`)
-      .then(() => this.getCoaches())
-      .catch(() => { });
+    this.http.delete(`https://youthdraft.com/api/coaches/${id}`)
+      .subscribe(() => this.getCoaches());
   }
 
   select(modal, coach) {

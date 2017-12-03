@@ -10,14 +10,10 @@ import { SessionService } from './services/session.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(
-    public session: SessionService
-  ) { }
+  constructor(private session: SessionService) { }
 
   ngOnInit() {
-    const youthdraftToken: string = Cookie.get('youthdraftToken');
-    if (youthdraftToken)
-      this.session.setSession(youthdraftToken);
+    this.session.setSession();
   }
 
 }

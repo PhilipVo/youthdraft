@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { HttpService } from '../../../../services/http.service';
 import { SessionService } from '../../../../services/session.service';
 
 @Component({
@@ -13,15 +13,14 @@ export class IndexComponent implements OnInit {
   constructor(
     public session: SessionService,
     public router: Router,
-    private http: HttpService,
+    private http: HttpClient,
   ) { }
 
   leagues = [];
 
   ngOnInit() {
-    this.http.get('/leagues')
-      .then(data => this.leagues = data)
-      .catch(() => { })
+    this.http.get<any>('https://youthdraft.com/leagues')
+      .subscribe(data => this.leagues = data);
   }
 
   next(): void {

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import * as moment from 'moment';
-
-import { HttpService } from '../../../services/http.service';
 
 @Component({
   selector: 'app-players',
@@ -10,20 +9,20 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpClient) { }
 
+  error = null;
   _moment = moment;
   players = [];
-  error = null;
   modal = null;
+  options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   selected: any = {};
   teams: {};
 
   ngOnInit() {
     this.getPlayers();
-    this.http.get('/api/teams')
-      .then(data => this.teams = data)
-      .catch(() => { });
+    this.http.get<any>('https://youthdraft.com/api/teams')
+      .subscribe(data => this.teams = data);
   }
 
   click(event) {
@@ -39,12 +38,11 @@ export class PlayersComponent implements OnInit {
 
   delete() {
     this.error = null;
-    this.http.delete(`/api/players/${this.selected.id}`)
-      .then(() => {
+    this.http.delete(`https://youthdraft.com/api/players/${this.selected.id}`)
+      .subscribe(() => {
         this.getPlayers();
         this.close();
-      }).catch(error => this.error = typeof error === 'string' ?
-        error : 'Something went wrong.');
+      }, error => this.error = error.error.message ? error.error.message : 'Oops, something went wrong.');
   }
 
   save() {
@@ -52,26 +50,22 @@ export class PlayersComponent implements OnInit {
     this.selected.phoneNumber = `${this.selected.area}-${this.selected.prefix}-${this.selected.line}`;
 
     if (this.modal === 'add')
-      this.http.post('/api/players', this.selected)
-        .then(() => {
+      this.http.post('https://youthdraft.com/api/players', this.selected, this.options)
+        .subscribe(() => {
           this.getPlayers();
           this.close();
-        }).catch(error => {
-          this.error = typeof error === 'string' ? error : 'Something went wrong.'
-        });
+        }, error => this.error = error.error.message ? error.error.message : 'Oops, something went wrong.');
     else if (this.modal === 'edit')
-      this.http.put(`/api/players/${this.selected.id}`, this.selected)
-        .then(() => {
+      this.http.put(`https://youthdraft.com/api/players/${this.selected.id}`, this.selected, this.options)
+        .subscribe(() => {
           this.getPlayers();
           this.close();
-        }).catch(error => {
-          this.error = typeof error === 'string' ? error : 'Something went wrong.'
-        });
+        }, error => this.error = error.error.message ? error.error.message : 'Oops, something went wrong.');
   }
 
   getPlayers() {
-    this.http.get('/api/players')
-      .then(data => {
+    this.http.get<any>('https://youthdraft.com/api/players')
+      .subscribe(data => {
         this.players = data.map(player => {
           try {
             const number = player.phoneNumber.split('-');
@@ -82,7 +76,7 @@ export class PlayersComponent implements OnInit {
           } catch (error) { }
           return player;
         });
-      }).catch(() => { });
+      });
   }
 
   select(modal, coach) {

@@ -8,18 +8,17 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt'
 import { Cookie } from 'ng2-cookies';
 
 import { SessionService } from './session.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild {
-  private jwtHelper: JwtHelper = new JwtHelper();
-
   constructor(
-    public router: Router,
-    public session: SessionService
+    private jwtHelper: JwtHelperService,
+    private router: Router,
+    private session: SessionService
   ) { }
 
   canActivate(): boolean {

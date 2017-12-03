@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { HttpService } from '../../../services/http.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-formulas',
@@ -8,7 +7,7 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./formulas.component.css']
 })
 export class FormulasComponent implements OnInit {
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpClient) { }
 
   error = null;
   formula: any = {
@@ -26,6 +25,7 @@ export class FormulasComponent implements OnInit {
   }
   formulas = [];
   Math = Math;
+  options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   ngOnInit() {
     this.getFormulas();
@@ -53,24 +53,24 @@ export class FormulasComponent implements OnInit {
   }
 
   delete(formula) {
-    this.http.delete(`/api/formulas/${formula.id}`)
-      .then(() => {
+    this.http.delete(`https://youthdraft.com/api/formulas/${formula.id}`)
+      .subscribe(() => {
         if (this.formula.id === formula.id)
           this.formula.id === null;
         this.getFormulas();
-      }).catch(() => { });
+      });
   }
 
   getFormulas() {
-    this.http.get('/api/formulas')
-      .then(data => this.formulas = data)
-      .catch(() => { });
+    this.http.get<any>('https://youthdraft.com/api/formulas')
+      .subscribe(data => this.formulas = data);
   }
 
   save() {
     this.error = null;
 
-    if (this.formulas.length === 5) this.error = "You can only save up to 5 formulas."
+    if (this.formulas.length === 5 && !this.formula.id)
+      this.error = "You can only save up to 5 formulas."
     else if (!this.formula.title) this.error = 'Formula Name cannot be blank.';
     else if (!this.formula.hittingMechanics ||
       this.formula.hittingMechanics < 50 ||
@@ -113,15 +113,16 @@ export class FormulasComponent implements OnInit {
       this.formula.baserunSpeed > 150)
       this.error = 'Baserunning Speed must be an integer between 50 and 150.';
     else if (this.formula.id) {
-      this.http.put(`/api/formulas/${this.formula.id}`, this.formula)
-        .then(() => this.getFormulas())
-        .catch(() => { });
+      this.http.put<any>(
+        `https://youthdraft.com/api/formulas/${this.formula.id}`,
+        this.formula,
+        this.options).subscribe(() => this.getFormulas());
     } else {
-      this.http.post('/api/formulas', this.formula)
-        .then(id => {
+      this.http.post<any>('https://youthdraft.com/api/formulas', this.formula, this.options)
+        .subscribe(id => {
           this.formula.id = id;
           this.getFormulas();
-        }).catch(() => {});
+        });
     }
   }
 

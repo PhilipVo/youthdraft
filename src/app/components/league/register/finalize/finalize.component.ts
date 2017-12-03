@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import * as moment from 'moment';
@@ -14,6 +15,7 @@ export class FinalizeComponent implements OnInit {
   constructor(
     public session: SessionService,
     public router: Router,
+    private http: HttpClient
   ) { }
 
   error = null;
@@ -32,11 +34,23 @@ export class FinalizeComponent implements OnInit {
 
   register(): void {
     this.submitting = true;
-    this.session.registerLeague()
-      .then(() => this.router.navigate(['league/register/complete']))
-      .catch(error => {
+    
+    const formData = new FormData();
+    Object.keys(this.session.newUser).map(key => {
+      if (key === 'coaches' || key === 'teams' || key === 'players') {
+        formData.append(key, this.session.newUser[key], this.session.newUser[key].name);
+      } else if (key === 'tryouts') {
+        formData.append(key, JSON.stringify(this.session.newUser.tryouts));
+      } else formData.append(key, this.session.newUser[key]);
+    });
+
+    this.http.post(`https://youthdraft.com/league/register`, formData)
+      .subscribe(() => {
+        this.session.newUser = null;
+        this.router.navigate(['league/register/complete'])
+      }, error => {
         this.submitting = false;
-        this.error = typeof error === 'string' ? error : 'Something went wrong.';
-      })
+        this.error = error.error.message ? error.error.message : 'Something went wrong.'
+      });      
   }
 }

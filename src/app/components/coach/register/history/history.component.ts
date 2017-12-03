@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { SessionService } from '../../../../services/session.service';
@@ -13,9 +14,11 @@ export class HistoryComponent implements OnInit {
   constructor(
     public session: SessionService,
     public router: Router,
+    private http: HttpClient
   ) { }
 
   error = null;
+  options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   ngOnInit() {
     if (!(this.session.newUser.firstName &&
@@ -35,8 +38,10 @@ export class HistoryComponent implements OnInit {
   }
 
   register(): void {
-    this.session.registerCoach()
-      .then(() => this.router.navigate(['/coach/register/complete']))
-      .catch(error => this.error = typeof error === 'string' ? error : 'Something went wrong.')
+    this.http.post('https://youthdraft.com/coaches/register', this.session.newUser, this.options)
+      .subscribe(() => {
+        this.session.newUser = null;
+        this.router.navigate(['/coach/register/complete']);
+      }, error => this.error = error.error.message ? error.error.message : 'Something went wrong.');
   }
 }

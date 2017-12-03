@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { HttpService } from '../../../services/http.service';
+import { Cookie } from 'ng2-cookies';
+
 import { SessionService } from '../../../services/session.service';
 
 @Component({
@@ -13,26 +15,29 @@ export class LoginComponent implements OnInit {
   constructor(
     public router: Router,
     public session: SessionService,
-    private http: HttpService,
+    private http: HttpClient,
   ) { }
 
   error = null;
   leagues = [];
+  options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   user: any = {};
 
   ngOnInit() {
-    this.http.get('/leagues')
-      .then(data => this.leagues = data)
-      .catch(() => { })
+    this.http.get<any>('https://youthdraft.com/leagues')
+      .subscribe(data => this.leagues = data)
   }
 
   submit(): void {
     this.error = null;
     this.user = { ...this.user, ...this.user.league };
 
-    this.session.login('league', this.user)
-      .then(() => this.router.navigate(['/league/coaches']))
-      .catch(error => this.error = typeof error === 'string' ? error : 'Oops, something went wrong.');
+    this.http.post<any>(`https://youthdraft.com/league/login`, this.user, this.options)
+      .subscribe(youthdraftToken => {
+        Cookie.set('youthdraftToken', youthdraftToken, undefined, '/');
+        this.session.setSession();
+        this.router.navigate(['/league/coaches'])
+      }, error => this.error = error.error.message ? error.error.message : 'Something went wrong.');
   }
 
 }

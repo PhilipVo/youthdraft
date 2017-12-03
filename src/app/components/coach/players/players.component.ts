@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import * as moment from 'moment';
-
-import { HttpService } from '../../../services/http.service';
 
 @Component({
   selector: 'app-players',
@@ -10,18 +9,18 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpClient) { }
 
   players = [];
 
   ngOnInit() {
-    this.http.get('/api/players')
-      .then(data => {
+    this.http.get<any>('https://youthdraft.com/api/players')
+      .subscribe(data => {
         this.players = data.map(player => {
           player.dob = moment(player.birthday.replace('T', ' ')).format('M/d/YYYY');
           return player;
         });
-      }).catch(() => { });
+      });
   }
 
 }

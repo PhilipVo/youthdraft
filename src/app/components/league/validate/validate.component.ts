@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { HttpService } from '../../../services/http.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-validate',
@@ -12,14 +12,18 @@ export class ValidateComponent {
   constructor(
     public router: Router,
     private route: ActivatedRoute,
-    private http: HttpService
+    private http: HttpClient
   ) { }
-
+  
+  options = {
+    headers: new HttpHeaders({
+      'Authorization': `Bearer ${this.route.snapshot.paramMap.get('jwt')}`
+    })
+  };
   success = false;
 
   validate() {
-    this.http.postJwt('/api/league/validate', this.route.snapshot.paramMap.get('jwt'))
-      .then(() => this.success = true)
-      .catch(() => { });
+    this.http.post('https://youthdraft.com/api/league/validate', '', this.options)
+      .subscribe(() => this.success = true)
   }
 }

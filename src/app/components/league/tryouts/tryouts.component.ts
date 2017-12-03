@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { HttpService } from '../../../services/http.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-tryouts',
@@ -8,7 +7,9 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./tryouts.component.css']
 })
 export class TryoutsComponent implements OnInit {
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpClient) { }
+
+  options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   days = ['01', '02', '03', '04', '05', '06', '07', '08', '09'];
   hours = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09'];
@@ -30,8 +31,8 @@ export class TryoutsComponent implements OnInit {
       this.minutes.push(`${i}`);
     }
 
-    this.http.get('/api/tryouts')
-      .then(tryouts => {
+    this.http.get<any>('https://youthdraft.com/api/tryouts')
+      .subscribe(tryouts => {
         this.tryouts = tryouts.map(tryout => {
           const tokens = tryout.date.split(exp);
           tryout.date = tryout.date.substring(0, 16);
@@ -42,7 +43,7 @@ export class TryoutsComponent implements OnInit {
           tryout.min = tokens[4];
           return tryout;
         });
-      }).catch(() => { });
+      });
   }
 
   submit() {
@@ -55,8 +56,8 @@ export class TryoutsComponent implements OnInit {
         `${this.tryouts[i].hh}:` + `${this.tryouts[i].min}`;
     }
 
-    this.http.post('/api/tryouts', { tryouts: this.tryouts })
-      .then(() => this.success = true)
-      .catch(error => this.error = typeof error === 'string' ? error : 'Something went wrong.');
+    this.http.post('https://youthdraft.com/api/tryouts', { tryouts: this.tryouts }, this.options)
+      .subscribe(() => this.success = true,
+        error => this.error = error.error.message ? error.error.message : 'Something went wrong.');
   }
 }

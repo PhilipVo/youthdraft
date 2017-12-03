@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { HttpService } from '../../../services/http.service';
 import { SessionService } from '../../../services/session.service';
 
 @Component({
@@ -10,9 +10,11 @@ import { SessionService } from '../../../services/session.service';
 })
 export class SettingsComponent implements OnInit {
   constructor(
-    private http: HttpService,
+    private http: HttpClient,
     public session: SessionService
   ) { }
+
+  options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   league: any = {};
   password: any = {};
@@ -23,8 +25,8 @@ export class SettingsComponent implements OnInit {
   passwordSuccess = false;
 
   ngOnInit() {
-    this.http.get('/api/league')
-      .then(data => {
+    this.http.get<any>('https://youthdraft.com/api/league')
+      .subscribe(data => {
         try {
           const number = data.phoneNumber.split('-');
           data.area = number[0];
@@ -33,7 +35,7 @@ export class SettingsComponent implements OnInit {
           data.birthday = data.birthday.substring(0, 10);
         } catch (error) { }
         this.league = data;
-      }).catch(() => { });
+      });
   }
 
   updateLeague() {
@@ -42,17 +44,17 @@ export class SettingsComponent implements OnInit {
 
     this.league.phoneNumber = `${this.league.area}-${this.league.prefix}-${this.league.line}`;
 
-    this.http.put(`/api/league`, this.league)
-      .then(() => this.accountSuccess = true)
-      .catch(error => this.accountError = typeof error === 'string' ? error : 'Something went wrong.');
+    this.http.put(`https://youthdraft.com/api/league`, this.league, this.options)
+      .subscribe(() => this.accountSuccess = true,
+        error => this.accountError = error.error.message ? error.error.message : 'Something went wrong.')
   }
 
   updatePassword() {
     this.passwordError = null;
     this.passwordSuccess = false;
 
-    this.http.put(`/api/league/password`, this.password)
-      .then(() => this.passwordSuccess = true)
-      .catch(error => this.passwordError = typeof error === 'string' ? error : 'Something went wrong.');
+    this.http.put(`https://youthdraft.com/api/league/password`, this.password, this.options)
+      .subscribe(() => this.passwordSuccess = true, 
+        error => this.passwordError = error.error.message ? error.error.message : 'Something went wrong.')
   }
 }
