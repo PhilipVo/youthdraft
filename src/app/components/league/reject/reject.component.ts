@@ -13,16 +13,17 @@ export class RejectComponent {
     private route: ActivatedRoute,
     private http: HttpClient
   ) { }
-  
+
+  jwt = this.route.snapshot.paramMap.get('jwt');
   options = {
     headers: new HttpHeaders({
-      'Authorization': `Bearer ${this.route.snapshot.paramMap.get('jwt')}`
+      'Authorization': `Bearer ${this.jwt}`
     })
   };
   success = false;
 
   reject() {
-    this.http.post('https://youthdraft.com/api/league/reject', '', this.options)
-      .subscribe(() => this.success = true)
+    this.http.post('https://youthdraft.com/api/league/reject', { JWT: this.jwt }, this.options)
+      .subscribe(() => this.success = true);
   }
 }

@@ -15,15 +15,16 @@ export class ValidateComponent {
     private http: HttpClient
   ) { }
   
+  jwt = this.route.snapshot.paramMap.get('jwt');
   options = {
     headers: new HttpHeaders({
-      'Authorization': `Bearer ${this.route.snapshot.paramMap.get('jwt')}`
+      'Authorization': `Bearer ${this.jwt}`
     })
   };
   success = false;
 
   validate() {
-    this.http.post('https://youthdraft.com/api/league/validate', '', this.options)
+    this.http.post('https://youthdraft.com/api/league/validate', { JWT: this.jwt }, this.options)
       .subscribe(() => this.success = true)
   }
 }
