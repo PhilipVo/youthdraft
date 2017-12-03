@@ -15,9 +15,11 @@ export class ValidateComponent {
     private http: HttpService
   ) { }
 
-  reject() {
+  success = false;
+
+  validate() {
     this.http.postJwt('/api/league/validate', this.route.snapshot.paramMap.get('jwt'))
-      .then(() => this.router.navigate(['/']))
+      .then(() => this.success = true)
       .catch(() => { });
   }
 }

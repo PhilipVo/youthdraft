@@ -11,7 +11,7 @@
     <div style="flex:1"></div>
   </div>
 
-  <div style="align-items: center; display: flex; flex-direction: column; margin-top: 50px;">
+  <div *ngIf="!success" style="align-items: center; display: flex; flex-direction: column; margin-top: 50px;">
     <p style="text-align: center;">
       This Coach won't have access to your League if you reject this application.
     </p>
@@ -19,5 +19,12 @@
       Reject
     </button>
     <a routerLink="/" style="color: white; text-decoration: none;">Cancel</a>
+  </div>
+
+  <!-- Success -->
+  <div *ngIf="success"  style="align-items: center; display: flex; flex-direction: column; margin-top: 50px;">
+    <p style="text-align: center;">
+      You have successfully declined the application.
+    </p>
   </div>
 </div>

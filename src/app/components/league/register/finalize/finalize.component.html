@@ -35,7 +35,15 @@
     <div style="align-items: center; display: flex; flex-direction: column;">
       Selected Tryout Dates:
       <p *ngFor="let tryout of tryouts">{{tryout}}</p>
-      <button class="bg-blue btn"  style="margin-top: 100px;" type="submit">Finish</button>
+      <button
+        class="bg-blue btn"
+        [disabled]="submitting"
+        [ngStyle]="{cursor: submitting ? 'not-allowed' : 'pointer',
+          opacity: submitting ? 0.5 : 1.0}"
+        style="margin-top: 100px;"
+        type="submit">
+        Finish
+      </button>
       <p style="color: red; text-align: center;">{{error}}</p>
     </div>
     

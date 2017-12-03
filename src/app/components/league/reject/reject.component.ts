@@ -14,10 +14,12 @@ export class RejectComponent {
     private route: ActivatedRoute,
     private http: HttpService
   ) { }
+  
+  success = false;
 
   reject() {
     this.http.postJwt('/api/league/reject', this.route.snapshot.paramMap.get('jwt'))
-      .then(() => this.router.navigate(['/']))
+      .then(() => this.success = true)
       .catch(() => { });
   }
 }

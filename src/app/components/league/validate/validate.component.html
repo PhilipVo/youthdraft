@@ -13,13 +13,20 @@
     <div style="flex:1"></div>
   </div>
 
-  <div style="align-items: center; display: flex; flex-direction: column; margin-top: 50px;">
+  <div *ngIf="!success" style="align-items: center; display: flex; flex-direction: column; margin-top: 50px;">
     <p style="text-align: center;">
       Accepting this application will allow this Coach access to your League.
     </p>
-    <button class="btn bg-blue" (click)="accept()">
+    <button class="btn bg-blue" (click)="validate()">
       Accept
     </button>
     <a routerLink="/" style="color: white; text-decoration: none;">Cancel</a>
+  </div>
+
+  <!-- Success -->
+  <div *ngIf="success"  style="align-items: center; display: flex; flex-direction: column; margin-top: 50px;">
+    <p style="text-align: center;">
+      Validation successful!
+    </p>
   </div>
 </div>
