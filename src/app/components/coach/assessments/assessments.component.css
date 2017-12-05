@@ -19,12 +19,43 @@ table {
 }
 
 table, th, td {
-    font-size: 12px;
-    padding: 5px;
-    white-space: nowrap;
+  font-size: 12px;
+  padding: 5px;
+  white-space: nowrap;
 }
 
 tr {
-    text-align: left;
-    width: 100%;
+  text-align: left;
+  width: 100%;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 10px;
+  position: absolute;
+  top: 100%;
+  visibility: hidden;
+  z-index: 1;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent#787878 transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

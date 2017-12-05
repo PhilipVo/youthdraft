@@ -11,6 +11,11 @@
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <form (ngSubmit)="submit()" #form="ngForm">
       <div style="align-items: center; display: flex; flex-direction: column; justify-content: center;">
+        
+        <p style="font-weight: bold; font-size: 12px; margin-bottom: 20px;">
+          Note that deleting a tryout date will unassign players to that tryout date.
+        </p>
+        
         <div *ngFor="let tryout of tryouts; let index = index;" [attr.data-index]="index">
 
           <span (click)="tryouts.splice(index, 1)">Remove</span>

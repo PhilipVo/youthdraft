@@ -101,161 +101,185 @@
           </tr>
         </thead>
         <tbody *ngFor="let player of players">
-            <tr>
-              <td 
-                (click)="player.show ? player.show = false : player.show = true"
-                style="cursor: pointer;">
-                {{player.teamNumber}} | {{player.firstName}} {{player.lastName}}&nbsp;
-                <i class="icon ion-android-arrow-dropdown" style="font-size: 14px;"></i>
-              </td>
-              <td>
-                {{((player.hittingMechanics + player.batSpeed + player.batContact) / 3).toFixed(1)}} | 
-                {{((
-                  player.hittingMechanics * formula.hittingMechanics + 
-                  player.batSpeed * formula.batSpeed +
-                  player.batContact * formula.batContact) / 300).toFixed(1)
-                }}
-              </td>
-              <td>
-                {{((player.throwingMechanics + player.armStrength + player.armAccuracy) / 3).toFixed(1)}} | 
-                {{((
-                  player.throwingMechanics * formula.throwingMechanics + 
-                  player.armStrength * formula.armStrength +
-                  player.armAccuracy * formula.armAccuracy) / 300).toFixed(1)
-                }}
-              </td>
-              <td>
-                {{((player.inField + player.outField) / 2).toFixed(1)}} | 
-                {{((
-                  player.inField * formula.inField + 
-                  player.outField * formula.outField) / 200).toFixed(1)
-                }}                
-              </td>
-              <td>
-                {{((player.baserunMechanics + player.baserunSpeed) / 2).toFixed(1)}} | 
-                {{((
-                  player.baserunMechanics * formula.baserunMechanics + 
-                  player.baserunSpeed * formula.baserunSpeed) / 200).toFixed(1)
-                }}                
-              </td>
-              <td>
-                {{(
-                  player.hittingMechanics +
-                  player.batSpeed +
-                  player.batContact +
-                  player.throwingMechanics +
-                  player.armStrength +
-                  player.armAccuracy +
-                  player.inField +
-                  player.outField +
-                  player.baserunMechanics +
-                  player.baserunSpeed).toFixed(1)
-                }}
-              </td>
-              <td>
-                {{((
-                  (player.hittingMechanics * formula.hittingMechanics) +
-                  (player.batSpeed * formula.batSpeed) +
-                  (player.batContact * formula.batContact) +
-                  (player.throwingMechanics * formula.throwingMechanics) +
-                  (player.armStrength * formula.armStrength) +
-                  (player.armAccuracy * formula.armAccuracy) +
-                  (player.inField * formula.inField) +
-                  (player.outField * formula.outField) +
-                  (player.baserunMechanics * formula.baserunMechanics) +
-                  (player.baserunSpeed * formula.baserunSpeed)) / 100).toFixed(1)
-                }}
-              </td>
-              <td>{{player.division}}</td>
-            </tr>
+          <tr>
+            <td 
+              (click)="player.show ? player.show = false : player.show = true"
+              style="cursor: pointer;">
+              {{player.teamNumber}} | {{player.firstName}} {{player.lastName}}&nbsp;
+              <i class="icon ion-android-arrow-dropdown" style="font-size: 14px;"></i>
+            </td>
+            <td>
+              {{((player.hittingMechanics + player.batSpeed + player.batContact) / 3).toFixed(1)}} | 
+              {{((
+                player.hittingMechanics * formula.hittingMechanics + 
+                player.batSpeed * formula.batSpeed +
+                player.batContact * formula.batContact) / 300).toFixed(1)
+              }}
+            </td>
+            <td>
+              {{((player.throwingMechanics + player.armStrength + player.armAccuracy) / 3).toFixed(1)}} | 
+              {{((
+                player.throwingMechanics * formula.throwingMechanics + 
+                player.armStrength * formula.armStrength +
+                player.armAccuracy * formula.armAccuracy) / 300).toFixed(1)
+              }}
+            </td>
+            <td>
+              {{((player.inField + player.outField) / 2).toFixed(1)}} | 
+              {{((
+                player.inField * formula.inField + 
+                player.outField * formula.outField) / 200).toFixed(1)
+              }}                
+            </td>
+            <td>
+              {{((player.baserunMechanics + player.baserunSpeed) / 2).toFixed(1)}} | 
+              {{((
+                player.baserunMechanics * formula.baserunMechanics + 
+                player.baserunSpeed * formula.baserunSpeed) / 200).toFixed(1)
+              }}                
+            </td>
+            <td>
+              {{(
+                player.hittingMechanics +
+                player.batSpeed +
+                player.batContact +
+                player.throwingMechanics +
+                player.armStrength +
+                player.armAccuracy +
+                player.inField +
+                player.outField +
+                player.baserunMechanics +
+                player.baserunSpeed).toFixed(1)
+              }}
+            </td>
+            <td>
+              {{((
+                (player.hittingMechanics * formula.hittingMechanics) +
+                (player.batSpeed * formula.batSpeed) +
+                (player.batContact * formula.batContact) +
+                (player.throwingMechanics * formula.throwingMechanics) +
+                (player.armStrength * formula.armStrength) +
+                (player.armAccuracy * formula.armAccuracy) +
+                (player.inField * formula.inField) +
+                (player.outField * formula.outField) +
+                (player.baserunMechanics * formula.baserunMechanics) +
+                (player.baserunSpeed * formula.baserunSpeed)) / 100).toFixed(1)
+              }}
+            </td>
+            <td>{{player.division}}</td>
+          </tr>
 
-            <!-- Expanded row -->
-            <tr *ngIf="player.show">
-              <td colspan="8">
-                <div style="padding: 10px; white-space: normal;">
-                  This is where we provide more details on this player's assessment results
-                  formatted as: raw score | weighted score.<br>
-                  Assessment Date: January 15, 2017.
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Hitting</th>
-                        <th>Throwing</th>
-                        <th>Fielding</th>
-                        <th>Baserunning</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          Mechanics
-                          {{player.hittingMechanics}} | 
-                          {{(player.hittingMechanics * formula.hittingMechanics / 100).toFixed(1)}}
-                        </td>
-                        <td>
-                          Mechanics
-                          {{player.throwingMechanics}} | 
-                          {{(player.throwingMechanics * formula.throwingMechanics / 100).toFixed(1)}}
-                        </td>
-                        <td>
-                          Infield
-                          {{player.inField}} | 
-                          {{(player.inField * formula.inField / 100).toFixed(1)}}
-                        </td>
-                        <td>
-                          Mechanics
-                          {{player.baserunMechanics}} | 
-                          {{(player.baserunMechanics * formula.baserunMechanics / 100).toFixed(1)}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Speed
-                          {{player.batSpeed}} | 
-                          {{(player.batSpeed * formula.batSpeed / 100).toFixed(1)}}
-                        </td>
-                        <td>
-                          Strength
-                          {{player.armStrength}} | 
-                          {{(player.armStrength * formula.armStrength / 100).toFixed(1)}}
-                        </td>
-                        <td>
-                          Outfield
-                          {{player.outField}} | 
-                          {{(player.outField * formula.outField / 100).toFixed(1)}}
-                        </td>
-                        <td>
-                          Speed 
-                          {{player.baserunSpeed}} | 
-                          {{(player.baserunSpeed * formula.baserunSpeed / 100).toFixed(1)}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Contact
-                          {{player.batContact}} | 
-                          {{(player.batContact * formula.batContact / 100).toFixed(1)}}
-                        </td>
-                        <td>
-                          Accuracy
-                          {{player.armAccuracy}} | 
-                          {{(player.armAccuracy * formula.armAccuracy / 100).toFixed(1)}}
-                        </td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <!-- Notes -->
-                  <p style="font-weight: bold;">Notes</p>
-                  <p style="margin-bottom: 50px;">
-                    Looks a little frail and lack great physical structure and strength.
-                  </p>
-                  <hr>
-                </div>
-              </td>
-            </tr>
+          <!-- Expanded row -->
+          <tr *ngIf="player.show">
+            <td colspan="8">
+              <div style="padding: 10px; white-space: normal;">
+                This is where we provide more details on this player's assessment results
+                formatted as: raw score | weighted score.<br>
+                Assessment Date: January 15, 2017.
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Hitting</th>
+                      <th>Throwing</th>
+                      <th>Fielding</th>
+                      <th>Baserunning</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.hittingMechanicsNotes" style="cursor: default;">
+                          {{player.hittingMechanicsNotes}}
+                        </span>
+                        Mechanics
+                        {{player.hittingMechanics}} | 
+                        {{(player.hittingMechanics * formula.hittingMechanics / 100).toFixed(1)}}
+                      </td>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.throwingMechanicsNote" style="cursor: default;">
+                          {{player.throwingMechanicsNotes}}
+                        </span>
+                        Mechanics
+                        {{player.throwingMechanics}} | 
+                        {{(player.throwingMechanics * formula.throwingMechanics / 100).toFixed(1)}}
+                      </td>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.inFieldNotes" style="cursor: default;">
+                          {{player.inFieldNotes}}
+                        </span>
+                        Infield
+                        {{player.inField}} | 
+                        {{(player.inField * formula.inField / 100).toFixed(1)}}
+                      </td>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.baserunMechanicsNote" style="cursor: default;">
+                          {{player.baserunMechanicsNotes}}
+                        </span>
+                        Mechanics
+                        {{player.baserunMechanics}} | 
+                        {{(player.baserunMechanics * formula.baserunMechanics / 100).toFixed(1)}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.batSpeedNotes" style="cursor: default;">
+                          {{player.batSpeedNotes}}
+                        </span>
+                        Speed
+                        {{player.batSpeed}} | 
+                        {{(player.batSpeed * formula.batSpeed / 100).toFixed(1)}}
+                      </td>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.armStrengthNotes" style="cursor: default;">
+                          {{player.armStrengthNotes}}
+                        </span>
+                        Strength
+                        {{player.armStrength}} | 
+                        {{(player.armStrength * formula.armStrength / 100).toFixed(1)}}
+                      </td>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.outFieldNotes" style="cursor: default;">
+                          {{player.outFieldNotes}}
+                        </span>
+                        Outfield
+                        {{player.outField}} | 
+                        {{(player.outField * formula.outField / 100).toFixed(1)}}
+                      </td>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.baserunSpeedNotes" style="cursor: default;">
+                          {{player.baserunSpeedNotes}}
+                        </span>
+                        Speed 
+                        {{player.baserunSpeed}} | 
+                        {{(player.baserunSpeed * formula.baserunSpeed / 100).toFixed(1)}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.batContactNotes" style="cursor: default;">
+                          {{player.batContactNotes}}
+                        </span>
+                        Contact
+                        {{player.batContact}} | 
+                        {{(player.batContact * formula.batContact / 100).toFixed(1)}}
+                      </td>
+                      <td class="tooltip">
+                        <span class="tooltiptext" *ngIf="player.armAccuracyNotes" style="cursor: default;">
+                          {{player.armAccuracyNotes}}
+                        </span>
+                        Accuracy
+                        {{player.armAccuracy}} | 
+                        {{(player.armAccuracy * formula.armAccuracy / 100).toFixed(1)}}
+                      </td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
