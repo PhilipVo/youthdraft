@@ -51,7 +51,7 @@ export class SettingsComponent implements OnInit {
   updatePassword() {
     this.passwordError = null;
     this.passwordSuccess = null;
-
+    
     this.http.post(`https://youthdraft.com/api/coaches/password`, this.password)
       .subscribe(() => this.passwordSuccess = true,
         error => this.passwordError = error.error.message ? error.error.message : 'Something went wrong.')

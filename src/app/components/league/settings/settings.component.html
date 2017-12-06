@@ -71,7 +71,7 @@
           Successfully updated your account information!
         </p>
       </form>
-      <form (submit)="updatePassword()" #password="ngForm">
+      <form (submit)="updatePassword()" #passwordForm="ngForm">
         <h4>Change Password</h4>
         <input
           name="oldPassword"
@@ -93,9 +93,9 @@
           required>
         <button
           class="bg-blue btn"
-          [disabled]="!password.form.valid"
-          [ngStyle]="{cursor: password.form.valid ? 'pointer' : 'not-allowed',
-            opacity: password.form.valid ? 1.0 : 0.5}"
+          [disabled]="!passwordForm.form.valid"
+          [ngStyle]="{cursor: passwordForm.form.valid ? 'pointer' : 'not-allowed',
+            opacity: passwordForm.form.valid ? 1.0 : 0.5}"
           style="color: white; margin-top: 20px; width: 75%;"
           type="submit">
           Save New Password
