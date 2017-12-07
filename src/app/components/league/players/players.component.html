@@ -115,6 +115,12 @@
             {{team.name}} - {{team.division}}
           </option>
         </select>
+        <select name="tryout" [(ngModel)]="selected.tryoutId" required>
+          <option [ngValue]="modal==='add' ? undefined : null" disabled>Tryout Date</option>
+          <option *ngFor="let tryout of tryouts" [ngValue]="tryout.id">
+            {{_moment(tryout.date).format('M/D/YYYY')}} at {{tryout.address}}
+          </option>
+        </select>
       </div>
       <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
         <input

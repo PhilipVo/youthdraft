@@ -17,12 +17,17 @@ export class PlayersComponent implements OnInit {
   modal = null;
   options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   selected: any = {};
-  teams: {};
+  teams = [];
+  tryouts = [];
 
   ngOnInit() {
     this.getPlayers();
+    
     this.http.get<any>('https://youthdraft.com/api/teams')
       .subscribe(data => this.teams = data);
+    
+    this.http.get<any>('https://youthdraft.com/api/tryouts')
+      .subscribe(tryouts => this.tryouts = tryouts);
   }
 
   click(event) {
