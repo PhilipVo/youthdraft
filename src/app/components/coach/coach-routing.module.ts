@@ -6,12 +6,14 @@ import { FormulasComponent } from './formulas/formulas.component';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import { PlayersComponent } from './players/players.component';
+import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
 
 import { AuthGuardService } from '../../services/auth-guard.service';
 
 const coachRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'reset', component: ResetComponent },
   {
     path: 'register',
     loadChildren: './register/coach-register.module#CoachRegisterModule'

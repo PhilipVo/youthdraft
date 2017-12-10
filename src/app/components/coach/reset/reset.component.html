@@ -6,15 +6,13 @@
       </a>
     </div>
     <div style="flex: 2;">
-      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Coach Login</h1>
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Forgot Your Coach Login?</h1>
     </div>
     <div style="flex:1"></div>
   </div>
 
   <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
-    "There are three types of baseball players: those who make it<br>
-    happen, those who watch it happen and those who wonder what happens."<br>
-    - Tommy Lasorda
+    Please submit the form below to have a password reset sent to your email account.
   </p>
   
   <form 
@@ -28,12 +26,6 @@
         placeholder="Email Address"
         required
         type="text">
-      <input
-        name="password"
-        [(ngModel)]="user.password"
-        placeholder="Password"
-        required
-        type="password">
       <select name="league" [(ngModel)]="user.league" required>
         <option [ngValue]="undefined" disabled>Choose Your League</option>
         <option *ngFor="let league of leagues" [ngValue]="league">
@@ -43,14 +35,16 @@
       <button 
         class="bg-green btn"
         [disabled]="!form.form.valid"
+        *ngIf="!success"
         [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
           opacity: form.form.valid ? 1.0 : 0.5}"
         style="width: 100%;"
         type="submit">
-        Login
+        Request Password Reset
       </button>
-      <p id="reset" routerLink="/coach/reset">
-        Forgot your password? Click here to request a password reset.
+      <p *ngIf="success" style="text-align: center;">
+        A new password has been sent to your email.<br>
+        Please make sure to update your password after logging in.
       </p>
       <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
     </div>

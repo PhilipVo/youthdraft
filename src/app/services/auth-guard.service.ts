@@ -39,7 +39,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
     if (url.includes('reject') || url.includes('validate')) {
       return true;
-    } else if ((url.includes('login') || url.includes('register'))) {
+    } else if ((url.includes('login') || url.includes('register') || url.includes('reset'))) {
       if (this.session.user) {
         this.router.navigate([`/${this.session.user}`]);
         return false;

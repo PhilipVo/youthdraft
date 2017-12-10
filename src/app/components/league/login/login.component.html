@@ -49,6 +49,9 @@
         type="submit">
         Login
       </button>
+      <p id="reset" routerLink="/league/reset">
+        Forgot your password? Click here to request a password reset.
+      </p>
       <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
     </div>
   </form>
