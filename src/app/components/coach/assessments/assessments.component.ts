@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-assessments',
@@ -21,17 +23,37 @@ export class AssessmentsComponent implements OnInit {
     baserunMechanics: 100,
     baserunSpeed: 100
   };
+  error = null;
   formula = this.defaultFormula;
   formulas = [];
   Math = Math;
+  modal = null;
+  _moment = moment;
+  options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   order = null;
   players = [];
   reverse = false;
+  selected: any = {};
 
   ngOnInit() {
     this.http.get<any>('https://youthdraft.com/api/formulas')
       .subscribe(data => this.formulas = data);
 
+    this.getStats();
+  }
+
+  click(event) {
+    event.stopPropagation();
+    return false;
+  }
+
+  close() {
+    this.error = null;
+    this.modal = null;
+    this.selected = {};
+  }
+
+  getStats() {
     this.http.get<any>('https://youthdraft.com/api/stats')
       .subscribe(data => {
         this.players = data;
@@ -78,10 +100,17 @@ export class AssessmentsComponent implements OnInit {
         (player.baserunMechanics * this.formula.baserunMechanics) +
         (player.baserunSpeed * this.formula.baserunSpeed)) / 100).toFixed(1);
     });
+    this.orderBy(this.order, true);
   }
 
-  orderBy(order) {
-    if (this.order === order) {
+  orderBy(order, ignoreReverse = false) {
+    if (!order) {
+      return;
+    } else if (ignoreReverse) {
+      this.players.sort((a, b) => b[order] - a[order]);
+      this.reverse && this.players.reverse();
+    }
+    else if (this.order === order) {
       this.reverse = this.reverse ? false : true;
       this.players.reverse();
     } else {
@@ -89,5 +118,25 @@ export class AssessmentsComponent implements OnInit {
       this.reverse = false;
       this.players.sort((a, b) => b[order] - a[order]);
     }
+  }
+
+  save() {
+    this.error = null;
+
+    this.http.put(`https://youthdraft.com/api/stats/${this.selected.id}`, this.selected, this.options)
+      .subscribe(() => {
+        this.getStats();
+        this.close();
+      }, error => this.error = error.error.message ? error.error.message : 'Oops, something went wrong.');
+  }
+
+  select(modal, player) {
+    this.modal = modal;
+    this.selected = Object.assign({}, player);
+  }
+
+  stopPropagation(event) {
+    event.stopPropagation();
+    return false;
   }
 }

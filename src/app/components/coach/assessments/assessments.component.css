@@ -2,6 +2,26 @@
   color: #787878;
 }
 
+form {
+  display: flex;
+  overflow: auto;
+  padding: 25px;
+}
+
+input {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 90%;
+}
+
+label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 select {
   border: 1px solid gray;
   border-radius: 5px;

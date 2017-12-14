@@ -2,10 +2,7 @@
   <div style="flex: 1; padding: 25px;">
     <h1>Assessments</h1><br>
     <p>
-      Select one of the formulas you created in the Formulas tab to view player
-      rankings based on the weight of your formula.
-    </p>
-    <select (change)="onChange()" [(ngModel)]="formula" required style="margin-top: 20px;">
+      Select one of the formulas you created in the Formulas tab to view player rankings based on the weight of your formula. </p> <select (change)="onChange()" [(ngModel)]="formula" required style="margin-top: 20px;">
       <option [ngValue]="defaultFormula"></option>
       <option *ngFor="let formula of formulas" [ngValue]="formula">
         {{formula.title}}
@@ -47,7 +44,7 @@
               <p>{{formula.inField}}%</p>
             </td>
             <td>
-              <p>Baserunning</p>
+              <p>Mechanics</p>
               <p>{{formula.baserunMechanics}}%</p>
             </td>
           </tr>
@@ -163,7 +160,7 @@
               <div style="padding: 10px; white-space: normal;">
                 This is where we provide more details on this player's assessment results
                 formatted as: raw score | weighted score.<br>
-                Assessment Date: January 15, 2017.
+                Assessment Date: {{_moment(player.createdAt).format('MMMM D, YYYY')}}
                 <table>
                   <thead>
                     <tr>
@@ -260,7 +257,11 @@
                         {{(player.armAccuracy * formula.armAccuracy / 100).toFixed(1)}}
                       </td>
                       <td></td>
-                      <td></td>
+                      <td 
+                        (click)="select('edit', player)"
+                        style="color: #8cc63e; cursor: pointer; font-weight: bold;">
+                        Edit
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -273,4 +274,67 @@
     </div>
   
     </div>
+</div>
+
+
+<!-- Edit modal -->
+<div class="modal" (click)="close()" *ngIf="modal==='edit'">
+  <div
+    (click)="stopPropagation($event)"
+    class="modal-width"
+    style="background-color: white; padding: 20px;">
+    <h1>Edit {{selected.firstName}} {{selected.lastName}}'s Assessment</h1>
+    <form #form="ngForm">
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+        <label for="hittingMechanics">Hitting Mechanics</label>
+        <input name="hittingMechanics" [(ngModel)]="selected.hittingMechanics" required>
+        <label for="batSpeed">Bat Speed</label>
+        <input name="batSpeed" [(ngModel)]="selected.batSpeed" required>
+        <label for="batContact">Bat Contact</label>
+        <input name="batContact" [(ngModel)]="selected.batContact" required>
+      </div>
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+        <label for="throwingMechanics">Throwing Mechanics</label>
+        <input name="throwingMechanics" [(ngModel)]="selected.throwingMechanics" required>
+        <label for="armStrength">Arm Strength</label>
+        <input name="armStrength" [(ngModel)]="selected.armStrength" required>
+        <label for="armAccuracy">Arm Accuracy</label>
+        <input name="armAccuracy" [(ngModel)]="selected.armAccuracy" required>
+      </div>
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+        <label for="inField">Infield</label>
+        <input name="inField" [(ngModel)]="selected.inField" required>
+        <label for="outField">Outfield</label>
+        <input name="outField" [(ngModel)]="selected.outField" required>
+      </div>
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+        <label for="baserunMechanics">Baserunning Mechanics</label>
+        <input name="baserunMechanics" [(ngModel)]="selected.baserunMechanics" required>
+        <label for="baserunStrength">Baserunning Speed</label>
+        <input name="baserunStrength" [(ngModel)]="selected.baserunSpeed" required>
+      </div>
+    </form>
+
+    <p style="font-size: 12px; font-weight: bold; margin-top: 20px; text-align: center;">
+      Ratings must be numbers between 0.0 and 10.0
+    </p>
+    <div style="display: flex; justify-content: center;">
+      <button
+        class="bg-gray btn"
+        (click)="close()"
+        style="color: white; margin-right: 20px; margin-top: 5px;">
+        Cancel
+      </button>
+      <button
+        class="bg-blue btn"
+        (click)="save()"
+        [disabled]="!form.form.valid"
+        [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
+          opacity: form.form.valid ? 1.0 : 0.5}"
+        style="color: white; margin-top: 5px;">
+        Save
+      </button>
+    </div>
+    <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
+  </div>
 </div>
