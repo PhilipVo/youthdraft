@@ -10,7 +10,7 @@
 
   <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
     <!-- Create a Formula -->
-    <form #form="ngForm" id="create" (ngSubmit)="save()">
+    <form #form="ngForm" id="create" (ngSubmit)="save()" style="flex: 3;">
       <div style="align-items: center; display: flex;">
         <h4 style="flex: 1;">Create a Formula</h4>
         <input
@@ -211,7 +211,7 @@
     </form>
     
     <!-- Manage Your Formulas -->
-    <div style="background-color: white; height: 100%; padding: 25px; overflow: auto;">
+    <div style="background-color: white; flex: 2; height: 100%; padding: 25px; overflow: auto;">
       <div style="align-items: center; display: flex; white-space: nowrap">
         <h4>Manage Your Formulas | &nbsp;</h4>
         <h5>You can save up to 5 formulas</h5>

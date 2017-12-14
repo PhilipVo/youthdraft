@@ -1,0 +1,123 @@
+<div style="height: 100%; display: flex; flex-direction: column;">
+  <div style="flex: 1; display: flex; justify-content: space-between; padding: 25px;">
+    <h1>Manage Teams</h1>
+    <div>
+      <h5 (click)="modal='add'" style="color: #0055a5; cursor: pointer">Add a new Team</h5>
+    </div>
+  </div>
+
+  <div style="background-color: #f0f1f2; flex: 11; display: flex; flex-direction: column; padding: 20px;">
+    <div style="background-color: white; height: 100%; overflow: auto; padding: 25px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Team Name</th>
+            <th>Division</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let team of teams;" >
+            <td>{{team.name}}</td>
+            <td>{{team.division}}</td>
+            <td>
+              <p style="font-weight: bold;">
+                <span (click)="select('edit', team)" style="cursor: pointer;">
+                  Edit
+                </span> | 
+                <span (click)="select('delete', team)" style="cursor: pointer;">
+                  Delete
+                </span>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit modal -->
+<div class="modal" (click)="close()" *ngIf="modal==='add' || modal==='edit'">
+  <div
+    (click)="stopPropagation($event)"
+    class="modal-width"
+    style="background-color: white; padding: 20px;">
+    <h1 *ngIf="modal === 'add'">Add a new Team</h1>
+    <h1 *ngIf="modal === 'edit'">Edit this Team</h1>
+    <form #form="ngForm">
+      <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+        <input name="name" placeholder="Team Name" [(ngModel)]="selected.name" required>
+        <select name="division" [(ngModel)]="selected.division" required>
+          <option [ngValue]="modal==='add' ? undefined : null" disabled>Division</option>
+          <option [ngValue]="'8U'">8U</option>
+          <option [ngValue]="'9U'">9U</option>
+          <option [ngValue]="'10U'">10U</option>
+          <option [ngValue]="'11U'">11U</option>
+          <option [ngValue]="'12U'">12U</option>
+          <option [ngValue]="'13U'">13U</option>
+          <option [ngValue]="'14U'">14U</option>
+          <option [ngValue]="'15U'">15U</option>
+          <option [ngValue]="'16U'">16U</option>
+          <option [ngValue]="'17U'">17U</option>
+          <option [ngValue]="'18U'">18U</option>
+          <option [ngValue]="'A'">A</option>
+          <option [ngValue]="'AA'">AA</option>
+          <option [ngValue]="'AAA'">AAA</option>
+          <option [ngValue]="'Farm'">Farm</option>
+          <option [ngValue]="'Majors'">Majors</option>
+          <option [ngValue]="'Intermediate'">Intermediate</option>
+          <option [ngValue]="'T-ball'">T-ball</option>
+          <option [ngValue]="'Rookie'">Rookie</option>
+        </select>
+      </div>
+    </form>
+
+    <div style="display: flex; justify-content: center;">
+      <button
+        class="bg-gray btn"
+        (click)="close()"
+        style="color: white; margin-right: 20px;">
+        Cancel
+      </button>
+      <button
+        class="bg-blue btn"
+        (click)="save()"
+        [disabled]="!form.form.valid"
+        [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
+          opacity: form.form.valid ? 1.0 : 0.5}"
+        style="color: white;">
+        Save
+      </button>
+    </div>
+    <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
+  </div>
+</div>
+
+<!-- Delete modal -->
+<div class="modal" (click)="close()" *ngIf="modal==='delete'">
+  <div
+    (click)="stopPropagation($event)"
+    class="modal-width"
+    style="background-color: white; padding: 20px 50px;">
+    <h2 style="text-align: center;">
+      Deleting this team will unassign players and coaches from this team.<br><br>
+      Are you sure you would like to delete {{selected.name}}?
+    </h2>
+    <div style="display: flex; justify-content: center;">
+      <button
+        class="bg-gray btn"
+        (click)="close()"
+        style="color: white; margin-right: 20px;">
+        No
+      </button>
+      <button
+        class="bg-blue btn"
+        (click)="delete()"
+        style="color: white;">
+        Yes
+      </button>
+    </div>
+    <p *ngIf="error" style="color: red; text-align: center;">{{error}}</p>
+  </div>
+</div>

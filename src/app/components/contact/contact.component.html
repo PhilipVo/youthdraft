@@ -1,0 +1,66 @@
+<div class="bg-about register">
+  <div style="align-items: flex-end; display: flex; margin: 1%;">
+    <div style="display: flex; flex: 1; justify-content: center;">
+      <a routerLink="/">
+        <img src="assets/logo-no-text.png">
+      </a>
+    </div>
+    <div style="flex: 2;">
+      <h1 style=" font-size: 40px; margin: 5% 0%; text-align: center;">Contact</h1>
+    </div>
+    <div style="flex: 1"></div>
+  </div>
+
+  <p style="font-size: 20px; margin: 5% 0%; text-align: center;">
+    We're always trying to seek your feeback to improve.<br>
+    What did we do well? What could we do better?<br>
+    Athletes need feedback to improve just like us.<br>
+    Please share your thoughts below so we can<br>
+    make a product that leagues and coaches love.
+  </p>
+  
+  <form 
+    (ngSubmit)="submit()"
+    #form="ngForm"
+    style="align-items: flex-start; display: flex; justify-content: space-around;">
+
+    <!-- Left Column -->
+    <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+      <!-- First Name -->
+      <input [(ngModel)]="contact.firstName" name="firstName" placeholder="First Name" required type="text">
+
+      <!-- Last Name -->
+      <input [(ngModel)]="contact.lastName" name="LastName" placeholder="Last Name" required type="text">
+
+      <!-- Email -->
+      <input [(ngModel)]="contact.email" name="email" placeholder="Email Address" required type="text">
+    </div>
+
+    <!-- Right Column -->
+    <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
+
+      <!-- Email -->
+      <textarea
+        name="feedback"
+        [(ngModel)]="contact.feedback"
+        placeholder="Any additional thoughts?"
+        rows="7">
+      </textarea>
+
+      <!-- Next -->
+      <div style="display: flex; justify-content: flex-end; margin-top: 10%; width: 50%;">
+        <button
+          class="bg-blue btn"
+          [disabled]="!form.form.valid"
+          *ngIf="!submitted"
+          [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
+            opacity: form.form.valid ? 1.0 : 0.5}"
+          type="submit">
+          Next
+        </button>
+      </div>
+      <p *ngIf="submitted">Thank you for your feedback!</p>
+    </div>
+    
+  </form>
+</div>

@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { JwtModule } from '@auth0/angular-jwt'
 
 import { AppComponent } from './app.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { FAQComponent } from './components/faq/faq.component';
 import { IndexComponent } from './components/index/index.component';
 
 import { AuthGuardService } from './services/auth-guard.service';
@@ -33,6 +36,9 @@ export function tokenGetter() {
   ],
   declarations: [
     AppComponent,
+    AboutComponent,
+    ContactComponent,
+    FAQComponent,
     IndexComponent,
   ],
   providers: [

@@ -5,7 +5,7 @@
       Select one of the formulas you created in the Formulas tab to view player
       rankings based on the weight of your formula.
     </p>
-    <select [(ngModel)]="formula" required style="margin-top: 20px;">
+    <select (change)="onChange()" [(ngModel)]="formula" required style="margin-top: 20px;">
       <option [ngValue]="defaultFormula"></option>
       <option *ngFor="let formula of formulas" [ngValue]="formula">
         {{formula.title}}
@@ -91,12 +91,36 @@
         <thead>
           <tr>
             <th>Player Name</th>
-            <th>Hitting</th>
-            <th>Throwing</th>
-            <th>Fielding</th>
-            <th>Baserunning</th>
-            <th>Raw Score</th>
-            <th>Weighted Score</th>
+            <th (click)="orderBy('hitting')" style="cursor: pointer;">
+              Hitting
+              <i class="icon ion-android-arrow-dropup" *ngIf="order === 'hitting' && reverse" style="font-size: 12px;"></i>
+              <i class="icon ion-android-arrow-dropdown" *ngIf="order === 'hitting' && !reverse" style="font-size: 12px;"></i>
+            </th>
+            <th (click)="orderBy('throwing')" style="cursor: pointer;">
+              Throwing
+              <i class="icon ion-android-arrow-dropup" *ngIf="order === 'throwing' && reverse" style="font-size: 12px;"></i>
+              <i class="icon ion-android-arrow-dropdown" *ngIf="order === 'throwing' && !reverse" style="font-size: 12px;"></i>
+            </th>
+            <th (click)="orderBy('fielding')" style="cursor: pointer;">
+              Fielding
+              <i class="icon ion-android-arrow-dropup" *ngIf="order === 'fielding' && reverse" style="font-size: 12px;"></i>
+              <i class="icon ion-android-arrow-dropdown" *ngIf="order === 'fielding' && !reverse" style="font-size: 12px;"></i>
+            </th>
+            <th (click)="orderBy('baserunning')" style="cursor: pointer;">
+              Baserunning
+              <i class="icon ion-android-arrow-dropup" *ngIf="order === 'baserunning' && reverse" style="font-size: 12px;"></i>
+              <i class="icon ion-android-arrow-dropdown" *ngIf="order === 'baserunning' && !reverse" style="font-size: 12px;"></i>
+            </th>
+            <th (click)="orderBy('raw')" style="cursor: pointer;">
+              Raw Score
+              <i class="icon ion-android-arrow-dropup" *ngIf="order === 'raw' && reverse" style="font-size: 12px;"></i>
+              <i class="icon ion-android-arrow-dropdown" *ngIf="order === 'raw' && !reverse" style="font-size: 12px;"></i>
+            </th>
+            <th (click)="orderBy('weighted')" style="cursor: pointer;">
+              Weighted Score
+              <i class="icon ion-android-arrow-dropup" *ngIf="order === 'weighted' && reverse" style="font-size: 12px;"></i>
+              <i class="icon ion-android-arrow-dropdown" *ngIf="order === 'weighted' && !reverse" style="font-size: 12px;"></i>
+            </th>
             <th>Prior Div.</th>
           </tr>
         </thead>
@@ -110,61 +134,25 @@
             </td>
             <td>
               {{((player.hittingMechanics + player.batSpeed + player.batContact) / 3).toFixed(1)}} | 
-              {{((
-                player.hittingMechanics * formula.hittingMechanics + 
-                player.batSpeed * formula.batSpeed +
-                player.batContact * formula.batContact) / 300).toFixed(1)
-              }}
+              {{player.hitting}}
             </td>
             <td>
               {{((player.throwingMechanics + player.armStrength + player.armAccuracy) / 3).toFixed(1)}} | 
-              {{((
-                player.throwingMechanics * formula.throwingMechanics + 
-                player.armStrength * formula.armStrength +
-                player.armAccuracy * formula.armAccuracy) / 300).toFixed(1)
-              }}
+              {{player.throwing}}
             </td>
             <td>
               {{((player.inField + player.outField) / 2).toFixed(1)}} | 
-              {{((
-                player.inField * formula.inField + 
-                player.outField * formula.outField) / 200).toFixed(1)
-              }}                
+              {{player.fielding}}
             </td>
             <td>
               {{((player.baserunMechanics + player.baserunSpeed) / 2).toFixed(1)}} | 
-              {{((
-                player.baserunMechanics * formula.baserunMechanics + 
-                player.baserunSpeed * formula.baserunSpeed) / 200).toFixed(1)
-              }}                
+              {{player.baserunning}}
             </td>
             <td>
-              {{(
-                player.hittingMechanics +
-                player.batSpeed +
-                player.batContact +
-                player.throwingMechanics +
-                player.armStrength +
-                player.armAccuracy +
-                player.inField +
-                player.outField +
-                player.baserunMechanics +
-                player.baserunSpeed).toFixed(1)
-              }}
+              {{player.raw}}
             </td>
             <td>
-              {{((
-                (player.hittingMechanics * formula.hittingMechanics) +
-                (player.batSpeed * formula.batSpeed) +
-                (player.batContact * formula.batContact) +
-                (player.throwingMechanics * formula.throwingMechanics) +
-                (player.armStrength * formula.armStrength) +
-                (player.armAccuracy * formula.armAccuracy) +
-                (player.inField * formula.inField) +
-                (player.outField * formula.outField) +
-                (player.baserunMechanics * formula.baserunMechanics) +
-                (player.baserunSpeed * formula.baserunSpeed)) / 100).toFixed(1)
-              }}
+              {{player.weighted}}
             </td>
             <td>{{player.division}}</td>
           </tr>

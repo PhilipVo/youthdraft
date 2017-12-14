@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { FAQComponent } from './components/faq/faq.component';
 import { IndexComponent } from './components/index/index.component';
 
 import { AuthGuardService } from './services/auth-guard.service';
@@ -18,6 +21,18 @@ const routes: Routes = [
 				path: 'league',
 				canActivateChild: [AuthGuardService],
 				loadChildren: './components/league/league.module#LeagueModule'
+			},
+			{
+				path: 'about',
+				component: AboutComponent,
+			},
+			{
+				path: 'contact',
+				component: ContactComponent,
+			},
+			{
+				path: 'faq',
+				component: FAQComponent,
 			},
 			{
 				path: '',

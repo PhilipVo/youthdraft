@@ -53,13 +53,18 @@ button {
   background-color: #8cc63e;
 }
 
+.bg-about {
+  background-image: url('assets/background-about.png');
+  background-size: cover;
+}
+
 .bg-coach {
-  background-image: url('./assets/background-coach.png');
+  background-image: url('assets/background-coach.png');
   background-size: cover;
 }
 
 .bg-league {
-  background-image: url('./assets/background-league.png');
+  background-image: url('assets/background-league.png');
   background-size: cover;
 }
 

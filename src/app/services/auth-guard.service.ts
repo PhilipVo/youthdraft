@@ -37,7 +37,8 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     const youthdraftToken = Cookie.get('youthdraftToken');
     const url = state.url;
 
-    if (url.includes('reject') || url.includes('validate')) {
+    if (url.includes('about') || url.includes('contact') || url.includes('faq') ||
+      url.includes('reject') || url.includes('validate')) {
       return true;
     } else if ((url.includes('login') || url.includes('register') || url.includes('reset'))) {
       if (this.session.user) {
