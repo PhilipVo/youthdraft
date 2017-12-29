@@ -27,13 +27,13 @@
     <!-- Left Column -->
     <div style="align-items: center; display: flex; flex: 1; flex-direction: column;">
       <!-- First Name -->
-      <input [(ngModel)]="contact.firstName" name="firstName" placeholder="First Name" required type="text">
+      <input [(ngModel)]="feedback.firstName" name="firstName" placeholder="First Name" required type="text">
 
       <!-- Last Name -->
-      <input [(ngModel)]="contact.lastName" name="LastName" placeholder="Last Name" required type="text">
+      <input [(ngModel)]="feedback.lastName" name="LastName" placeholder="Last Name" required type="text">
 
       <!-- Email -->
-      <input [(ngModel)]="contact.email" name="email" placeholder="Email Address" required type="text">
+      <input [(ngModel)]="feedback.email" name="email" placeholder="Email Address" required type="text">
     </div>
 
     <!-- Right Column -->
@@ -41,8 +41,8 @@
 
       <!-- Email -->
       <textarea
-        name="feedback"
-        [(ngModel)]="contact.feedback"
+        name="message"
+        [(ngModel)]="feedback.message"
         placeholder="Any additional thoughts?"
         rows="7">
       </textarea>
@@ -56,7 +56,7 @@
           [ngStyle]="{cursor: form.form.valid ? 'pointer' : 'not-allowed',
             opacity: form.form.valid ? 1.0 : 0.5}"
           type="submit">
-          Next
+          Submit
         </button>
       </div>
       <p *ngIf="submitted">Thank you for your feedback!</p>
