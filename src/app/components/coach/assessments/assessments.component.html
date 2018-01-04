@@ -40,7 +40,7 @@
               <p>{{formula.throwingMechanics}}%</p>
             </td>
             <td>
-              <p>Fielding</p>
+              <p>Infield</p>
               <p>{{formula.inField}}%</p>
             </td>
             <td>
@@ -84,6 +84,11 @@
     
     <!-- Players -->
     <div style="background-color: white; flex: 2; height: 100%; padding: 25px; overflow: auto;">
+      <p style="font-size: 12px; font-weight: bold; text-align: right;">
+        <span (click)="export()" style="color: #8cc63e; cursor: pointer;">
+          Export excel
+        </span>
+      </p>
       <table>
         <thead>
           <tr>

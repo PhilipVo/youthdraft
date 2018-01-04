@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { saveAs } from 'file-saver';
 import * as moment from 'moment';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-assessments',
@@ -51,6 +53,56 @@ export class AssessmentsComponent implements OnInit {
     this.error = null;
     this.modal = null;
     this.selected = {};
+  }
+
+  export() {
+    /* generate worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([[
+      'Player Name',
+      'Hitting',
+      'Hitting Mechanics',
+      'Bat Speed',
+      'Bat Contact',
+      'Throwing',
+      'Throwing Mechanics',
+      'Arm Strength',
+      'Arm Accuracy',
+      'Fielding',
+      'Infield',
+      'Outfield',
+      'Baserunning',
+      'Baserunning Mechanics',
+      'Baserunning Speed',
+      'Raw Score',
+      'Weighted Score',
+      'Prior Div.']].concat(this.players.map(player => [
+        `${player.teamNumber}  |  ${player.firstName} ${player.lastName}`,
+        `${player.hitting}  |  ${((player.hittingMechanics + player.batSpeed + player.batContact) / 3).toFixed(1)}`,
+        `${player.hittingMechanics}  |  ${(player.hittingMechanics * this.formula.hittingMechanics / 100).toFixed(1)}`,
+        `${player.batSpeed}  |  ${(player.batSpeed * this.formula.batSpeed / 100).toFixed(1)}`,
+        `${player.batContact}  |  ${(player.batContact * this.formula.batContact / 100).toFixed(1)}`,
+        `${player.throwing}  |  ${((player.throwingMechanics + player.armStrength + player.armAccuracy) / 3).toFixed(1)}`,
+        `${player.throwingMechanics}  |  ${(player.throwingMechanics * this.formula.throwingMechanics / 100).toFixed(1)}`,
+        `${player.armStrength}  |  ${(player.armStrength * this.formula.armStrength / 100).toFixed(1)}`,
+        `${player.armAccuracy}  |  ${(player.armAccuracy * this.formula.armAccuracy / 100).toFixed(1)}`,
+        `${player.fielding}  |  ${((player.inField + player.outField) / 2).toFixed(1)}`,
+        `${player.inField}  |  ${(player.inField * this.formula.inField / 100).toFixed(1)}`,
+        `${player.outField}  |  ${(player.outField * this.formula.outField / 100).toFixed(1)}`,
+        `${player.baserunning}  |  ${((player.baserunMechanics + player.baserunSpeed) / 2).toFixed(1)}`,
+        `${player.baserunMechanics}  |  ${(player.baserunMechanics * this.formula.baserunMechanics / 100).toFixed(1)}`,
+        `${player.baserunSpeed}  |  ${(player.baserunSpeed * this.formula.baserunSpeed / 100).toFixed(1)}`,
+        `${player.raw}`,
+        `${player.weighted}`,
+        `${player.division}`
+      ])));
+    
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    saveAs(new Blob([wbout]), 'player-assessment.xlsx');
   }
 
   getStats() {
